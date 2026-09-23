@@ -1,0 +1,19 @@
+<?xml version ="1.0" encoding="UTF-8" standalone="no" ?>
+<agenda>
+
+    <contacto>
+    <nombre>Alexandru</nombre>
+    <telefono>66666666</telefono>
+    </contacto>
+
+    <contacto>
+    <nombre>Jordan</nombre>
+    <telefono>666666667</telefono>
+    </contacto>
+
+    <contacto>
+    <nombre>Kevin</nombre>
+    <telefono>666666668</telefono>
+    </contacto>
+
+</agenda>

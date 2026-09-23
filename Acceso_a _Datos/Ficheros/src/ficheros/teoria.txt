@@ -1,0 +1,18 @@
+
+
+
+Texto --- Lectura: FILEFOLDER + BUFFEREDER
+		  Escritura: FILEWRITER + BUFFERWRITER
+		             PRINTWRITER
+		             
+		             
+Binarios ---  Lectura: DATAINPUTSTREAM + FILE INPUTSTREAM
+					  OBJECTINPUTSTREAM
+			  
+			  Escritura: DATAOUTPUTSTREAM + FILEOUTPUTSTREAM
+			             OBJECTOUTPUTSTREAM
+			             
+			             
+------------------------------------------------------------------------			             
+			             
+ALEATORIO ----> 	LECTURA Y ESCRITURA: (RANDOMACCESSFILE)
