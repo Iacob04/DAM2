@@ -12,12 +12,17 @@ public class Contacto {
 		this.dni = d;
 		
 	}
-	
-	public  void mostrar() {
-		System.out.println("Nombre: "+ this.nombre);
-		System.out.println("Telefono: "+ this.teléfono);
-		System.out.println("DNI: "+ this.dni);
-		System.out.println();
+	@Override
+	public String toString() {
+		
+		
+		
+		return "Nombre: "+ this.nombre + "\nTelefono: "+ this.teléfono + "\nDNI: "+ this.dni +"\n" ;
 	}
-
+	
+	public String getNombre(Contacto nombre) {
+		return this.nombre;
+	}
+	
+	
 }
