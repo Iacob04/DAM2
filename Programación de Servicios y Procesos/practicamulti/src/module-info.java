@@ -4,5 +4,5 @@
 /**
  * 
  */
-module prueba {
+module practicamulti {
 }
