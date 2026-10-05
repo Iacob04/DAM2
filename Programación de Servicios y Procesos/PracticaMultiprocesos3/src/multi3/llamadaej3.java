@@ -12,7 +12,7 @@ public class llamadaej3 {
 	        String texto = sc.nextLine();
 
 	        String classpath = System.getProperty("java.class.path");
-	        ProcessBuilder pb = new ProcessBuilder("java", "-cp", classpath, "Ejercicio3", texto);
+	        ProcessBuilder pb = new ProcessBuilder("java", "-cp", classpath, "ejercicio3", texto);
 
 	        try {
 	            Process p = pb.start();
