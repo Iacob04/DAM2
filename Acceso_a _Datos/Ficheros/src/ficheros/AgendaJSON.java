@@ -12,7 +12,7 @@ public class AgendaJSON {
 		
 		final String ruta = "agenda.json";
 		leerAgenda(ruta);
-		Contacto nuevo = new Contacto("Alexandru Iacob", "Y1225789H", "642335122");
+		Contacto nuevo = new Contacto("Alexandru Iacob", "2222222", "3669999");
 		crearContacto (nuevo, ruta);
 		
 	}
