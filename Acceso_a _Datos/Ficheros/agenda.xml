@@ -5,7 +5,8 @@
             
         <nombre>Alexandru</nombre>
             
-        <telefono>66666666</telefono>
+        <telefono tipo = "movil">66666666</telefono>
+        <telefono tipo = "fijo">66611666</telefono>
             
     </contacto>
         
