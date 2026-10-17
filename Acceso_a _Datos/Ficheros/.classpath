@@ -5,7 +5,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="jdbc/" kind="src" path="src"/>
 	<classpathentry kind="lib" path="/home/alumno/Escritorio/DAM2/Acceso_a _Datos/JAR/gson-2.14.0.jar"/>
+	<classpathentry kind="lib" path="/home/alumno/Escritorio/DAM2/Acceso_a _Datos/JAR/mysql-connector-j-26.7.0/mysql-connector-j-26.7.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

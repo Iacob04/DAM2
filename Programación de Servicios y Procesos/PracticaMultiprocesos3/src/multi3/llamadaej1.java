@@ -1,16 +1,16 @@
 package multi3;
 
-import java.io.File;                 // CAMBIO: para referenciar dato.txt
+import java.io.File;                 
 import java.io.IOException;
-// CAMBIO: eliminado import de Scanner, ya no se pide por teclado
+
 
 public class llamadaej1 {
 	public static void main(String[] args) {
 
-		// Classpath actual para que el hijo encuentre las clases compiladas
+		
 		String classpath = System.getProperty("java.class.path");
 
-		// CAMBIO: nombre correcto de la clase (paquete + minúscula) y sin pasar el dato como argumento
+		
 		ProcessBuilder pb = new ProcessBuilder("java", "-cp", classpath, "multi3.ejercicio1");
 
 		// CAMBIO: la entrada estándar del hijo pasa a ser el fichero dato.txt
