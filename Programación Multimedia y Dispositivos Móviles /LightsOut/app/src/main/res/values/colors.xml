@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    COLORES DE LA APP
+    Se definen aquí y se usan con @color/nombre (XML) o R.color.nombre (código).
+    Así, para cambiar un color solo hay que tocarlo en un sitio.
+-->
+<resources>
+    <!-- Los dos estados de cada casilla -->
+    <color name="casilla_primaria">#FF1E3A5F</color>          <!-- azul oscuro: estado inicial -->
+    <color name="casilla_primaria_borde">#FF14283F</color>
+    <color name="casilla_secundaria">#FFFFC94D</color>        <!-- amarillo: objetivo -->
+    <color name="casilla_secundaria_borde">#FFE0A800</color>
+
+    <!-- Botones de control -->
+    <color name="boton_reiniciar">#FFD32F2F</color>           <!-- rojo -->
+    <color name="boton_nueva">#FF2E7D32</color>               <!-- verde -->
+
+    <!-- Fondo y textos -->
+    <color name="fondo">#FFF4F6FA</color>
+    <color name="texto">#FF1A1A1A</color>
+    <color name="texto_secundario">#FF5F6368</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
