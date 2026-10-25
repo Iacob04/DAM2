@@ -1,0 +1,6 @@
+# Copiar como config.properties. Para Gmail hay que usar una "contraseña de aplicación".
+smtp.host=smtp.gmail.com
+smtp.port=587
+smtp.user=tu_correo@gmail.com
+smtp.password=xxxx xxxx xxxx xxxx
+smtp.from=tu_correo@gmail.com
