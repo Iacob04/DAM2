@@ -11,7 +11,7 @@ public class PoolConexiones {
 	
 	static {
 		dataSource = new BasicDataSource();
-		String url = "jdbc:mysql://localhost/dam2";
+		String url = "jdbc:mysql://localhost/classicmodels";
 		String usuario = "alumno";
 		String password = "abc123";
 		dataSource.setUrl(url);

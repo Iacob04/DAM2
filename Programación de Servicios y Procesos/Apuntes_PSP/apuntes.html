@@ -1,0 +1,3580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apuntes PSP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:wght@500;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <script src="buscador.js"></script>
+</head>
+<body>
+<div class="pagina">
+
+  <aside class="lateral">
+    <p class="marca"><span class="logo">PSP <span>apuntes</span></span>
+      <span class="acciones"><button id="tema" class="tema-btn" type="button" aria-label="Cambiar tema claro u oscuro">◐</button><button id="ver-indice" class="boton-indice" type="button" aria-expanded="false">Índice</button></span>
+    </p>
+    <div class="buscador">
+      <input type="search" id="busqueda" placeholder="Buscar (pulsa /)" aria-label="Buscar en los apuntes" autocomplete="off">
+      <div id="contador" aria-live="polite"></div>
+    </div>
+    <div class="filtros" role="group" aria-label="Filtrar por tipo">
+      <button type="button" data-filtro="todo" aria-pressed="true">Todo</button>
+      <button type="button" data-filtro="teoria" aria-pressed="false">Teoría</button>
+      <button type="button" data-filtro="boletin" aria-pressed="false">Boletines</button>
+      <button type="button" data-filtro="chuleta" aria-pressed="false">Chuletas</button>
+      <button type="button" data-filtro="test" aria-pressed="false">Test</button>
+    </div>
+    <nav>
+      <ul class="indice">
+        <li><details open><summary>UT1 · Teoría de procesos</summary><ul><li><a href="#t-conceptos">Programa · proceso · hilo</a></li><li><a href="#t-estados-proceso">Estados de un proceso</a></li><li><a href="#t-multitarea">Multitarea y concurrencia</a></li><li><a href="#t-sincro-procesos">Sincronización de procesos</a></li><li><a href="#t-mecanismos">Semáforos · monitores · mensajes</a></li></ul></details></li><li><details><summary>UT1 · Procesos en Java</summary><ul><li><a href="#teoria-processbuilder">ProcessBuilder y Process</a></li><li><a href="#t-runtime">Runtime · directory · environment</a></li><li><a href="#teoria-exit">Códigos de salida</a></li><li><a href="#teoria-flujos">Comunicación padre ↔ hijo</a></li><li><a href="#teoria-classpath">Lanzar otra clase (classpath)</a></li><li><a href="#t-redireccion">Redirección a ficheros</a></li><li><a href="#t-sync-ficheros">File y FileLock</a></li></ul></details></li><li><details><summary>UT1 · Boletines resueltos</summary><ul><li><a href="#b-chrome">Abrir web en Chrome</a></li><li><a href="#b-leernombre">LeerNombre (vocales)</a></li><li><a href="#b-leernombre-fich">LeerNombre con ficheros</a></li><li><a href="#mp2-ej1">MP II · Ej1 Validar entero</a></li><li><a href="#mp2-ej2">MP II · Ej2 Sumar números</a></li><li><a href="#mp2-ej3">MP II · Ej3 Palíndromo</a></li><li><a href="#mp3-ej1">MP III · Ej1 dato.txt</a></li><li><a href="#mp3-ej2">MP III · Ej2 suma.txt</a></li><li><a href="#mp3-ej3">MP III · Ej3 palindromo.txt</a></li><li><a href="#mp3-ej4">MP III · Ej4 Notas</a></li><li><a href="#mp4">MP IV · Escritor / Lector</a></li></ul></details></li><li><details><summary>UT2 · Teoría de hilos</summary><ul><li><a href="#t-hilos">Concepto de hilo y modelos</a></li><li><a href="#t-estados-hilo">Estados de un hilo</a></li><li><a href="#t-crear-hilos">Thread vs Runnable · métodos</a></li><li><a href="#t-raton">Ejemplo Ratón (join)</a></li><li><a href="#t-finalizar">Finalizar hilos (interrupt)</a></li><li><a href="#t-executor">ExecutorService</a></li><li><a href="#t-problemas">Problemas de concurrencia</a></li><li><a href="#t-synchronized">synchronized y monitores</a></li><li><a href="#t-waitnotify">wait / notify</a></li><li><a href="#t-prioridad">Prioridad de hilos</a></li></ul></details></li><li><details><summary>UT2 · Boletines resueltos</summary><ul><li><a href="#b-tictac">TIC TAC</a></li><li><a href="#mh1-ej1">MH I · Ej1 Par/Impar</a></li><li><a href="#mh1-ej2">MH I · Ej2 Iron Man</a></li><li><a href="#mh1-ej3">MH I · Ej3 Relevos</a></li><li><a href="#mh1-ej4">MH I · Ej4 Carrera relevos</a></li><li><a href="#mh1-ej5">MH I · Ej5 Bomba</a></li><li><a href="#b-relevos-sync">Relevos synchronized</a></li><li><a href="#mh2-adivinar">MH II · Adivinar número</a></li><li><a href="#mh2-aeropuerto">MH II · Aeropuerto</a></li><li><a href="#dinamo">Opcional · Dinamo</a></li><li><a href="#dinamo2">Opcional · Dinamo mejorado</a></li></ul></details></li><li><details><summary>Chuletas y repaso</summary><ul><li><a href="#chuleta-procesos">Chuleta procesos</a></li><li><a href="#chuleta-hilos">Chuleta hilos</a></li><li><a href="#errores">Errores típicos</a></li><li><a href="#test">Preguntas tipo test</a></li></ul></details></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="contenido">
+
+<header class="portada">
+  <h1>Programación de Servicios y Procesos</h1>
+  <p>UT1 (multiproceso) y UT2 (multihilo): teoría de las diapositivas, ejemplos de clase y todos los boletines resueltos y probados. Busca con <code>/</code>, filtra por tipo y copia el código con un clic.</p>
+  <div class="tarjetas">
+    <a class="tarjeta" href="#t-conceptos"><b>UT1 · Teoría</b><span>Procesos, estados, multitarea, sincronización</span></a>
+    <a class="tarjeta" href="#teoria-processbuilder"><b>UT1 · Java</b><span>ProcessBuilder, flujos, redirección, FileLock</span></a>
+    <a class="tarjeta" href="#b-chrome"><b>UT1 · Boletines</b><span>Prácticas Multiproceso II, III y IV</span></a>
+    <a class="tarjeta" href="#t-hilos"><b>UT2 · Teoría</b><span>Thread, Runnable, synchronized, wait/notify</span></a>
+    <a class="tarjeta" href="#b-tictac"><b>UT2 · Boletines</b><span>MultiHilo I, II, Aeropuerto, Dinamo</span></a>
+    <a class="tarjeta" href="#chuleta-procesos"><b>Chuletas y test</b><span>Plantillas, errores típicos, preguntas</span></a>
+  </div>
+</header>
+
+<p class="bloque-titulo">UT1 · Teoría de procesos</p>
+<section class="tema" id="t-conceptos" data-cat="teoria">
+<h2>Programa, proceso, hilo y servicio</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT1.1</p>
+
+<div class="tabla"><table>
+<tr><th>Concepto</th><th>Definición corta</th></tr>
+<tr><td><b>Programa</b></td><td>Conjunto de instrucciones guardado en disco. Es algo <b>estático</b>.</td></tr>
+<tr><td><b>Ejecutable</b></td><td>Fichero con el programa ya compilado/listo para que el SO lo cargue (.exe, binario, .class + JVM).</td></tr>
+<tr><td><b>Proceso</b></td><td><b>Programa en ejecución</b>. Tiene su propia memoria, PID, estado y recursos asignados por el SO.</td></tr>
+<tr><td><b>Hilo (thread)</b></td><td>Secuencia de ejecución <b>dentro</b> de un proceso. Comparte la memoria del proceso. No puede existir solo.</td></tr>
+<tr><td><b>Servicio</b></td><td>Proceso que se ejecuta en segundo plano, sin interfaz, normalmente al arrancar el sistema (demonio en Linux).</td></tr>
+</table></div>
+<h3>Un proceso está compuesto por</h3>
+<ul>
+<li>Las instrucciones que se van a ejecutar.</li>
+<li>El estado del propio proceso.</li>
+<li>El estado de ejecución (registros del procesador).</li>
+<li>El estado de la memoria.</li>
+</ul>
+<p>El SO necesita saber de cada proceso: <b>PID</b> (identificador único), <b>estado actual</b>, <b>prioridad</b> y <b>ubicación en memoria</b>.</p>
+<h3>Comandos del sistema</h3>
+<div class="tabla"><table>
+<tr><th>Acción</th><th>Linux</th><th>Windows</th></tr>
+<tr><td>Ver procesos</td><td><code>ps</code> · <code>ps -a</code> · <code>top</code></td><td><code>tasklist</code> · Administrador de tareas</td></tr>
+<tr><td>Matar un proceso</td><td><code>kill -9 PID</code></td><td><code>taskkill /pid PID</code> (<code>/f</code> para forzar)</td></tr>
+</table></div>
+
+<h3>Hilos vs procesos</h3>
+<div class="dos">
+<div><h4>Proceso</h4><ul>
+<li>Memoria propia (imagen de memoria).</li>
+<li>Crear y cambiar de proceso es <b>costoso</b>.</li>
+<li>Se comunican con flujos, ficheros, sockets.</li>
+<li>Si uno falla, los demás siguen.</li></ul></div>
+<div><h4>Hilo</h4><ul>
+<li>Comparte código, datos y ficheros del proceso.</li>
+<li>Es <b>ligero</b>: menos recursos y conmutación rápida.</li>
+<li>Se comunican por memoria compartida (variables, objetos).</li>
+<li>Propio: id, contador de programa, registros y pila.</li></ul></div>
+</div>
+<div class="clave"><b>Ejemplo de examen:</b> Word con un hilo revisando la ortografía mientras otro guarda automáticamente. Es <b>un</b> proceso con <b>varios</b> hilos.</div>
+
+</section>
+<section class="tema" id="t-estados-proceso" data-cat="teoria">
+<h2>Estados de un proceso y cambio de contexto</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT1.2</p>
+
+<div class="diagrama">
+<svg viewBox="0 0 720 250" role="img" aria-label="Estados de un proceso">
+  <defs><marker id="fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--tinta-suave)"/></marker></defs>
+  <rect class="estado" x="10" y="95" width="110" height="46" rx="23"/><text class="txt" x="65" y="123" text-anchor="middle">Nuevo</text>
+  <rect class="estado" x="190" y="95" width="120" height="46" rx="23"/><text class="txt" x="250" y="123" text-anchor="middle">Listo (ready)</text>
+  <rect class="estado" x="400" y="95" width="140" height="46" rx="23"/><text class="txt" x="470" y="123" text-anchor="middle">Ejecución (run)</text>
+  <rect class="estado" x="600" y="95" width="110" height="46" rx="23"/><text class="txt" x="655" y="123" text-anchor="middle">Terminado</text>
+  <rect class="estado" x="300" y="195" width="150" height="46" rx="23"/><text class="txt" x="375" y="223" text-anchor="middle">Bloqueado (wait)</text>
+  <rect class="estado" x="300" y="8" width="150" height="46" rx="23"/><text class="txt" x="375" y="36" text-anchor="middle">Suspendido (swap)</text>
+  <line class="flecha" x1="120" y1="118" x2="186" y2="118" marker-end="url(#fp)"/>
+  <path class="flecha" d="M310,110 C350,100 360,100 396,110" marker-end="url(#fp)"/>
+  <text class="txt-s" x="353" y="96" text-anchor="middle">planificador</text>
+  <path class="flecha" d="M398,130 C360,142 350,142 314,130" marker-end="url(#fp)"/>
+  <text class="txt-s" x="355" y="158" text-anchor="middle">fin de quantum</text>
+  <line class="flecha" x1="540" y1="118" x2="596" y2="118" marker-end="url(#fp)"/>
+  <path class="flecha" d="M470,141 C470,190 460,205 454,212" marker-end="url(#fp)"/>
+  <text class="txt-s" x="520" y="185">espera E/S</text>
+  <path class="flecha" d="M300,215 C250,205 250,170 250,145" marker-end="url(#fp)"/>
+  <text class="txt-s" x="240" y="200" text-anchor="end">llega el evento</text>
+  <path class="flecha" d="M250,95 C250,60 280,40 296,34" marker-end="url(#fp)"/>
+</svg>
+</div>
+<div class="tabla"><table>
+<tr><th>Estado</th><th>Qué significa</th></tr>
+<tr><td>Nuevo</td><td>Recién creado.</td></tr>
+<tr><td>Listo (ready)</td><td>Esperando a que le den la CPU.</td></tr>
+<tr><td>En ejecución (run)</td><td>Usando la CPU ahora mismo.</td></tr>
+<tr><td>Bloqueado (wait)</td><td>Esperando un evento externo (E/S, señal...).</td></tr>
+<tr><td>Suspendido</td><td>Llevado a memoria virtual / swap para liberar RAM.</td></tr>
+<tr><td>Terminado</td><td>Ha acabado y ya no necesita la CPU.</td></tr>
+</table></div>
+
+<h3>Contexto y PCB</h3>
+<ul>
+<li><b>Contexto</b>: toda la información que define el estado de un proceso en un instante (estado del proceso, del procesador y de la memoria).</li>
+<li><b>Cambio de contexto</b>: sacar un proceso de la CPU guardando su contexto y cargar el de otro. Es <b>tiempo perdido</b>: la CPU no hace trabajo útil mientras.</li>
+<li>El contexto se guarda en el <b>PCB</b> (Bloque de Control de Proceso).</li>
+<li>Registros clave: <b>contador de programa</b> (siguiente instrucción) y <b>puntero a pila</b>.</li>
+</ul>
+<h3>Planificación</h3>
+<p>El <b>planificador</b> (scheduler) reparte la CPU entre procesos. Debe ser imparcial y eficiente, minimizar el tiempo de respuesta, ejecutar el máximo de procesos y equilibrar recursos. El SO organiza los procesos en colas:</p>
+<ul>
+<li><b>Cola de procesos</b>: todos los del sistema.</li>
+<li><b>Cola de preparados</b>: los listos para ejecutarse.</li>
+<li><b>Colas de dispositivo</b>: los que esperan una E/S.</li>
+</ul>
+<div class="dos">
+<div><h4>Apropiativo (expulsivo)</h4><ul><li>El SO puede expulsar al proceso de la CPU.</li><li>Más coste, mejor uso de la CPU.</li><li>Sistemas multiusuario y multitarea.</li></ul></div>
+<div><h4>No apropiativo</h4><ul><li>El proceso usa la CPU hasta que termina o se bloquea.</li><li>Sencillo, menor rendimiento.</li><li>Sistemas batch o monousuario.</li></ul></div>
+</div>
+<p>El <b>kernel</b> es la parte del SO que gestiona los recursos; se accede a él mediante <b>llamadas al sistema</b>.</p>
+
+</section>
+<section class="tema" id="t-multitarea" data-cat="teoria">
+<h2>Multitarea, concurrencia, paralelismo y sistemas distribuidos</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT1.1 · UT1.2</p>
+<div class="tabla"><table>
+<tr><th>Tipo de multitarea</th><th>Descripción</th><th>Ejemplo</th></tr>
+<tr><td>Nula</td><td>Sin multitarea: un programa cada vez.</td><td>MS-DOS</td></tr>
+<tr><td>Cooperativa (no apropiativa)</td><td>Los procesos <b>ceden</b> la CPU al SO voluntariamente.</td><td>Windows 3.11</td></tr>
+<tr><td>Preferente (apropiativa)</td><td>El SO reparte el tiempo de CPU. Con 1 CPU hay muchos cambios de contexto que dan sensación de simultaneidad.</td><td>UNIX, Windows NT</td></tr>
+<tr><td>Real</td><td>Varios procesadores ejecutan procesos <b>a la vez</b> de verdad.</td><td>Unix, Windows NT, macOS</td></tr>
+</table></div>
+
+<div class="tabla"><table>
+<tr><th>Programación</th><th>Idea clave</th></tr>
+<tr><td><b>Secuencial</b></td><td>Una línea de control. Orden <b>estricto</b>. El tiempo de cada operación no afecta al resultado.</td></tr>
+<tr><td><b>Concurrente</b></td><td>Varias líneas de control. Orden <b>parcial</b>. Dos procesos son concurrentes si la primera instrucción de uno se ejecuta entre la primera y la última del otro. Puede ser con 1 CPU (intercalando).</td></tr>
+<tr><td><b>Paralela</b></td><td>Ejecución <b>simultánea real</b> en varios núcleos/procesadores.</td></tr>
+<tr><td><b>Distribuida</b></td><td>Componentes en <b>distintas máquinas</b> de una red que se coordinan por <b>paso de mensajes</b>. Ej.: Internet, cloud, proyecto SETI.</td></tr>
+</table></div>
+<p>A la secuencialización entre procesos concurrentes se le llama <b>sincronización</b>.</p>
+<h3>Características de un sistema distribuido</h3>
+<ul>
+<li><b>Concurrencia</b> de programas.</li>
+<li><b>Sin reloj global</b>: se sincronizan con mensajes.</li>
+<li><b>Fallos independientes</b>: un componente puede fallar sin tirar el resto.</li>
+</ul>
+<h3>¿Para qué usar concurrencia?</h3>
+<ul>
+<li>Optimizar recursos: la CPU está menos ociosa mientras hay E/S.</li>
+<li>Interactividad con el usuario.</li>
+<li>Disponibilidad: un servidor puede atender a varios clientes a la vez.</li>
+<li>Diseño más modular y mantenible.</li>
+</ul>
+
+</section>
+<section class="tema" id="t-sincro-procesos" data-cat="teoria">
+<h2>Sincronización y comunicación entre procesos</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT1.4</p>
+
+<h3>Tipos de procesos según cómo se relacionan</h3>
+<div class="tabla"><table>
+<tr><th>Tipo</th><th>Descripción</th></tr>
+<tr><td>Independientes</td><td>No se comunican con nadie (los menos frecuentes).</td></tr>
+<tr><td>Cooperativos</td><td>Se comunican y colaboran en una tarea común.</td></tr>
+<tr><td>Competitivos</td><td>Usan los mismos recursos y compiten por ellos.</td></tr>
+</table></div>
+
+<h3>Vocabulario que cae seguro</h3>
+<div class="tabla"><table>
+<tr><th>Término</th><th>Definición</th></tr>
+<tr><td>Región / sección crítica</td><td>Instrucciones en las que un proceso usa un recurso compartido y que deben ejecutarse en <b>exclusión mutua</b>.</td></tr>
+<tr><td>Exclusión mutua</td><td>Mientras un proceso usa el recurso, ningún otro puede usarlo.</td></tr>
+<tr><td>Lock (bloqueo)</td><td>Un proceso hace lock sobre un recurso cuando obtiene su uso exclusivo; el resto se bloquea al pedirlo.</td></tr>
+<tr><td>Deadlock / interbloqueo</td><td>Procesos que esperan <b>para siempre</b> recursos que tiene otro del grupo. Ej.: A tiene R1 y quiere R2, B tiene R2 y quiere R1.</td></tr>
+<tr><td>Inanición</td><td>Un proceso espera indefinidamente porque otros siempre entran antes (p. ej., por prioridades).</td></tr>
+<tr><td>Condición de carrera</td><td>El resultado depende del orden en que se intercalan los accesos.</td></tr>
+<tr><td>Primitiva</td><td>Operación de la que conocemos restricciones y efectos, pero no la implementación.</td></tr>
+</table></div>
+
+<h3>Tres tipos de interacción</h3>
+<ul>
+<li><b>Sincronización</b>: un proceso conoce el punto de ejecución de otro.</li>
+<li><b>Exclusión mutua</b>: solo uno accede al recurso.</li>
+<li><b>Sincronización condicional</b>: solo se accede si el recurso está en cierto estado.</li>
+</ul>
+<h3>Formas de comunicarse</h3>
+<div class="dos">
+<div><h4>Intercambio de mensajes</h4><ul><li>Primitivas <code>send</code> / <code>receive</code>.</li><li>Por <b>buffer de memoria</b> (misma máquina) o <b>socket</b> (por red).</li><li>En Java se usan como streams: <code>read</code> / <code>write</code>.</li></ul></div>
+<div><h4>Recursos compartidos</h4><ul><li>Primitivas <code>write</code> / <code>read</code> sobre el recurso.</li><li>Ficheros, memoria compartida, BD.</li></ul></div>
+</div>
+<h3>Labores del SO con la concurrencia</h3>
+<ul>
+<li>Seguir a los procesos activos.</li>
+<li>Asignar y retirar recursos: CPU, memoria, archivos y E/S.</li>
+<li>Proteger datos y recursos de cada proceso.</li>
+<li>Que el resultado no dependa de la velocidad de los demás procesos.</li>
+</ul>
+
+</section>
+<section class="tema" id="t-mecanismos" data-cat="teoria">
+<h2>Semáforos, monitores y paso de mensajes</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT1.5</p>
+
+<h3>Semáforos</h3>
+<ul>
+<li>Tipo de dato con un valor y una lista de procesos suspendidos esperando.</li>
+<li><b>Binario</b>: solo 0 o 1. <b>General</b>: cualquier natural.</li>
+<li>Valor <b>0 = cerrado</b>; valor <b>&gt; 0 = abierto</b>.</li>
+<li>Analogía: baño con 3 cabinas. Entrar resta 1, salir suma 1; si vale 0, se espera.</li>
+<li>Ventajas: fáciles de entender y resuelven cualquier problema de concurrencia.</li>
+<li>Inconvenientes: bajo nivel, un olvido o cambio de orden provoca <b>interbloqueos</b>, y la lógica queda repartida por todo el código.</li>
+<li>Java: <code>java.util.concurrent.Semaphore</code> (para hilos de un mismo proceso).</li>
+</ul>
+<pre data-archivo="Semaphore (hilos)">Semaphore sem = new Semaphore(3);   // 3 permisos (3 cabinas libres)
+
+sem.acquire();          // resta 1; si es 0, el hilo espera
+try {
+    // región crítica
+} finally {
+    sem.release();      // suma 1 y despierta a uno que esperaba
+}</pre>
+
+<h3>Monitores</h3>
+<ul>
+<li>Encierran los recursos compartidos como componentes <b>privados</b> y garantizan acceso en <b>exclusión mutua</b>.</li>
+<li>Incluyen: variables privadas, procedimientos públicos (la interfaz), un cuerpo que inicializa y una cola de procesos suspendidos.</li>
+<li>Ventajas: <b>uniformidad</b>, <b>modularidad</b>, <b>simplicidad</b> y <b>eficiencia</b>.</li>
+<li>Desventaja: con muchas condiciones de sincronización el código se complica mucho.</li>
+<li>En Java: cualquier objeto con métodos <code>synchronized</code> (+ <code>wait</code>/<code>notify</code>).</li>
+</ul>
+<h3>Paso de mensajes</h3>
+<p>No necesita memoria compartida. Intervienen el emisor, el receptor y el mensaje.</p>
+<div class="dos">
+<div><h4>Asíncrono</h4><ul><li>El emisor <b>no espera</b> a que se reciba.</li><li>Usa buzones o colas.</li><li>Solo se bloquea si el buzón está lleno.</li></ul></div>
+<div><h4>Síncrono (rendezvous)</h4><ul><li>El emisor <b>espera</b> a que el receptor lo reciba.</li><li>Incluye la llamada a procedimiento remoto (<b>RPC</b>), típica de cliente/servidor.</li></ul></div>
+</div>
+<h3>Lectores-escritores con ficheros</h3>
+<ul>
+<li><b>Solo lectura</b>: el SO deja leer a todos los lectores a la vez.</li>
+<li><b>Escritura</b>: acceso exclusivo. El escritor espera a que acaben los lectores, y los demás esperan al escritor.</li>
+</ul>
+
+</section>
+<p class="bloque-titulo">UT1 · Procesos en Java</p>
+<section class="tema" id="teoria-processbuilder" data-cat="teoria">
+<h2>ProcessBuilder y Process</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT1.3 · UT1.4</p>
+
+<p>Las dos clases están en <code>java.lang</code> (no hace falta importarlas). <code>ProcessBuilder</code> <b>configura</b> el proceso (comando, directorio, entorno, redirecciones) y <code>start()</code> lo lanza devolviendo un <code>Process</code>, que sirve para <b>controlarlo</b>.</p>
+<pre data-archivo="Constructores">new ProcessBuilder(List&lt;String&gt; comando);      // comando + argumentos en una lista
+new ProcessBuilder(String... comando);         // varargs: &quot;java&quot;, &quot;-cp&quot;, cp, &quot;Clase&quot;, &quot;arg&quot;</pre>
+<h3>Métodos de ProcessBuilder</h3><div class="tabla"><table>
+<tr><th>Método</th><th>Qué hace</th></tr>
+<tr><td><code>start()</code></td><td>Lanza el hijo. <code>IOException</code> si no encuentra el programa.</td></tr>
+<tr><td><code>command(...)</code></td><td>Obtiene o cambia el comando y sus argumentos.</td></tr>
+<tr><td><code>directory(File)</code></td><td>Directorio de trabajo del hijo. Por defecto <code>user.dir</code>.</td></tr>
+<tr><td><code>environment()</code></td><td><code>Map</code> con las variables de entorno del hijo.</td></tr>
+<tr><td><code>redirectInput(File)</code></td><td>La entrada del hijo sale de un fichero.</td></tr>
+<tr><td><code>redirectOutput(File)</code></td><td>La salida del hijo va a un fichero.</td></tr>
+<tr><td><code>redirectError(File)</code></td><td>Los errores del hijo van a un fichero.</td></tr>
+<tr><td><code>redirectErrorStream(true)</code></td><td>Junta <code>System.err</code> con <code>System.out</code>.</td></tr>
+<tr><td><code>inheritIO()</code></td><td>El hijo usa la consola del padre.</td></tr>
+</table></div>
+<h3>Métodos de Process</h3><div class="tabla"><table>
+<tr><th>Método</th><th>Qué hace</th></tr>
+<tr><td><code>waitFor()</code></td><td>Bloquea al padre hasta que el hijo acabe. Devuelve el código de salida. <code>InterruptedException</code>.</td></tr>
+<tr><td><code>waitFor(5, TimeUnit.SECONDS)</code></td><td>Espera como mucho ese tiempo; devuelve <code>true</code> si terminó.</td></tr>
+<tr><td><code>exitValue()</code></td><td>Código de salida sin esperar (excepción si sigue vivo).</td></tr>
+<tr><td><code>getInputStream()</code></td><td><span class="c-stdout"><b>Salida del hijo</b></span>: el padre LEE lo que el hijo imprime.</td></tr>
+<tr><td><code>getOutputStream()</code></td><td><span class="c-stdin"><b>Entrada del hijo</b></span>: el padre ESCRIBE y le llega por <code>System.in</code>.</td></tr>
+<tr><td><code>getErrorStream()</code></td><td>Lo que el hijo escribe en <code>System.err</code>.</td></tr>
+<tr><td><code>isAlive()</code></td><td>¿Sigue en ejecución?</td></tr>
+<tr><td><code>destroy()</code> / <code>destroyForcibly()</code></td><td>Mata al hijo (normal / forzado).</td></tr>
+<tr><td><code>pid()</code></td><td>PID del proceso hijo (Java 9+).</td></tr>
+</table></div>
+
+<div class="ojo"><b>Ojo con los nombres:</b> parecen al revés. <code>getInputStream()</code> es la <i>salida</i> del hijo (entrada para el padre) y <code>getOutputStream()</code> es la <i>entrada</i> del hijo.</div>
+<div class="ojo"><b>Procesos especiales:</b> los métodos de <code>Process</code> no funcionan bien sobre servicios, shell scripts o demonios del SO.</div>
+<h3>Operaciones básicas (teoría)</h3>
+<ul>
+<li><b>Creación</b>: padre e hijo se ejecutan concurrentemente; cada uno con su memoria (<i>imagen de memoria</i>). El padre puede esperar con <b>wait</b> (<code>waitFor()</code>).</li>
+<li><b>Terminación</b>: el hijo avisa al SO con <b>exit</b> (<code>System.exit(n)</code>) y así manda información al padre.</li>
+<li>Un hijo puede crear más procesos: se forma un <b>árbol de procesos</b>.</li>
+</ul>
+
+</section>
+<section class="tema" id="t-runtime" data-cat="teoria">
+<h2>Runtime, directorio de trabajo y entorno</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT1.3 · ejemplos 1–4</p>
+
+<div class="dos">
+<div><h4>ProcessBuilder</h4><ul><li>Primero se configura todo (comando, directorio, entorno) y luego <code>start()</code>.</li><li>Forma recomendada.</li></ul></div>
+<div><h4>Runtime</h4><ul><li>El proceso se crea "en vacío" y el comando se pasa en <code>exec(...)</code>.</li><li><code>exec(String)</code> está deprecado desde Java 18: usa <code>exec(String[])</code>.</li></ul></div>
+</div>
+<p>Ambos devuelven un objeto <code>Process</code>. Los recursos del hijo los libera el SO al hacer exit; los objetos Java los limpia el <i>garbage collector</i>.</p>
+<pre data-archivo="EjecutarAplicacionProcessBuilder.java">import java.io.IOException;
+
+public class EjecutarAplicacionProcessBuilder {
+
+    public static void main(String[] args) {
+        // Comando + argumentos, cada uno en un String separado (varargs)
+        // Windows: &quot;notepad.exe&quot;   ·   Linux: &quot;gedit&quot;   ·   macOS: &quot;open&quot;, &quot;-a&quot;, &quot;TextEdit&quot;
+        ProcessBuilder pb = new ProcessBuilder(&quot;notepad.exe&quot;);
+        try {
+            Process p = pb.start();          // crea el proceso hijo
+            System.out.println(&quot;Proceso lanzado. PID: &quot; + p.pid());
+            int codigo = p.waitFor();        // el padre espera a que cierres el bloc de notas
+            System.out.println(&quot;El hijo terminó con código &quot; + codigo);
+        } catch (IOException e) {
+            System.out.println(&quot;No se encontró el programa: &quot; + e.getMessage());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+<pre data-archivo="EjecutarAplicacionRuntime.java">import java.io.IOException;
+
+public class EjecutarAplicacionRuntime {
+
+    public static void main(String[] args) {
+        // Runtime: el proceso se crea &quot;en vacío&quot; y el comando se pasa al ejecutar
+        Runtime rt = Runtime.getRuntime();
+        try {
+            // exec(String[]) evita el exec(String) deprecado desde Java 18
+            Process p = rt.exec(new String[] {&quot;notepad.exe&quot;});
+            p.waitFor();
+            System.out.println(&quot;Fin. Código: &quot; + p.exitValue());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+<pre data-archivo="DestruccionProceso.java">import java.io.IOException;
+
+public class DestruccionProceso {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        Process p = new ProcessBuilder(&quot;notepad.exe&quot;).start();
+
+        Thread.sleep(3000);                 // dejamos el hijo vivo 3 segundos
+        System.out.println(&quot;¿Vivo? &quot; + p.isAlive());
+
+        p.destroy();                        // pide al SO que lo mate (destroyForcibly() = kill -9)
+        p.waitFor();                        // esperar a que muera de verdad
+        System.out.println(&quot;¿Vivo? &quot; + p.isAlive() + &quot; · código: &quot; + p.exitValue());
+    }
+}</pre>
+<pre data-archivo="Environment.java">import java.io.File;
+import java.util.Map;
+
+public class Environment {
+
+    public static void main(String[] args) {
+        ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-version&quot;);
+
+        // environment(): mapa con las variables de entorno que heredará el hijo
+        Map&lt;String, String&gt; entorno = pb.environment();
+        System.out.println(&quot;PATH = &quot; + entorno.get(&quot;PATH&quot;));
+        entorno.put(&quot;MI_VARIABLE&quot;, &quot;hola&quot;);          // se puede añadir o cambiar
+
+        // Directorio de trabajo (por defecto user.dir)
+        System.out.println(&quot;Directorio por defecto: &quot; + System.getProperty(&quot;user.dir&quot;));
+        pb.directory(new File(System.getProperty(&quot;user.home&quot;)));
+        System.out.println(&quot;Directorio del hijo: &quot; + pb.directory());
+
+        // Recorrer todas las variables
+        for (Map.Entry&lt;String, String&gt; e : entorno.entrySet()) {
+            System.out.println(e.getKey() + &quot; = &quot; + e.getValue());
+        }
+    }
+}</pre>
+
+<div class="ojo"><b>Lanzar otro proyecto de Eclipse:</b> apunta al <code>bin</code> del otro proyecto con <code>pb.directory(new File("../OtroProyecto/bin"))</code> y lanza <code>new ProcessBuilder("java", "paquete.Clase")</code>. El hijo tiene que estar <b>compilado</b> antes.</div>
+
+</section>
+<section class="tema" id="teoria-exit" data-cat="teoria">
+<h2>Códigos de salida</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>System.exit / waitFor</p>
+
+<div class="canales"><span class="canal c-exit">Exit</span></div>
+<p>El hijo termina con <code>System.exit(n)</code> y el padre recoge <code>n</code> con <code>p.waitFor()</code>. Por convenio <b>0 = todo bien</b> y cualquier otro valor = error. No tiene nada que ver con lo que se mandan por los streams.</p>
+<div class="tabla"><table>
+<tr><th>exit en el hijo</th><th>Llega en Windows</th><th>Llega en Linux / macOS</th></tr>
+<tr><td><span class="num">0</span></td><td>0</td><td>0</td></tr>
+<tr><td><span class="num">-1</span></td><td>-1</td><td>255</td></tr>
+<tr><td><span class="num">-2</span></td><td>-2</td><td>254</td></tr>
+<tr><td><span class="num">-3</span></td><td>-3</td><td>253</td></tr>
+<tr><td><span class="num">1</span> (sin exit, excepción)</td><td>1</td><td>1</td></tr>
+</table></div>
+
+<div class="ojo"><b>Códigos negativos:</b> en Linux/macOS el código es un byte sin signo (0–255), así que un negativo llega como 256 + valor. Por eso el <code>switch</code> pone los dos casos: <code>case -1: case 255:</code></div>
+<div class="ojo"><b>Código 1 inesperado:</b> casi siempre es que la JVM del hijo no encontró la clase (classpath, paquete o sin compilar) o que el hijo lanzó una excepción no capturada.</div>
+
+</section>
+<section class="tema" id="teoria-flujos" data-cat="teoria">
+<h2>Comunicación padre ↔ hijo</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>Flujos estándar</p>
+
+<div class="diagrama">
+<svg viewBox="0 0 720 300" role="img" aria-label="Los cuatro canales entre proceso padre e hijo">
+  <defs>
+    <marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--args)"/></marker>
+    <marker id="fi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--stdin)"/></marker>
+    <marker id="fo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--stdout)"/></marker>
+    <marker id="fe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--exit)"/></marker>
+  </defs>
+  <rect class="caja" x="10" y="30" width="170" height="240" rx="16"/>
+  <text class="nombre" x="95" y="145" text-anchor="middle">Padre</text>
+  <text class="sub" x="95" y="168" text-anchor="middle">LlamarEjercicioN</text>
+  <rect class="caja" x="540" y="30" width="170" height="240" rx="16"/>
+  <text class="nombre" x="625" y="145" text-anchor="middle">Hijo</text>
+  <text class="sub" x="625" y="168" text-anchor="middle">EjercicioN</text>
+  <line x1="190" y1="70" x2="528" y2="70" stroke="var(--args)" stroke-width="3" marker-end="url(#fa)"/>
+  <text class="etiqueta" x="359" y="60" text-anchor="middle" fill="var(--args)">argumentos → args[]</text>
+  <text class="metodo" x="359" y="88" text-anchor="middle">new ProcessBuilder(..., dato)</text>
+  <line x1="190" y1="130" x2="528" y2="130" stroke="var(--stdin)" stroke-width="3" marker-end="url(#fi)"/>
+  <text class="etiqueta" x="359" y="120" text-anchor="middle" fill="var(--stdin)">entrada estándar → System.in</text>
+  <text class="metodo" x="359" y="148" text-anchor="middle">p.getOutputStream() · redirectInput(File)</text>
+  <line x1="530" y1="190" x2="192" y2="190" stroke="var(--stdout)" stroke-width="3" marker-end="url(#fo)"/>
+  <text class="etiqueta" x="359" y="180" text-anchor="middle" fill="var(--stdout)">System.out / System.err → salida</text>
+  <text class="metodo" x="359" y="208" text-anchor="middle">p.getInputStream() · redirectOutput(File)</text>
+  <line x1="530" y1="248" x2="192" y2="248" stroke="var(--exit)" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#fe)"/>
+  <text class="etiqueta" x="359" y="238" text-anchor="middle" fill="var(--exit)">System.exit(n) → código</text>
+  <text class="metodo" x="359" y="266" text-anchor="middle">p.waitFor()</text>
+</svg>
+<div class="leyenda">
+  <span class="c-args">● Argumentos: al arrancar</span>
+  <span class="c-stdin">● Entrada: mientras se ejecuta</span>
+  <span class="c-stdout">● Salida: lo que imprime el hijo</span>
+  <span class="c-exit">● Exit: al terminar</span>
+</div>
+</div>
+<div class="tabla"><table>
+<tr><th>Canal</th><th>Dirección</th><th>Cuándo</th><th>Cómo</th></tr>
+<tr><td><span class="canal c-args">Argumentos</span></td><td>padre → hijo</td><td>Al arrancar</td><td>En el <code>ProcessBuilder</code>; el hijo los lee en <code>args[]</code>.</td></tr>
+<tr><td><span class="canal c-stdin">Entrada</span></td><td>padre → hijo</td><td>Durante la ejecución</td><td>Padre escribe en <code>getOutputStream()</code> o <code>redirectInput</code>; hijo lee <code>System.in</code>.</td></tr>
+<tr><td><span class="canal c-stdout">Salida</span></td><td>hijo → padre</td><td>Durante la ejecución</td><td>Hijo <code>println</code>; padre lee <code>getInputStream()</code> o <code>redirectOutput</code>.</td></tr>
+<tr><td><span class="canal c-exit">Exit</span></td><td>hijo → padre</td><td>Al terminar</td><td><code>System.exit(n)</code> / <code>waitFor()</code>.</td></tr>
+</table></div>
+
+<h3>Orden correcto</h3>
+<ol class="pasos">
+<li><div>Escribir en la entrada del hijo y <b>cerrarla</b> (<code>bw.close()</code>). Si no se cierra, el hijo espera más líneas para siempre.</div></li>
+<li><div>Leer toda la salida del hijo hasta que <code>readLine()</code> devuelva <code>null</code>.</div></li>
+<li><div>Llamar a <code>waitFor()</code>. Si se hace antes de leer y el hijo escribe mucho, el buffer se llena y los dos se bloquean (deadlock).</div></li>
+</ol>
+<pre data-archivo="Estilo del profe (Pedir.java) con OutputStream y Scanner">// Enviar al hijo: imprescindible el salto de línea
+respuesta = respuesta + &quot;\n&quot;;
+OutputStream os = p.getOutputStream();
+os.write(respuesta.getBytes());
+os.flush();                       // vacía el buffer
+os.close();
+
+// Recoger la salida
+int exitVal = p.waitFor();
+System.out.println(&quot;Valor de Salida: &quot; + exitVal);
+if (exitVal == 0) {
+    InputStream is = p.getInputStream();
+    Scanner sc2 = new Scanner(is);
+    while (sc2.hasNextLine()) {
+        System.out.println(sc2.nextLine());
+    }
+    is.close();
+}</pre>
+
+</section>
+<section class="tema" id="teoria-classpath" data-cat="teoria">
+<h2>Lanzar otra clase Java como proceso</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>classpath</p>
+
+<p>Para ejecutar una clase Java como hijo se lanza el comando <code>java</code> igual que en la terminal:</p>
+<pre data-archivo="ejemplo">// Ruta donde están los .class del proyecto actual (la misma que usa el padre)
+String classpath = System.getProperty(&quot;java.class.path&quot;);
+
+// Equivale a escribir en la terminal:  java -cp &lt;classpath&gt; Ejercicio3 &quot;texto&quot;
+ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, classpath, &quot;Ejercicio3&quot;, texto);
+
+// Si la clase está en un paquete: nombre completo
+ProcessBuilder pb2 = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, classpath, &quot;Ejercicios.Ejercicio3&quot;, texto);
+
+// Alternativa del profe: directorio bin de OTRO proyecto
+ProcessBuilder pb3 = new ProcessBuilder(&quot;java&quot;, &quot;mispaquetes.Calcular&quot;);
+pb3.directory(new File(&quot;../UT1_5_CalcularParImpar/bin&quot;));</pre>
+
+<div class="ojo"><b>Si el proyecto tiene module-info.java,</b> Eclipse puede ejecutar con <i>module path</i> y <code>java.class.path</code> sale vacío: el hijo falla con "No se ha encontrado o cargado la clase principal". Solución: borrar <code>module-info.java</code>.</div>
+<pre data-archivo="module-info.java">// Declara que el proyecto es un MÓDULO (Java 9+). Eclipse lo crea por defecto.
+module practicamulti {
+}</pre>
+
+</section>
+<section class="tema" id="t-redireccion" data-cat="teoria">
+<h2>Redirigir entrada y salida a ficheros</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT1.5</p>
+
+<p>Para guardar la salida de un proceso en un log o leer su entrada de un fichero no hace falta tocar el hijo: se configura en el <code>ProcessBuilder</code> <b>antes de <code>start()</code></b>.</p>
+<pre data-archivo="Redirecciones">ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, &quot;Hijo&quot;);
+
+pb.redirectInput(new File(&quot;entrada.txt&quot;));    // System.in  del hijo &lt;- fichero
+pb.redirectOutput(new File(&quot;salida.txt&quot;));    // System.out del hijo -&gt; fichero (sobrescribe)
+pb.redirectError(new File(&quot;error.txt&quot;));      // System.err del hijo -&gt; fichero
+
+// Añadir al final en vez de sobrescribir
+pb.redirectOutput(ProcessBuilder.Redirect.appendTo(new File(&quot;log.txt&quot;)));
+
+// Usar la consola del padre
+pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);   // o pb.inheritIO() para los tres
+
+Process p = pb.start();
+int codigo = p.waitFor();</pre>
+
+<div class="ojo"><b>Al redirigir, el stream queda vacío:</b> si haces <code>redirectInput</code>, <code>p.getOutputStream()</code> devuelve un <i>NullOutputStream</i>. Si haces <code>redirectOutput</code>, <code>p.getInputStream()</code> no da nada.</div>
+<div class="ojo"><b>¿Dónde se crean los ficheros?</b> En el directorio de trabajo: en Eclipse, la <b>carpeta del proyecto</b> (no <code>src</code> ni <code>bin</code>). Si quieres otra carpeta, pon la ruta al crear el <code>File</code>.</div>
+
+</section>
+<section class="tema" id="t-sync-ficheros" data-cat="teoria">
+<h2>Sincronizar procesos con ficheros (File y FileLock)</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT1.6 · procesos competitivos</p>
+
+<p>Java no tiene palabras reservadas para sincronizar <b>procesos</b> (para hilos sí: <code>synchronized</code>). Se usan recursos externos: ficheros como semáforo, <code>FileLock</code> de Java NIO, pipes, sockets o una BD.</p>
+<h3>¿Por qué sincronizar?</h3>
+<ul>
+<li><b>Compartir recursos sin conflictos</b>: que dos procesos no escriban a la vez en el mismo archivo.</li>
+<li><b>Mantener el orden</b>: B depende de A (A descarga un fichero, B lo procesa).</li>
+<li><b>Evitar condiciones de carrera</b>.</li>
+</ul>
+<p>El SO garantiza que cada <code>write</code> individual es <b>atómico</b>, pero dos operaciones separadas pueden intercalarse: A escribe AAAAA y B escribe BBBBB, y sale <code>ABBAABBABA</code>.</p>
+<h3>Tres formas</h3>
+<div class="tabla"><table>
+<tr><th>Forma</th><th>Cómo</th><th>Problema</th></tr>
+<tr><td><code>lock.exists()</code> + <code>createNewFile()</code></td><td>Comprobar si existe y luego crearlo</td><td><b>Incorrecto</b>: dos procesos pueden pasar el <code>exists()</code> a la vez.</td></tr>
+<tr><td><code>while (!lock.createNewFile())</code></td><td>createNewFile es atómico: devuelve false si ya existe</td><td>Funciona, pero con <b>espera activa</b> (sleep entre intentos).</td></tr>
+<tr><td><code>FileChannel.lock()</code></td><td>Bloqueo real del SO</td><td><b>Recomendada</b>. El proceso se bloquea sin consumir CPU.</td></tr>
+</table></div>
+<pre data-archivo="Incorrecto (Ejemplo2)">File lock = new File(&quot;lock.tmp&quot;);
+while (lock.exists()) {        // ¡dos procesos pueden pasar aquí a la vez!
+    Thread.sleep(100);
+}
+lock.createNewFile();          // &quot;adquirir&quot;
+// usar el recurso
+lock.delete();                 // liberar</pre>
+<pre data-archivo="Mejorado (Ejemplo3)">File lock = new File(&quot;lock.tmp&quot;);
+while (!lock.createNewFile()) {   // atómico: false si ya existe
+    Thread.sleep(100);
+}
+try {
+    // usar el recurso
+} finally {
+    lock.delete();                // liberar SIEMPRE
+}</pre>
+<pre data-archivo="Con FileChannel (Ejemplo4) – forma recomendada">File lockFile = new File(&quot;lock.tmp&quot;);
+lockFile.createNewFile();
+try (FileOutputStream fos = new FileOutputStream(lockFile);
+     FileChannel channel = fos.getChannel();
+     FileLock lock = channel.lock()) {      // se bloquea si otro proceso lo tiene
+    // región crítica
+} finally {
+    if (lockFile.exists()) lockFile.delete();
+}
+// FileLock es AutoCloseable: al salir del try se libera solo</pre>
+
+<div class="ojo"><b>Usa un fichero SOLO para el bloqueo</b> (<code>datos.lock</code>) y otro para los datos (<code>datos.txt</code>). Si bloqueas y escribes con el mismo objeto, o usas <code>PrintWriter</code>/<code>BufferedWriter</code> sobre él, no se sincroniza bien.</div>
+<div class="ojo"><b>Dentro de la MISMA JVM</b> no se puede pedir dos veces el lock del mismo fichero: lanza <code>OverlappingFileLockException</code>. FileLock es para procesos distintos.</div>
+<h3>Ejemplo completo: dos procesos escribiendo letras</h3>
+<pre data-archivo="EscribeLetrasSinBloqueo.java">import java.io.FileWriter;
+import java.io.IOException;
+
+// Ejemplo 1: dos procesos escriben en el MISMO fichero sin sincronizar.
+// Uso: java EscribeLetrasSinBloqueo A
+public class EscribeLetrasSinBloqueo {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        String letra = args.length &gt; 0 ? args[0] : &quot;A&quot;;
+        for (int i = 0; i &lt; 5; i++) {
+            // true = añadir al final (append). Cada write es atómico,
+            // pero entre write y write el otro proceso puede colarse
+            try (FileWriter fw = new FileWriter(&quot;letras.txt&quot;, true)) {
+                fw.write(letra);
+            }
+            Thread.sleep((long) (Math.random() * 100));
+        }
+    }
+}</pre>
+<pre data-archivo="EscribeLetrasFile.java">import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+// Ejemplo 3: semáforo con File + createNewFile() (espera activa)
+public class EscribeLetrasFile {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        String letra = args.length &gt; 0 ? args[0] : &quot;A&quot;;
+        File lock = new File(&quot;lock.tmp&quot;);
+
+        // createNewFile() es atómico: devuelve false si ya existe
+        while (!lock.createNewFile()) {
+            Thread.sleep(100);                 // ocupado: esperar y reintentar
+        }
+        try {
+            // ---- región crítica ----
+            for (int i = 0; i &lt; 5; i++) {
+                try (FileWriter fw = new FileWriter(&quot;letras.txt&quot;, true)) {
+                    fw.write(letra);
+                }
+                Thread.sleep((long) (Math.random() * 100));
+            }
+        } finally {
+            lock.delete();                     // liberar SIEMPRE, aunque haya excepción
+        }
+    }
+}</pre>
+<pre data-archivo="EscribeLetrasFileLock.java">import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+
+// Ejemplo 4/5: bloqueo real con FileChannel.lock() (forma recomendada)
+public class EscribeLetrasFileLock {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        String letra = args.length &gt; 0 ? args[0] : &quot;A&quot;;
+        File lockFile = new File(&quot;lock.tmp&quot;);     // fichero SOLO para bloquear
+        lockFile.createNewFile();
+
+        try (FileOutputStream fos = new FileOutputStream(lockFile);
+             FileChannel canal = fos.getChannel();
+             FileLock lock = canal.lock()) {       // bloquea el proceso hasta tener el lock
+            // ---- región crítica ----
+            for (int i = 0; i &lt; 5; i++) {
+                try (FileWriter fw = new FileWriter(&quot;letras.txt&quot;, true)) {   // OTRO fichero para escribir
+                    fw.write(letra);
+                }
+                Thread.sleep((long) (Math.random() * 100));
+            }
+        }   // al salir del try el FileLock se libera solo (AutoCloseable)
+    }
+}</pre>
+<pre data-archivo="LanzarLetras.java">import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+// Lanza dos procesos a la vez (A y B) con la clase que se pase por argumento
+// Uso: java LanzarLetras EscribeLetrasFileLock
+public class LanzarLetras {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        String clase = args.length &gt; 0 ? args[0] : &quot;EscribeLetrasSinBloqueo&quot;;
+        String cp = System.getProperty(&quot;java.class.path&quot;);
+        new File(&quot;letras.txt&quot;).delete();                   // empezar limpio
+
+        Process a = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, clase, &quot;A&quot;).inheritIO().start();
+        Process b = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, clase, &quot;B&quot;).inheritIO().start();
+        a.waitFor();
+        b.waitFor();
+
+        System.out.println(clase + &quot; -&gt; &quot; + Files.readString(Path.of(&quot;letras.txt&quot;)));
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida (3 ejecuciones)">EscribeLetrasSinBloqueo -&gt; ABBAABBABA
+EscribeLetrasFile -&gt; AAAAABBBBB
+EscribeLetrasFileLock -&gt; AAAAABBBBB</pre>
+
+</section>
+<p class="bloque-titulo">UT1 · Boletines resueltos</p>
+<section class="tema" id="b-chrome" data-cat="boletin">
+<h2>Abrir una web en el navegador</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>UT1.3 · ejercicio de clase</p>
+
+<div class="enunciado"><b>Enunciado:</b> pide al usuario una web y abre un navegador en esa URL (programa <code>google-chrome</code>).</div>
+<div class="canales"><span class="canal c-args">Argumentos</span></div>
+<pre data-archivo="ej1.java">package Ejercicios;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class ej1 {
+
+    // throws: en vez de try-catch, main deja pasar las excepciones
+    public static void main(String[] args) throws IOException, InterruptedException {
+
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println(&quot;Introduzca la web a la que desea acceder: &quot;);
+
+        // next() lee solo hasta el primer espacio (para una URL vale)
+        String url = teclado.next();
+
+        // Comando: google-chrome &lt;url&gt;  (nombre del ejecutable en Linux)
+        ProcessBuilder pb = new ProcessBuilder(&quot;google-chrome&quot;, url);
+
+        // Lanza Chrome como proceso hijo. El padre sigue y termina sin esperarlo
+        Process p = pb.start();
+
+        teclado.close();
+    }
+}</pre>
+
+<div class="ojo"><b>Solo funciona en Linux.</b> Windows: <code>new ProcessBuilder("cmd", "/c", "start", "chrome", url)</code>. macOS: <code>new ProcessBuilder("open", "-a", "Google Chrome", url)</code>.</div>
+
+</section>
+<section class="tema" id="b-leernombre" data-cat="boletin">
+<h2>LeerNombre: contar vocales</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>UT1.4 · ejercicio de clase</p>
+
+<div class="enunciado"><b>Enunciado:</b> <code>LeerNombre</code> recibe un nombre. Si tiene menos de 3 caracteres sale con -1; si no, escribe el número de vocales y sale con 0. <code>LlamarLeerNombre</code> lo ejecuta, pinta el valor de salida y, si ha ido bien, el número de vocales.</div>
+<div class="canales"><span class="canal c-args">Argumentos</span><span class="canal c-stdout">Salida</span><span class="canal c-exit">Exit</span></div>
+<pre data-archivo="LeerNombre.java">public class LeerNombre {
+
+    public static void main(String[] args) {
+        // Sin argumento o con menos de 3 caracteres -&gt; error -1
+        if (args.length == 0 || args[0].trim().length() &lt; 3) {
+            System.exit(-1);
+        }
+
+        String nombre = args[0].trim().toLowerCase();
+        int vocales = 0;
+        for (char c : nombre.toCharArray()) {
+            if (&quot;aeiouáéíóúü&quot;.indexOf(c) != -1) {
+                vocales++;
+            }
+        }
+        System.out.println(&quot;El nombre &quot; + args[0].trim() + &quot; tiene &quot; + vocales + &quot; vocales&quot;);
+        System.exit(0); // OK
+    }
+}</pre>
+<pre data-archivo="LlamarLeerNombre.java">import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
+
+public class LlamarLeerNombre {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;Escribe un nombre:&quot;);
+        String nombre = sc.nextLine();
+
+        String cp = System.getProperty(&quot;java.class.path&quot;);
+        ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, &quot;LeerNombre&quot;, nombre);
+
+        try {
+            Process p = pb.start();
+            int exitVal = p.waitFor();                 // salida corta: se puede esperar antes de leer
+            System.out.println(&quot;Valor de Salida: &quot; + exitVal);
+
+            if (exitVal == 0) {
+                // Recoger lo que el hijo escribió por System.out
+                InputStream is = p.getInputStream();
+                Scanner sc2 = new Scanner(is);
+                while (sc2.hasNextLine()) {
+                    System.out.println(sc2.nextLine());
+                }
+                sc2.close();
+            } else {
+                System.out.println(&quot;Error: el nombre debe tener al menos 3 caracteres&quot;);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        sc.close();
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida">Escribe un nombre:
+Alexandru
+Valor de Salida: 0
+El nombre Alexandru tiene 4 vocales
+
+Escribe un nombre:
+Al
+Valor de Salida: 255
+Error: el nombre debe tener al menos 3 caracteres</pre>
+
+</section>
+<section class="tema" id="b-leernombre-fich" data-cat="boletin">
+<h2>LeerNombre con ficheros</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>UT1.5 · ejercicio de clase</p>
+
+<div class="enunciado"><b>Enunciado:</b> modifica la clase que corresponda para que la salida de <code>LeerNombre</code> se escriba en <code>minombre.txt</code> y la entrada se recoja de <code>nombre.txt</code>.</div>
+<div class="canales"><span class="canal c-stdin">Entrada ← nombre.txt</span><span class="canal c-stdout">Salida → minombre.txt</span><span class="canal c-exit">Exit</span></div>
+<p>El hijo pasa de leer <code>args[0]</code> a leer <code>System.in</code>; el padre solo añade las redirecciones.</p>
+<pre data-archivo="LeerNombre.java">import java.util.Scanner;
+
+// Versión que lee el nombre por la ENTRADA ESTÁNDAR (System.in)
+// para que el padre pueda redirigirla desde nombre.txt
+public class LeerNombre {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String nombre = sc.hasNextLine() ? sc.nextLine().trim() : &quot;&quot;;
+        sc.close();
+
+        if (nombre.length() &lt; 3) {
+            System.err.println(&quot;El nombre &#x27;&quot; + nombre + &quot;&#x27; tiene menos de 3 caracteres&quot;);
+            System.exit(-1);
+        }
+
+        int vocales = 0;
+        for (char c : nombre.toLowerCase().toCharArray()) {
+            if (&quot;aeiouáéíóúü&quot;.indexOf(c) != -1) vocales++;
+        }
+        System.out.println(&quot;El nombre &quot; + nombre + &quot; tiene &quot; + vocales + &quot; vocales&quot;);
+        System.exit(0);
+    }
+}</pre>
+<pre data-archivo="LlamarLeerNombre.java">import java.io.File;
+import java.io.IOException;
+
+public class LlamarLeerNombre {
+
+    public static void main(String[] args) {
+        String cp = System.getProperty(&quot;java.class.path&quot;);
+        ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, &quot;LeerNombre&quot;);
+
+        // Redirecciones: SIEMPRE antes de start()
+        pb.redirectInput(new File(&quot;nombre.txt&quot;));     // System.in del hijo  &lt;- nombre.txt
+        pb.redirectOutput(new File(&quot;minombre.txt&quot;));  // System.out del hijo -&gt; minombre.txt
+        pb.redirectError(new File(&quot;error.txt&quot;));      // System.err del hijo -&gt; error.txt
+
+        try {
+            Process p = pb.start();
+            int exitVal = p.waitFor();
+            System.out.println(&quot;Valor de Salida: &quot; + exitVal);
+            System.out.println(exitVal == 0 ? &quot;Resultado en minombre.txt&quot; : &quot;Mira error.txt&quot;);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="nombre.txt">María</pre>
+<pre data-lang="txt" data-archivo="minombre.txt (generado)">El nombre María tiene 3 vocales</pre>
+
+</section>
+<section class="tema" id="mp2-ej1" data-cat="boletin">
+<h2>Práctica MP II · Ejercicio 1 · Validar entero</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Códigos de salida</p>
+
+<div class="enunciado"><b>Enunciado:</b> un programa recibe un argumento y devuelve con <code>System.exit()</code>: -1 si viene vacío, -2 si no es entero, -3 si es entero positivo y 0 si es negativo. Otro programa pide un entero positivo por consola, llama al primero y, según el valor de salida, confirma si el dato es correcto.</div>
+<div class="canales"><span class="canal c-args">Argumentos</span><span class="canal c-exit">Exit</span></div>
+<div class="tabla"><table>
+<tr><th>Caso</th><th>exit</th><th>Mensaje del padre</th></tr>
+<tr><td>Argumento vacío</td><td><span class="num">-1</span></td><td>No has escrito nada</td></tr>
+<tr><td>No es entero</td><td><span class="num">-2</span></td><td>No has escrito un entero</td></tr>
+<tr><td>Entero positivo</td><td><span class="num">-3</span></td><td>Has escrito un entero positivo</td></tr>
+<tr><td>Entero negativo o 0</td><td><span class="num">0</span></td><td>El entero debe ser positivo</td></tr>
+</table></div>
+<h3>Hijo</h3><pre data-archivo="Ejercicio1.java">public class Ejercicio1 {
+
+    public static void main(String[] args) {
+
+        // Caso -1: no llega ningún argumento o llega vacío / solo espacios
+        if (args.length == 0 || args[0].trim().isEmpty()) {
+            System.exit(-1);
+        }
+
+        int numero;
+        try {
+            // Intenta convertir el texto a int (trim quita espacios)
+            numero = Integer.parseInt(args[0].trim());
+        } catch (NumberFormatException e) {
+            // Caso -2: el texto no es un entero (&quot;hola&quot;, &quot;3.5&quot;...)
+            System.exit(-2);
+            return; // nunca se ejecuta, pero el compilador lo necesita
+                    // para saber que &#x27;numero&#x27; siempre está inicializado
+        }
+
+        if (numero &gt; 0) {
+            System.exit(-3); // Caso -3: entero positivo
+        } else {
+            System.exit(0);  // Caso 0: entero negativo o cero
+        }
+    }
+}</pre>
+<h3>Padre</h3><pre data-archivo="LlamarEjercicio1.java">import java.io.IOException;
+import java.util.Scanner;
+
+public class LlamarEjercicio1 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;Escribe un número entero positivo:&quot;);
+
+        // nextLine() lee la línea entera (aunque esté vacía)
+        String dato = sc.nextLine();
+
+        // Classpath actual para que el hijo encuentre Ejercicio1.class
+        String classpath = System.getProperty(&quot;java.class.path&quot;);
+
+        // java -cp &lt;classpath&gt; Ejercicio1 &lt;dato&gt;  -&gt; dato llega al hijo en args[0]
+        ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, classpath, &quot;Ejercicio1&quot;, dato);
+
+        try {
+            Process p = pb.start();      // lanza el hijo
+            int salida = p.waitFor();    // espera a que acabe y recoge su System.exit(n)
+
+            // Se ponen los dos valores porque en Linux/macOS
+            // los negativos llegan como 256 + valor (-1 -&gt; 255...)
+            switch (salida) {
+                case -3:
+                case 253:
+                    System.out.println(&quot;Has escrito un entero positivo&quot;);
+                    break;
+                case 0:
+                    System.out.println(&quot;El entero debe ser positivo&quot;);
+                    break;
+                case -2:
+                case 254:
+                    System.out.println(&quot;No has escrito un entero&quot;);
+                    break;
+                case -1:
+                case 255:
+                    System.out.println(&quot;No has escrito nada&quot;);
+                    break;
+                default:
+                    // Por ejemplo 1 si la JVM no encuentra la clase Ejercicio1
+                    System.out.println(&quot;Valor de salida inesperado: &quot; + salida);
+            }
+        } catch (IOException | InterruptedException e) {
+            // IOException: no se pudo lanzar &#x27;java&#x27;
+            // InterruptedException: interrumpieron al padre mientras esperaba
+            e.printStackTrace();
+        }
+        sc.close();
+    }
+}</pre>
+
+</section>
+<section class="tema" id="mp2-ej2" data-cat="boletin">
+<h2>Práctica MP II · Ejercicio 2 · Sumar números</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Entrada y salida estándar</p>
+
+<div class="enunciado"><b>Enunciado:</b> un programa lee de la entrada estándar un número desconocido de líneas. Si alguna es una cadena sale con -1. Si no, suma los números hasta que llegue un <code>*</code>, deja la suma en la salida estándar y sale bien. Otro programa pide números por consola hasta <code>*</code> (sin validar), llama al primero pasándole los datos y pinta la suma.</div>
+<div class="canales"><span class="canal c-stdin">Entrada</span><span class="canal c-stdout">Salida</span><span class="canal c-exit">Exit</span></div>
+<ol class="pasos">
+<li><div>Recoge datos por teclado <b>sin validar</b> hasta que llega <code>*</code>.</div></li>
+<li><div>Lanza el hijo <b>sin argumentos</b>.</div></li>
+<li><div><span class="c-stdin"><b>Envía</b></span> cada dato a la entrada del hijo y la cierra.</div></li>
+<li><div><span class="c-stdout"><b>Lee</b></span> todo lo que imprime el hijo.</div></li>
+<li><div><span class="c-exit"><b>Espera</b></span> el código: si es 0 muestra la suma, si no, el error.</div></li>
+</ol>
+<h3>Hijo</h3><pre data-archivo="Ejercicio2.java">import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Ejercicio2 {
+
+    public static void main(String[] args) {
+        // Lee de System.in, que aquí NO es el teclado: es lo que escribe el padre
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        double suma = 0;   // double para aceptar también decimales
+        String linea;
+
+        try {
+            // readLine() devuelve null cuando el padre cierra el flujo (bw.close())
+            while ((linea = br.readLine()) != null) {
+                linea = linea.trim();
+
+                // No sale por pantalla directamente: va a la salida del hijo,
+                // que el padre lee y muestra después
+                System.out.println(&quot;Escrito &quot; + linea);
+
+                if (linea.equals(&quot;*&quot;)) {
+                    break; // marca de fin: deja de leer
+                }
+
+                try {
+                    suma += Double.parseDouble(linea); // acumula el número
+                } catch (NumberFormatException e) {
+                    System.exit(-1); // no es un número -&gt; termina con error
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(&quot;Suma: &quot; + suma);
+        System.exit(0); // todo correcto
+    }
+}</pre>
+<h3>Padre</h3><pre data-archivo="LlamarEjercicio2.java">import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class LlamarEjercicio2 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List&lt;String&gt; datos = new ArrayList&lt;&gt;(); // todo lo que escribe el usuario
+        String entrada;
+
+        // 1) Recoger datos SIN validar hasta que llegue un *
+        //    (la validación la hace el hijo)
+        do {
+            System.out.println(&quot;Escribe un número:&quot;);
+            entrada = sc.nextLine();
+            datos.add(entrada);              // el * también se guarda y se envía
+        } while (!entrada.trim().equals(&quot;*&quot;));
+
+        String classpath = System.getProperty(&quot;java.class.path&quot;);
+        // 2) Sin argumentos: los datos van por la entrada estándar
+        ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, classpath, &quot;Ejercicio2&quot;);
+
+        try {
+            Process p = pb.start();
+
+            // 3) ENVIAR datos al hijo: getOutputStream() = System.in del hijo
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+            for (String d : datos) {
+                bw.write(d);   // escribe la línea
+                bw.newLine();  // salto de línea para que el hijo pueda hacer readLine()
+            }
+            bw.close(); // IMPORTANTE: vacía el buffer y cierra la entrada del hijo.
+                        // Sin esto el hijo nunca recibe null y se queda esperando
+
+            // 4) LEER lo que imprimió el hijo: getInputStream() = System.out del hijo
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            StringBuilder salidaHijo = new StringBuilder(); // acumula todas las líneas
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                salidaHijo.append(linea).append(&quot;\n&quot;);
+            }
+            br.close();
+
+            // 5) Esperar a que termine y recoger el código de salida
+            int salida = p.waitFor();
+            System.out.println(&quot;Valor de Salida: &quot; + salida);
+
+            if (salida == 0) {
+                System.out.print(salidaHijo);
+            } else {
+                // -1 en Windows, 255 en Linux: cualquier valor != 0 es error
+                System.out.println(&quot;Error: has introducido algo que no es un número&quot;);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        sc.close();
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida">Escribe un número:
+3
+Escribe un número:
+4.5
+Escribe un número:
+*
+Valor de Salida: 0
+Escrito 3
+Escrito 4.5
+Escrito *
+Suma: 7.5</pre>
+
+</section>
+<section class="tema" id="mp2-ej3" data-cat="boletin">
+<h2>Práctica MP II · Ejercicio 3 · Palíndromo</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Argumentos y salida estándar</p>
+
+<div class="enunciado"><b>Enunciado:</b> un programa recibe una cadena y comprueba si es palíndromo. Otro recoge una cadena por consola, llama al anterior y muestra la respuesta.</div>
+<div class="canales"><span class="canal c-args">Argumentos</span><span class="canal c-stdout">Salida</span><span class="canal c-exit">Exit</span></div>
+<div class="tabla"><table>
+<tr><th>Paso de limpieza</th><th>Ejemplo</th></tr>
+<tr><td><code>toLowerCase()</code></td><td>"Anita lava la tina" → "anita lava la tina"</td></tr>
+<tr><td>NFD + <code>\p{M}</code></td><td>"canción" → "cancion"</td></tr>
+<tr><td><code>[^a-z0-9ñ]</code></td><td>"anita lava la tina" → "anitalavalatina"</td></tr>
+<tr><td><code>reverse()</code> y comparar</td><td>iguales → Es palíndromo</td></tr>
+</table></div>
+<h3>Hijo</h3><pre data-archivo="Ejercicio3.java">import java.text.Normalizer;
+
+public class Ejercicio3 {
+
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.exit(-1); // sin texto -&gt; error
+        }
+
+        // Une todos los argumentos por si la frase llega partida en varios
+        // (pasaría desde terminal sin comillas: java Ejercicio3 Ana lava lana)
+        String texto = String.join(&quot;&quot;, args);
+
+        // Limpieza en 3 pasos:
+        // 1. toLowerCase()          -&gt; todo a minúsculas
+        // 2. Normalize NFD + \p{M}  -&gt; separa la letra de su tilde y borra la tilde
+        // 3. [^a-z0-9ñ]             -&gt; borra lo que no sea letra o número
+        texto = Normalizer.normalize(texto.toLowerCase(), Normalizer.Form.NFD)
+                .replaceAll(&quot;\\p{M}&quot;, &quot;&quot;)
+                .replaceAll(&quot;[^a-z0-9ñ]&quot;, &quot;&quot;);
+
+        // Da la vuelta al texto
+        String invertido = new StringBuilder(texto).reverse().toString();
+
+        // Es palíndromo si no está vacío y es igual al revés
+        if (!texto.isEmpty() &amp;&amp; texto.equals(invertido)) {
+            System.out.println(&quot;Es palíndromo&quot;);
+        } else {
+            System.out.println(&quot;NO es palíndromo&quot;);
+        }
+        System.exit(0);
+    }
+}</pre>
+<h3>Padre</h3><pre data-archivo="LlamarEjercicio3.java">import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class LlamarEjercicio3 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;Escribe un texto:&quot;);
+        String texto = sc.nextLine(); // nextLine para coger la frase con espacios
+
+        String classpath = System.getProperty(&quot;java.class.path&quot;);
+
+        // El texto entero va como UN argumento (ProcessBuilder no lo parte por espacios)
+        ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, classpath, &quot;Ejercicio3&quot;, texto);
+
+        try {
+            Process p = pb.start();
+
+            // Lee lo que imprime el hijo (&quot;Es palíndromo&quot; / &quot;NO es palíndromo&quot;)
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            StringBuilder respuesta = new StringBuilder();
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                respuesta.append(linea).append(&quot;\n&quot;);
+            }
+            br.close();
+
+            int salida = p.waitFor(); // código de salida del hijo
+            System.out.println(&quot;Valor de Salida: &quot; + salida);
+            System.out.print(respuesta); // muestra el resultado del hijo
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        sc.close();
+    }
+}</pre>
+
+<div class="ojo"><b>Tildes rotas en Windows:</b> si sale "pal&#xFFFD;ndromo", padre e hijo usan codificaciones distintas. Lee con <code>new InputStreamReader(p.getInputStream(), "UTF-8")</code> y lanza el hijo con <code>"-Dstdout.encoding=UTF-8"</code>.</div>
+
+</section>
+<section class="tema" id="mp3-ej1" data-cat="boletin">
+<h2>Práctica MP III · Ejercicio 1 · Entrada desde dato.txt</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>redirectInput</p>
+
+<div class="enunciado"><b>Enunciado:</b> partiendo del ejercicio 1 anterior, la entrada al primer programa se hace desde un fichero <code>dato.txt</code> en lugar de por argumento.</div>
+<div class="canales"><span class="canal c-stdin">Entrada ← dato.txt</span><span class="canal c-exit">Exit</span></div>
+<p>Cambio clave: el hijo lee de <code>System.in</code> y el padre hace <code>pb.redirectInput(new File("dato.txt"))</code>.</p>
+<pre data-archivo="Ejercicio1.java">import java.util.Scanner;
+
+// Igual que en la práctica II, pero el dato llega por la ENTRADA ESTÁNDAR
+// (el padre la redirige desde dato.txt) en lugar de por argumento.
+public class Ejercicio1 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Si dato.txt está vacío no hay ninguna línea
+        String dato = sc.hasNextLine() ? sc.nextLine().trim() : &quot;&quot;;
+        sc.close();
+
+        if (dato.isEmpty()) {
+            System.exit(-1);                 // vacío
+        }
+        int numero;
+        try {
+            numero = Integer.parseInt(dato);
+        } catch (NumberFormatException e) {
+            System.exit(-2);                 // no es entero
+            return;
+        }
+        System.exit(numero &gt; 0 ? -3 : 0);    // -3 positivo · 0 negativo/cero
+    }
+}</pre>
+<pre data-archivo="LlamarEjercicio1.java">import java.io.File;
+import java.io.IOException;
+
+public class LlamarEjercicio1 {
+
+    public static void main(String[] args) {
+        String cp = System.getProperty(&quot;java.class.path&quot;);
+        ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, &quot;Ejercicio1&quot;);
+
+        // El System.in del hijo pasa a ser el fichero dato.txt
+        // (se busca en el directorio de trabajo: la carpeta del proyecto en Eclipse)
+        pb.redirectInput(new File(&quot;dato.txt&quot;));
+
+        try {
+            Process p = pb.start();
+            int salida = p.waitFor();
+
+            switch (salida) {
+                case -3: case 253: System.out.println(&quot;Has escrito un entero positivo&quot;); break;
+                case 0:            System.out.println(&quot;El entero debe ser positivo&quot;);    break;
+                case -2: case 254: System.out.println(&quot;No has escrito un entero&quot;);       break;
+                case -1: case 255: System.out.println(&quot;No has escrito nada&quot;);            break;
+                default:           System.out.println(&quot;Valor inesperado: &quot; + salida);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="dato.txt">7</pre>
+<pre data-lang="txt" data-archivo="Salida">Has escrito un entero positivo</pre>
+
+</section>
+<section class="tema" id="mp3-ej2" data-cat="boletin">
+<h2>Práctica MP III · Ejercicio 2 · datos.txt → suma.txt / error.txt</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Redirigir las tres</p>
+
+<div class="enunciado"><b>Enunciado:</b> partiendo del ejercicio 2 anterior, la entrada se toma de <code>datos.txt</code> en lugar de pedirla por consola y las salidas se redirigen a <code>suma.txt</code> y <code>error.txt</code>.</div>
+<div class="canales"><span class="canal c-stdin">Entrada ← datos.txt</span><span class="canal c-stdout">Salida → suma.txt</span><span class="canal c-stdout">Error → error.txt</span><span class="canal c-exit">Exit</span></div>
+<p>El hijo escribe el error en <code>System.err</code> para que acabe en <code>error.txt</code>. El padre ya no necesita la lista ni el BufferedWriter.</p>
+<pre data-archivo="Ejercicio2.java">import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Ejercicio2 {
+
+    public static void main(String[] args) throws IOException {
+        // System.in = datos.txt (redirigido por el padre)
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        double suma = 0;
+        String linea;
+
+        while ((linea = br.readLine()) != null) {      // null = fin del fichero
+            linea = linea.trim();
+            if (linea.equals(&quot;*&quot;)) break;              // marca de fin
+            if (linea.isEmpty()) continue;             // ignora líneas en blanco
+            try {
+                suma += Double.parseDouble(linea);
+            } catch (NumberFormatException e) {
+                // System.err -&gt; acabará en error.txt
+                System.err.println(&quot;Error: &#x27;&quot; + linea + &quot;&#x27; no es un número&quot;);
+                System.exit(-1);
+            }
+        }
+        // System.out -&gt; acabará en suma.txt
+        System.out.println(&quot;Suma: &quot; + suma);
+        System.exit(0);
+    }
+}</pre>
+<pre data-archivo="LlamarEjercicio2.java">import java.io.File;
+import java.io.IOException;
+
+public class LlamarEjercicio2 {
+
+    public static void main(String[] args) {
+        String cp = System.getProperty(&quot;java.class.path&quot;);
+        ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, &quot;Ejercicio2&quot;);
+
+        // Ya no se pide nada por consola: los datos salen de datos.txt
+        pb.redirectInput(new File(&quot;datos.txt&quot;));   // entrada  &lt;- datos.txt
+        pb.redirectOutput(new File(&quot;suma.txt&quot;));   // salida   -&gt; suma.txt
+        pb.redirectError(new File(&quot;error.txt&quot;));   // errores  -&gt; error.txt
+
+        try {
+            Process p = pb.start();
+            int salida = p.waitFor();
+            System.out.println(&quot;Valor de Salida: &quot; + salida);
+            if (salida == 0) {
+                System.out.println(&quot;Correcto: la suma está en suma.txt&quot;);
+            } else {
+                System.out.println(&quot;Error: revisa error.txt&quot;);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="datos.txt">1
+2
+3.5
+*</pre>
+<pre data-lang="txt" data-archivo="suma.txt (generado)">Suma: 6.5</pre>
+<pre data-lang="txt" data-archivo="Si datos.txt tiene &quot;hola&quot; → error.txt">Error: &#x27;hola&#x27; no es un número</pre>
+
+</section>
+<section class="tema" id="mp3-ej3" data-cat="boletin">
+<h2>Práctica MP III · Ejercicio 3 · texto.txt → palindromo.txt</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Redirigir las tres</p>
+
+<div class="enunciado"><b>Enunciado:</b> partiendo del ejercicio 3 anterior, la entrada se toma de <code>texto.txt</code> y las salidas se redirigen a <code>palindromo.txt</code> y <code>error.txt</code>.</div>
+<div class="canales"><span class="canal c-stdin">Entrada ← texto.txt</span><span class="canal c-stdout">Salida → palindromo.txt</span><span class="canal c-stdout">Error → error.txt</span></div>
+<pre data-archivo="Ejercicio3.java">import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.Normalizer;
+
+public class Ejercicio3 {
+
+    public static void main(String[] args) throws IOException {
+        // Lee TODO el texto de la entrada estándar (texto.txt)
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            sb.append(linea);
+        }
+        String original = sb.toString().trim();
+
+        if (original.isEmpty()) {
+            System.err.println(&quot;Error: texto.txt está vacío&quot;);   // -&gt; error.txt
+            System.exit(-1);
+        }
+
+        String limpio = Normalizer.normalize(original.toLowerCase(), Normalizer.Form.NFD)
+                .replaceAll(&quot;\\p{M}&quot;, &quot;&quot;)          // quita tildes
+                .replaceAll(&quot;[^a-z0-9]&quot;, &quot;&quot;);      // quita espacios y signos
+
+        if (limpio.isEmpty()) {
+            System.err.println(&quot;Error: el texto no tiene letras ni números&quot;);
+            System.exit(-2);
+        }
+
+        String invertido = new StringBuilder(limpio).reverse().toString();
+        if (limpio.equals(invertido)) {
+            System.out.println(&quot;\&quot;&quot; + original + &quot;\&quot; es palíndromo&quot;);      // -&gt; palindromo.txt
+        } else {
+            System.out.println(&quot;\&quot;&quot; + original + &quot;\&quot; NO es palíndromo&quot;);
+        }
+        System.exit(0);
+    }
+}</pre>
+<pre data-archivo="LlamarEjercicio3.java">import java.io.File;
+import java.io.IOException;
+
+public class LlamarEjercicio3 {
+
+    public static void main(String[] args) {
+        String cp = System.getProperty(&quot;java.class.path&quot;);
+        ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, &quot;Ejercicio3&quot;);
+
+        pb.redirectInput(new File(&quot;texto.txt&quot;));        // entrada
+        pb.redirectOutput(new File(&quot;palindromo.txt&quot;));  // salida
+        pb.redirectError(new File(&quot;error.txt&quot;));        // errores
+
+        try {
+            Process p = pb.start();
+            int salida = p.waitFor();
+            System.out.println(&quot;Valor de Salida: &quot; + salida);
+            System.out.println(salida == 0 ? &quot;Resultado en palindromo.txt&quot; : &quot;Error: revisa error.txt&quot;);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="texto.txt">Dábale arroz a la zorra el abad</pre>
+<pre data-lang="txt" data-archivo="palindromo.txt (generado)">&quot;Dábale arroz a la zorra el abad&quot; es palíndromo</pre>
+
+</section>
+<section class="tema" id="mp3-ej4" data-cat="boletin">
+<h2>Práctica MP III · Ejercicio 4 · Notas por asignatura</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Argumentos + lectura de fichero + bucle</p>
+
+<div class="enunciado"><b>Enunciado:</b> un programa recibe 2 argumentos: asignatura y fichero de notas (una por línea). Calcula la media y el número de aprobados y lo deja en la salida estándar. Otro programa pide asignaturas y ficheros hasta que se introduzca <code>*</code>; por cada par llama al anterior y muestra su salida.</div>
+<div class="canales"><span class="canal c-args">Argumentos</span><span class="canal c-stdout">Salida</span><span class="canal c-exit">Exit</span></div>
+<pre data-archivo="Notas.java">import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+// Uso: java Notas &lt;asignatura&gt; &lt;fichero&gt;
+public class Notas {
+
+    public static void main(String[] args) {
+        if (args.length &lt; 2) {
+            System.err.println(&quot;Uso: Notas &lt;asignatura&gt; &lt;fichero&gt;&quot;);
+            System.exit(-1);
+        }
+        String asignatura = args[0];
+        String fichero = args[1];
+
+        double suma = 0;
+        int numNotas = 0, aprobados = 0;
+
+        // try-with-resources: cierra el fichero solo
+        try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                linea = linea.trim().replace(&quot;,&quot;, &quot;.&quot;);   // admite 8,5
+                if (linea.isEmpty()) continue;
+                try {
+                    double nota = Double.parseDouble(linea);
+                    suma += nota;
+                    numNotas++;
+                    if (nota &gt;= 5) aprobados++;
+                } catch (NumberFormatException e) {
+                    System.err.println(&quot;Línea ignorada (no es una nota): &quot; + linea);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println(&quot;No se puede leer el fichero &quot; + fichero);
+            System.exit(-2);
+        }
+
+        if (numNotas == 0) {
+            System.err.println(&quot;El fichero no tiene notas&quot;);
+            System.exit(-3);
+        }
+
+        System.out.println(&quot;En la asignatura &quot; + asignatura);
+        System.out.println(&quot;Han aprobado &quot; + aprobados + &quot; alumnos&quot;);
+        System.out.printf(&quot;La media es %.1f%n&quot;, suma / numNotas);
+        System.exit(0);
+    }
+}</pre>
+<pre data-archivo="LlamarNotas.java">import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class LlamarNotas {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String cp = System.getProperty(&quot;java.class.path&quot;);
+
+        while (true) {
+            System.out.println(&quot;Escribe la asignatura:&quot;);
+            String asignatura = sc.nextLine().trim();
+            if (asignatura.equals(&quot;*&quot;)) break;
+
+            System.out.println(&quot;Escribe el nombre del fichero:&quot;);
+            String fichero = sc.nextLine().trim();
+            if (fichero.equals(&quot;*&quot;)) break;
+
+            // Cada asignatura = un proceso hijo nuevo con 2 argumentos
+            ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, &quot;Notas&quot;, asignatura, fichero);
+            // Mezcla System.err con System.out para leerlo todo de una vez
+            pb.redirectErrorStream(true);
+
+            try {
+                Process p = pb.start();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                StringBuilder salidaHijo = new StringBuilder();
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    salidaHijo.append(linea).append(&quot;\n&quot;);
+                }
+                br.close();
+
+                int salida = p.waitFor();
+                System.out.println(&quot;Valor de Salida: &quot; + salida);
+                System.out.print(salidaHijo);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(&quot;Fin del programa&quot;);
+        sc.close();
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="notas_psp.txt">6
+7
+8.5
+2
+3</pre>
+<pre data-lang="txt" data-archivo="Salida">Escribe la asignatura:
+PSP
+Escribe el nombre del fichero:
+notas_psp.txt
+Valor de Salida: 0
+En la asignatura PSP
+Han aprobado 3 alumnos
+La media es 5.3
+Escribe la asignatura:
+*
+Fin del programa</pre>
+
+<div class="ojo"><b>El fichero de notas</b> tiene que estar en el directorio de trabajo del hijo (carpeta del proyecto) o pasar la ruta completa. Con <code>pb.directory(...)</code> cambias ese directorio.</div>
+
+</section>
+<section class="tema" id="mp4" data-cat="boletin">
+<h2>Práctica MP IV · Escritor y Lector con FileLock</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Procesos competitivos</p>
+
+<div class="enunciado"><b>Enunciado:</b> dos programas independientes usan <code>datos.txt</code> y el fichero de bloqueo <code>datos.lock</code>. El <b>Escritor</b> bloquea con <code>FileLock</code>, escribe 10 mensajes esperando 1–1,5 s entre cada uno y libera. El <b>Lector</b> espera al bloqueo, lee todas las líneas y termina. Usa <code>FileChannel</code>, <code>FileLock</code> y try-with-resources.</div>
+<ol class="pasos">
+<li><div>Ejecuta <b>Escritor</b>.</div></li>
+<li><div>Mientras escribe, ejecuta <b>Lector</b>: se queda en "Esperando que se libere el bloqueo...".</div></li>
+<li><div>Cuando Escritor libera, Lector lee el fichero completo.</div></li>
+</ol>
+<pre data-archivo="Escritor.java">import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.util.Random;
+
+public class Escritor {
+
+    public static void main(String[] args) {
+        Random r = new Random();
+
+        // 1-3. Abrir datos.lock, sacar su FileChannel y bloquearlo.
+        //      Los tres recursos van en el try-with-resources: al salir del try
+        //      se cierran en orden inverso -&gt; primero se libera el FileLock.
+        try (RandomAccessFile raf = new RandomAccessFile(&quot;datos.lock&quot;, &quot;rw&quot;);
+             FileChannel canal = raf.getChannel();
+             FileLock bloqueo = canal.lock()) {          // si otro proceso lo tiene, ESPERA aquí
+
+            System.out.println(&quot;Establecido bloqueo para escribir los mensajes...&quot;);
+
+            // 5. Escribir 10 mensajes en datos.txt (false = sobrescribir el fichero)
+            try (FileWriter fw = new FileWriter(&quot;datos.txt&quot;, false)) {
+                for (int i = 0; i &lt; 10; i++) {
+                    fw.write(&quot;Mensaje de iteración :&quot; + i + System.lineSeparator());
+                    fw.flush();                                   // que llegue ya al disco
+                    System.out.println(&quot;Escritor: Escrito mensaje de iteración &quot; + i);
+                    Thread.sleep(1000 + r.nextInt(501));          // 1 a 1,5 segundos
+                }
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        // Aquí el bloqueo ya está liberado (lo cerró el try)
+        System.out.println(&quot;Liberado bloqueo.&quot;);
+    }
+}</pre>
+<pre data-archivo="Lector.java">import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+
+public class Lector {
+
+    public static void main(String[] args) {
+        System.out.println(&quot;Esperando que se libere el bloqueo...&quot;);
+
+        // Mismo fichero de bloqueo que el Escritor
+        try (RandomAccessFile raf = new RandomAccessFile(&quot;datos.lock&quot;, &quot;rw&quot;);
+             FileChannel canal = raf.getChannel();
+             FileLock bloqueo = canal.lock();             // se queda bloqueado hasta que Escritor termine
+             BufferedReader br = new BufferedReader(new FileReader(&quot;datos.txt&quot;))) {
+
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                System.out.println(&quot;Leído mensaje: &quot; + linea);
+            }
+        } catch (IOException e) {
+            System.out.println(&quot;Error: &quot; + e.getMessage());
+        }
+        System.out.println(&quot;Fin de lectura del fichero.&quot;);
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Consola del Escritor">Establecido bloqueo para escribir los mensajes...
+Escritor: Escrito mensaje de iteración 0
+Escritor: Escrito mensaje de iteración 1
+...
+Escritor: Escrito mensaje de iteración 9
+Liberado bloqueo.</pre>
+<pre data-lang="txt" data-archivo="Consola del Lector">Esperando que se libere el bloqueo...
+Leído mensaje: Mensaje de iteración :0
+Leído mensaje: Mensaje de iteración :1
+...
+Leído mensaje: Mensaje de iteración :9
+Fin de lectura del fichero.</pre>
+
+<div class="clave"><b>Por qué funciona:</b> en un try-with-resources los recursos se abren en orden y se cierran al revés. El <code>FileReader</code> del Lector solo se abre <b>después</b> de conseguir el lock, y el <code>FileLock</code> es lo primero que se cierra al salir.</div>
+<div class="ojo"><b>Para probarlo en Eclipse:</b> lanza Escritor, y mientras corre, lanza Lector (dos consolas; cambia entre ellas con el icono de monitor de la vista Console).</div>
+
+</section>
+<p class="bloque-titulo">UT2 · Teoría de hilos</p>
+<section class="tema" id="t-hilos" data-cat="teoria">
+<h2>Concepto de hilo</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT2.1</p>
+
+<p>Un <b>hilo</b> (thread o subproceso) es la unidad básica de uso de la CPU: una secuencia de código en ejecución <b>dentro del contexto de un proceso</b>. Tiene identificador único. Todo programa tiene al menos el <b>hilo principal</b> (el del <code>main</code>).</p>
+<h3>Características</h3>
+<div class="tabla"><table>
+<tr><th>Característica</th><th>Explicación</th></tr>
+<tr><td>Dependencia del proceso</td><td>No se ejecutan solos; siempre dentro de un proceso.</td></tr>
+<tr><td>Ligereza</td><td>No crean procesos nuevos: se pueden crear muchos con poco coste.</td></tr>
+<tr><td>Compartición de recursos</td><td>Comparten la memoria del proceso → posibles colisiones (errores de concurrencia).</td></tr>
+<tr><td>Paralelismo</td><td>Aprovechan los núcleos del procesador.</td></tr>
+<tr><td>Concurrencia</td><td>Atienden muchas peticiones a la vez (servidores web, BD).</td></tr>
+</table></div>
+
+<div class="dos">
+<div><h4>Comparten entre ellos</h4><ul><li>Sección de código y de datos.</li><li>Variables globales / <code>static</code>.</li><li>Recursos del sistema (ficheros).</li></ul></div>
+<div><h4>Cada hilo tiene</h4><ul><li>Identificador único.</li><li>Contador de programa.</li><li>Registros de la CPU.</li><li>Pila de variables (locales).</li></ul></div>
+</div>
+<h3>Beneficios</h3>
+<ul>
+<li><b>Capacidad de respuesta</b>: el programa sigue atendiendo aunque una tarea sea larga.</li>
+<li><b>Compartición de recursos</b> sin reservar memoria extra.</li>
+<li><b>Paralelismo real</b> en multinúcleo.</li>
+<li><b>Prioridades</b> para tareas críticas.</li>
+<li>Menor tiempo de creación, terminación y conmutación que un proceso.</li>
+</ul>
+<h3>Fases de un programa multihilo</h3>
+<ol>
+<li><b>Descomposición funcional</b>: identificar tareas y sus relaciones.</li>
+<li><b>Partición</b>: los hilos se comunican por memoria (rápido, pero ojo a la sincronización).</li>
+<li><b>Implementación</b>: <code>Thread</code> o <code>Runnable</code> + mecanismos de sincronización.</li>
+</ol>
+<h3>Hilos de usuario vs hilos de kernel</h3>
+<div class="dos">
+<div><h4>Nivel de usuario</h4><ul><li>Los gestiona una librería; el SO solo ve un hilo.</li><li>Cambio de contexto más sencillo.</li><li>Funcionan aunque el SO no tenga hilos.</li><li>Planificación propia.</li></ul></div>
+<div><h4>Nivel de kernel</h4><ul><li>El SO los crea, planifica y gestiona.</li><li>Aprovechan multiprocesador.</li><li>Si uno se bloquea, los demás siguen.</li></ul></div>
+</div>
+<div class="tabla"><table>
+<tr><th>Modelo</th><th>Relación</th><th>Pros / contras</th></tr>
+<tr><td><b>M×1</b> (many to one)</td><td>Muchos hilos de usuario → 1 de kernel</td><td>Si uno se bloquea, se bloquea todo el proceso. No hay paralelismo real.</td></tr>
+<tr><td><b>1×1</b> (one to one)</td><td>Cada hilo de usuario → 1 de kernel</td><td>Más concurrencia, pero el número de hilos de kernel es limitado.</td></tr>
+<tr><td><b>M×N</b> (many to many)</td><td>Muchos de usuario → igual o menos de kernel</td><td>Lo mejor de ambos: hilos ilimitados y paralelismo; si uno se bloquea, el kernel planifica otro.</td></tr>
+</table></div>
+
+</section>
+<section class="tema" id="t-estados-hilo" data-cat="teoria">
+<h2>Estados de un hilo</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT2.1</p>
+
+<div class="diagrama">
+<svg viewBox="0 0 720 230" role="img" aria-label="Estados de un hilo en Java">
+  <defs><marker id="fh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--tinta-suave)"/></marker></defs>
+  <rect class="estado" x="10" y="80" width="120" height="46" rx="23"/><text class="txt" x="70" y="101" text-anchor="middle">Nuevo</text><text class="txt-s" x="70" y="117" text-anchor="middle">new Thread()</text>
+  <rect class="estado" x="210" y="80" width="170" height="46" rx="23"/><text class="txt" x="295" y="101" text-anchor="middle">Runnable</text><text class="txt-s" x="295" y="117" text-anchor="middle">listo / ejecutando</text>
+  <rect class="estado" x="560" y="80" width="150" height="46" rx="23"/><text class="txt" x="635" y="101" text-anchor="middle">Terminado</text><text class="txt-s" x="635" y="117" text-anchor="middle">fin de run()</text>
+  <rect class="estado" x="160" y="176" width="270" height="46" rx="23"/><text class="txt" x="295" y="197" text-anchor="middle">Bloqueado</text><text class="txt-s" x="295" y="213" text-anchor="middle">sleep · wait · join · E/S · monitor</text>
+  <line class="flecha" x1="130" y1="103" x2="206" y2="103" marker-end="url(#fh)"/>
+  <text class="txt-s" x="168" y="94" text-anchor="middle">start()</text>
+  <line class="flecha" x1="380" y1="103" x2="556" y2="103" marker-end="url(#fh)"/>
+  <text class="txt-s" x="468" y="94" text-anchor="middle">run() acaba / excepción</text>
+  <path class="flecha" d="M275,126 L275,172" marker-end="url(#fh)"/>
+  <path class="flecha" d="M315,176 L315,130" marker-end="url(#fh)"/>
+  <text class="txt-s" x="325" y="155">notify · fin sleep · interrupt()</text>
+  <text class="txt-s" x="265" y="155" text-anchor="end">sleep · wait · join</text>
+  <text class="txt-s" x="10" y="30">getState(): NEW · RUNNABLE · BLOCKED · WAITING · TIMED_WAITING · TERMINATED</text>
+</svg>
+</div>
+<div class="tabla"><table>
+<tr><th>Estado</th><th>Cuándo</th></tr>
+<tr><td>Nuevo</td><td>Creado con <code>new</code>, aún sin <code>start()</code>.</td></tr>
+<tr><td>Listo / Runnable</td><td>Tras <code>start()</code>; puede estar ejecutándose o esperando CPU.</td></tr>
+<tr><td>Bloqueado</td><td>Por <code>sleep()</code>, esperando E/S, en <code>wait()</code> hasta un <code>notify()</code>/<code>notifyAll()</code>, en <code>join()</code>, o esperando un monitor <code>synchronized</code>.</td></tr>
+<tr><td>Terminado</td><td>Acaba <code>run()</code> normalmente o por excepción / <code>stop()</code>.</td></tr>
+</table></div>
+
+<div class="ojo"><b>Un hilo terminado no se puede volver a arrancar.</b> Llamar otra vez a <code>start()</code> lanza <code>IllegalThreadStateException</code>: hay que crear otro con <code>new</code>.</div>
+
+</section>
+<section class="tema" id="t-crear-hilos" data-cat="teoria">
+<h2>Crear hilos: Thread vs Runnable</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT2.1</p>
+
+<p>Lo que hace el hilo va <b>siempre en <code>run()</code></b>. Se arranca con <b><code>start()</code></b>, que crea el hilo nuevo y llama a <code>run()</code>. Llamar a <code>run()</code> directamente ejecuta el código en el hilo actual, sin concurrencia.</p>
+<pre data-archivo="Las 3 formas">// 1) Heredando de Thread
+class MiHilo extends Thread {
+    @Override
+    public void run() { /* trabajo */ }
+}
+new MiHilo().start();
+
+// 2) Implementando Runnable
+class MiTarea implements Runnable {
+    @Override
+    public void run() { /* trabajo */ }
+}
+new Thread(new MiTarea()).start();
+
+// 3) Lambda (Runnable es una interfaz funcional)
+new Thread(() -&gt; System.out.println(&quot;Hola desde &quot; + Thread.currentThread().getName())).start();</pre>
+
+<div class="dos">
+<div><h4>implements Runnable</h4><ul><li>Más general: la clase puede heredar de <b>otra</b> clase.</li><li>Solo aporta <code>run()</code>; para el resto hay que usar <code>Thread.currentThread()</code>.</li></ul></div>
+<div><h4>extends Thread</h4><ul><li>Más sencillo: tienes a mano <code>getName()</code>, <code>setPriority()</code>...</li><li>Limitado: ya no puede heredar de otra clase (herencia simple).</li></ul></div>
+</div>
+<h3>Métodos de la clase Thread</h3>
+<div class="tabla"><table>
+<tr><th>Método</th><th>Qué hace</th></tr>
+<tr><td><code>start()</code></td><td>Arranca el hilo (llama a <code>run()</code> en un hilo nuevo).</td></tr>
+<tr><td><code>run()</code></td><td>Código del hilo.</td></tr>
+<tr><td><code>Thread.sleep(ms)</code></td><td>Duerme el hilo actual. Lanza <code>InterruptedException</code>.</td></tr>
+<tr><td><code>join()</code> / <code>join(ms)</code></td><td>El hilo que llama espera a que ese hilo termine.</td></tr>
+<tr><td><code>isAlive()</code></td><td>true desde <code>start()</code> hasta que muere.</td></tr>
+<tr><td><code>interrupt()</code></td><td>Interrumpe el hilo: si está en sleep/wait/join salta <code>InterruptedException</code>.</td></tr>
+<tr><td><code>isInterrupted()</code></td><td>¿Le han interrumpido?</td></tr>
+<tr><td><code>getName()</code> / <code>setName()</code></td><td>Nombre del hilo (por defecto Thread-0, Thread-1...).</td></tr>
+<tr><td><code>getId()</code> / <code>threadId()</code></td><td>Identificador.</td></tr>
+<tr><td><code>getPriority()</code> / <code>setPriority(n)</code></td><td>Prioridad 1–10.</td></tr>
+<tr><td><code>getState()</code></td><td>NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED.</td></tr>
+<tr><td><code>Thread.currentThread()</code></td><td>Referencia al hilo que se está ejecutando.</td></tr>
+<tr><td><code>Thread.yield()</code></td><td>Cede la CPU al planificador.</td></tr>
+<tr><td><code>setDaemon(true)</code></td><td>Hilo demonio: no impide que el programa termine. Antes de <code>start()</code>.</td></tr>
+<tr><td><code>stop()</code>, <code>suspend()</code>, <code>resume()</code></td><td><b>Deprecados</b>: inseguros, no usar.</td></tr>
+</table></div>
+
+<h3>ThreadGroup</h3>
+<p>Todo hilo pertenece a un grupo. Por defecto, al grupo <b>main</b>. Con <code>ThreadGroup</code> se pueden interrumpir o gestionar todos los hilos del grupo con una sola llamada. Forman una estructura en árbol.</p>
+<pre data-archivo="ThreadGroup">ThreadGroup grupo = new ThreadGroup(&quot;Corredores&quot;);
+Thread t1 = new Thread(grupo, new Tarea(), &quot;Hilo-1&quot;);
+Thread t2 = new Thread(grupo, new Tarea(), &quot;Hilo-2&quot;);
+t1.start();
+t2.start();
+System.out.println(&quot;Activos: &quot; + grupo.activeCount());
+grupo.interrupt();          // interrumpe a todos los del grupo</pre>
+
+</section>
+<section class="tema" id="t-raton" data-cat="teoria">
+<h2>Ejemplo Ratón: secuencial, hilos y join</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT2.1 · 0_Ejemplo_Raton</p>
+
+<p>Secuencial: cada ratón espera a que termine el anterior → tiempo total = suma (18 s). Con hilos todos empiezan a la vez → tiempo total ≈ el más lento (6 s).</p>
+<pre data-archivo="Raton.java">// 0_Ejemplo_Raton: versión SECUENCIAL (sin hilos)
+public class Raton {
+
+    private String nombre;
+    private int tiempoAlimentacion;   // segundos
+
+    public Raton(String nombre, int tiempoAlimentacion) {
+        this.nombre = nombre;
+        this.tiempoAlimentacion = tiempoAlimentacion;
+    }
+
+    public void comer() {
+        try {
+            System.out.printf(&quot;El ratón %s ha comenzado a alimentarse%n&quot;, nombre);
+            Thread.sleep(tiempoAlimentacion * 1000L);
+            System.out.printf(&quot;El ratón %s ha terminado de alimentarse%n&quot;, nombre);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Uno detrás de otro: tiempo total = 4+5+3+6 = 18 s
+        new Raton(&quot;Fievel&quot;, 4).comer();
+        new Raton(&quot;Jerry&quot;, 5).comer();
+        new Raton(&quot;Pinky&quot;, 3).comer();
+        new Raton(&quot;Mickey&quot;, 6).comer();
+    }
+}</pre>
+<pre data-archivo="RatonHilo.java">// 0_Ejemplo_Raton_Hilos: cada ratón es un hilo (extends Thread)
+public class RatonHilo extends Thread {
+
+    private String nombre;
+    private int tiempoAlimentacion;
+
+    public RatonHilo(String nombre, int tiempoAlimentacion) {
+        this.nombre = nombre;
+        this.tiempoAlimentacion = tiempoAlimentacion;
+    }
+
+    // Lo que hace el hilo va SIEMPRE en run()
+    @Override
+    public void run() {
+        try {
+            System.out.printf(&quot;El ratón %s ha comenzado a alimentarse%n&quot;, nombre);
+            Thread.sleep(tiempoAlimentacion * 1000L);
+            System.out.printf(&quot;El ratón %s ha terminado de alimentarse%n&quot;, nombre);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        // start() crea el hilo y llama a run(). Si llamas a run() directamente NO hay hilo nuevo
+        new RatonHilo(&quot;Fievel&quot;, 4).start();
+        new RatonHilo(&quot;Jerry&quot;, 5).start();
+        new RatonHilo(&quot;Pinky&quot;, 3).start();
+        new RatonHilo(&quot;Mickey&quot;, 6).start();
+        // Tiempo total ≈ el del más lento (6 s)
+    }
+}</pre>
+<pre data-archivo="RatonRunnable.java">// 0_Ejemplo_Raton_Runnable: implementando la interfaz Runnable
+public class RatonRunnable implements Runnable {
+
+    private String nombre;
+    private int tiempoAlimentacion;
+
+    public RatonRunnable(String nombre, int tiempoAlimentacion) {
+        this.nombre = nombre;
+        this.tiempoAlimentacion = tiempoAlimentacion;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.printf(&quot;El ratón %s ha comenzado a alimentarse%n&quot;, nombre);
+            Thread.sleep(tiempoAlimentacion * 1000L);
+            System.out.printf(&quot;El ratón %s ha terminado de alimentarse%n&quot;, nombre);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Con Runnable hay que envolver el objeto en un Thread
+        new Thread(new RatonRunnable(&quot;Fievel&quot;, 4)).start();
+        new Thread(new RatonRunnable(&quot;Jerry&quot;, 5)).start();
+        new Thread(new RatonRunnable(&quot;Pinky&quot;, 3)).start();
+        new Thread(new RatonRunnable(&quot;Mickey&quot;, 6)).start();
+    }
+}</pre>
+<pre data-archivo="RatonJoin.java">// 0_Ejemplo_Raton_Join: el main espera a que acaben todos con join()
+public class RatonJoin {
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread fievel = new Thread(new RatonRunnable(&quot;Fievel&quot;, 4));
+        Thread jerry  = new Thread(new RatonRunnable(&quot;Jerry&quot;, 5));
+        Thread pinky  = new Thread(new RatonRunnable(&quot;Pinky&quot;, 3));
+
+        long inicio = System.currentTimeMillis();
+        fievel.start();
+        jerry.start();
+        pinky.start();
+
+        // join(): el hilo que lo llama (main) se BLOQUEA hasta que ese hilo termine
+        fievel.join();
+        jerry.join();
+        pinky.join();
+
+        System.out.println(&quot;Todos han comido en &quot; + (System.currentTimeMillis() - inicio) / 1000.0 + &quot; s&quot;);
+    }
+}</pre>
+
+<div class="clave"><b>join():</b> "espera a que termines". El hilo que llama (normalmente el main) se bloquea hasta que el otro acaba. Es la sincronización más básica.</div>
+
+</section>
+<section class="tema" id="t-finalizar" data-cat="teoria">
+<h2>Finalizar un hilo: isAlive e interrupt</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT2.1B</p>
+
+<ul>
+<li>La forma natural de morir es <b>terminar <code>run()</code></b>.</li>
+<li><code>isAlive()</code> dice si sigue vivo (desde <code>start()</code> hasta su muerte).</li>
+<li>Para pararlo desde fuera: <b><code>interrupt()</code></b>. Si está en <code>sleep</code>/<code>wait</code>/<code>join</code> salta <code>InterruptedException</code> y en el <code>catch</code> programamos la salida (<code>return</code>).</li>
+<li><code>return</code> sale del hilo; <code>System.exit(0)</code> sale de <b>todo el programa</b>.</li>
+<li><code>stop()</code> está en desuso: no usar.</li>
+</ul>
+<pre data-archivo="Patrón para hilos con bucle">@Override
+public void run() {
+    try {
+        while (!Thread.currentThread().isInterrupted()) {
+            // trabajo
+            Thread.sleep(500);
+        }
+    } catch (InterruptedException e) {
+        // nos han interrumpido mientras dormíamos
+    }
+    System.out.println(&quot;Hilo terminado limpiamente&quot;);
+}
+
+// Desde el main
+hilo.interrupt();</pre>
+<pre data-archivo="Alternativa: bandera volatile">private volatile boolean activo = true;   // volatile: todos los hilos ven el cambio
+
+public void parar() { activo = false; }
+
+@Override
+public void run() {
+    while (activo) {
+        // trabajo
+    }
+}</pre>
+
+</section>
+<section class="tema" id="t-executor" data-cat="teoria">
+<h2>ExecutorService y pool de hilos</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT2.1B</p>
+
+<p>Un <b>pool de hilos</b> es un contenedor con un número <b>limitado</b> de hilos que ejecutan todas las tareas de una cola. Evita crear tantos hilos que se agoten los recursos. Java recomienda usar <code>ExecutorService</code> en lugar de crear hilos a mano.</p>
+<div class="tabla"><table>
+<tr><th>Executors.</th><th>Crea</th></tr>
+<tr><td><code>newFixedThreadPool(n)</code></td><td>Pool de n hilos reutilizados cíclicamente.</td></tr>
+<tr><td><code>newCachedThreadPool()</code></td><td>Crea hilos según hace falta y reutiliza los libres; mata los inactivos.</td></tr>
+<tr><td><code>newSingleThreadExecutor()</code></td><td>Un solo hilo; si una tarea lanza excepción, las siguientes siguen.</td></tr>
+<tr><td><code>newScheduledThreadPool(n)</code></td><td>Tareas programadas (una vez o repetidas), como un Timer con varios hilos.</td></tr>
+</table></div>
+<div class="tabla"><table>
+<tr><th>Método</th><th>Qué hace</th></tr>
+<tr><td><code>execute(Runnable)</code></td><td>De <code>Executor</code>. Ejecuta y nunca devuelve resultado.</td></tr>
+<tr><td><code>submit(Runnable / Callable)</code></td><td>De <code>ExecutorService</code>. Devuelve un <code>Future</code> (con Callable, el resultado).</td></tr>
+<tr><td><code>shutdown()</code></td><td>No acepta más tareas (submit lanza excepción) y deja terminar las que hay.</td></tr>
+<tr><td><code>shutdownNow()</code></td><td>Intenta parar todo: interrumpe los hilos.</td></tr>
+<tr><td><code>isTerminated()</code></td><td>true cuando, tras shutdown, ya no queda ninguna tarea.</td></tr>
+<tr><td><code>awaitTermination(t, unidad)</code></td><td>Bloquea hasta que termine todo: un <code>join()</code> masivo.</td></tr>
+</table></div>
+
+<h3>Ventajas</h3>
+<ul>
+<li><b>Desacopla</b> qué se hace de cómo se ejecuta.</li>
+<li><b>Reutiliza hilos</b>: al acabar una tarea el hilo vuelve al pool → menos overhead.</li>
+<li><b>Limita</b> el número de hilos.</li>
+<li>Permite recuperar resultados con <code>Callable</code> + <code>Future</code>.</li>
+</ul>
+<pre data-archivo="PoolHilos.java">import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+// UT3_7_PoolHilos: 10 tareas repartidas entre solo 3 hilos reutilizados
+public class PoolHilos {
+
+    public static void main(String[] args) throws InterruptedException {
+        ExecutorService pool = Executors.newFixedThreadPool(3);
+
+        for (int i = 1; i &lt;= 10; i++) {
+            final int tarea = i;                    // las lambdas solo ven variables &quot;final&quot;
+            pool.submit(() -&gt; {
+                System.out.println(&quot;Tarea &quot; + tarea + &quot; en &quot; + Thread.currentThread().getName());
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            });
+        }
+
+        pool.shutdown();                            // no acepta más tareas; deja terminar las que hay
+        pool.awaitTermination(1, TimeUnit.MINUTES); // como un join() de todas las tareas
+        System.out.println(&quot;¿Terminado? &quot; + pool.isTerminated());
+    }
+}</pre>
+<pre data-archivo="TicTacExecutor.java">import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+// UT2_1_TIC_TAC_ExecutorService
+public class TicTacExecutor {
+
+    public static void main(String[] args) throws InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        executor.execute(new TicTacRunnable(&quot;TIC&quot;));   // execute: Runnable, sin resultado
+        executor.submit(new TicTacRunnable(&quot;TAC&quot;));    // submit: también vale (devuelve Future)
+
+        Thread.sleep(5000);           // dejamos que suenen 5 segundos
+        executor.shutdownNow();       // interrumpe los hilos (los bucles son infinitos)
+        executor.awaitTermination(1, TimeUnit.SECONDS);
+        System.out.println(&quot;Fin&quot;);
+    }
+}</pre>
+
+</section>
+<section class="tema" id="t-problemas" data-cat="teoria">
+<h2>Problemas de concurrencia y sección crítica</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT2.2</p>
+
+<p>Los problemas aparecen cuando varios hilos acceden a un recurso <b>compartido y limitado</b>. No siempre provocan el mismo error, ni en todas las ejecuciones. Se resuelven haciendo <b>secuenciales</b> ciertas partes; si te pasas, todo el programa se vuelve secuencial y pierdes la concurrencia.</p>
+<div class="tabla"><table>
+<tr><th>Problema</th><th>Qué es</th></tr>
+<tr><td><b>Condición de carrera</b></td><td>El resultado depende del orden de acceso a memoria (<code>c++</code> no es atómico).</td></tr>
+<tr><td><b>Inconsistencia de memoria</b></td><td>Hilos con visiones distintas del mismo dato (cachés de cada núcleo).</td></tr>
+<tr><td><b>Inanición</b></td><td>Un hilo nunca consigue el recurso porque otros siempre entran antes.</td></tr>
+<tr><td><b>Interbloqueo</b></td><td>Dos o más esperan para siempre un evento que solo puede producir otro bloqueado.</td></tr>
+<tr><td><b>Bloqueo activo</b> (livelock)</td><td>Como el interbloqueo, pero los hilos cambian de estado continuamente sin avanzar.</td></tr>
+</table></div>
+
+<h3>Acción atómica y volatile</h3>
+<ul>
+<li><b>Atómica</b>: sucede completa, sin interrupciones; su efecto solo se ve al final.</li>
+<li>En Java son atómicas: leer/escribir primitivos <b>excepto long y double</b>, y leer/escribir variables <b>volatile</b> (incluidas long y double).</li>
+<li><code>volatile</code> hace que solo haya <b>una copia</b> de la variable visible para todos. Útil con <b>un hilo que escribe y varios que leen</b>. No arregla <code>c++</code> con varios escritores.</li>
+</ul>
+<h3>Requisitos de una solución a la sección crítica</h3>
+<ol>
+<li><b>Exclusión mutua</b>: si uno está en su sección crítica, nadie más entra.</li>
+<li><b>Progreso</b>: si nadie está dentro, solo los que quieren entrar deciden quién entra.</li>
+<li><b>Espera limitada</b>: hay un límite de veces que otros pueden colarse.</li>
+</ol>
+<h3>Condiciones de la exclusión mutua (mutex)</h3>
+<ul>
+<li>Solo un proceso en la sección crítica de un recurso.</li>
+<li>Ninguno que pida entrar puede ser postergado indefinidamente.</li>
+<li>Si no hay nadie dentro, entra sin demora.</li>
+<li>No se suponen velocidades ni número de procesadores.</li>
+<li>Se permanece dentro un tiempo finito.</li>
+</ul>
+<p>La sincronización se consigue por <b>exclusión mutua</b> (acceso exclusivo y finito) y <b>por condición</b> (no avanzar hasta que se cumpla algo). En Java ambas se basan en el <b>monitor</b>.</p>
+
+</section>
+<section class="tema" id="t-synchronized" data-cat="teoria">
+<h2>synchronized y monitores</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT2.2</p>
+
+<ul>
+<li>Limita un método o bloque a <b>un único hilo a la vez</b> → exclusión mutua.</li>
+<li>El monitor es <b>por instancia de objeto</b>: todos los hilos que usan <b>ese mismo objeto</b> se excluyen entre sí. Con objetos distintos no hay exclusión.</li>
+<li>Un método <code>synchronized</code> usa <code>this</code> como monitor: es equivalente a <code>synchronized(this) { ... }</code>.</li>
+<li>Sincronizar demasiado código es poco eficiente: mejor solo la parte que toca la variable compartida.</li>
+<li>Cada objeto tiene una cola de hilos esperando el bloqueo; el orden en que entran es <b>indeterminista</b>.</li>
+<li>Al <b>entrar</b> en un bloque synchronized se actualizan las variables visibles; al <b>salir</b>, los cambios se escriben en memoria principal.</li>
+</ul>
+<pre data-archivo="Método y bloque">// Método sincronizado: monitor = this
+public synchronized void incrementa() {
+    c++;
+}
+
+// Bloque sincronizado: solo la parte crítica
+public void add(int value) {
+    // ... código no crítico ...
+    synchronized (this) {
+        this.count += value;
+    }
+}
+
+// Con un objeto cerrojo propio (static si la variable es static)
+private static final Object CERROJO = new Object();
+synchronized (CERROJO) {
+    contadorCompartido++;
+}</pre>
+
+<div class="ojo"><b>Objeto monitor final:</b> si reasignas el objeto usado como monitor se pierden los bloqueos. Decláralo <code>final</code>. Oracle recomienda <b>no</b> sincronizar sobre <code>String</code> ni wrappers (<code>Integer</code>, <code>Boolean</code>...). Lo seguro: <code>this</code> o un <code>new Object()</code>.</div>
+<h3>Ejemplo: Sumador y Restador con un Contador compartido</h3>
+<p>Contador empieza en 100; un hilo suma 300 veces y otro resta 300 veces. Sin <code>synchronized</code> el resultado puede no ser 100. Lo importante: pasar <b>el mismo objeto</b> a los dos constructores.</p>
+<pre data-archivo="Contador.java">// Objeto COMPARTIDO por los dos hilos (UT2_2_1_CompartirInfo2)
+public class Contador {
+
+    private int c;
+
+    public Contador(int inicial) {
+        this.c = inicial;
+    }
+
+    // c++ NO es atómico: leer c -&gt; sumar 1 -&gt; guardar c.
+    // Sin synchronized dos hilos pueden intercalarse y perder operaciones (condición de carrera)
+    public synchronized void incrementa() {
+        c++;
+    }
+
+    public synchronized void decrementa() {
+        c--;
+    }
+
+    public synchronized int valor() {
+        return c;
+    }
+}</pre>
+<pre data-archivo="Sumador.java">public class Sumador extends Thread {
+
+    private Contador contador;
+
+    public Sumador(String nombre, Contador contador) {
+        super(nombre);                 // nombre del hilo
+        this.contador = contador;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 300; i++) {
+            contador.incrementa();
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
+        System.out.println(getName() + &quot; termina. Valor: &quot; + contador.valor());
+    }
+}</pre>
+<pre data-archivo="Restador.java">public class Restador extends Thread {
+
+    private Contador contador;
+
+    public Restador(String nombre, Contador contador) {
+        super(nombre);
+        this.contador = contador;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 300; i++) {
+            contador.decrementa();
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
+        System.out.println(getName() + &quot; termina. Valor: &quot; + contador.valor());
+    }
+}</pre>
+<pre data-archivo="CompartirInfo.java">public class CompartirInfo {
+
+    public static void main(String[] args) throws InterruptedException {
+        // UN SOLO objeto Contador para los dos hilos
+        Contador contador = new Contador(100);
+
+        Sumador s = new Sumador(&quot;Sumador&quot;, contador);
+        Restador r = new Restador(&quot;Restador&quot;, contador);
+        s.start();
+        r.start();
+        s.join();
+        r.join();
+
+        // Con synchronized siempre 100. Sin él, a veces 98, 103...
+        System.out.println(&quot;Valor final: &quot; + contador.valor());
+    }
+}</pre>
+<h3>Ejercicio: 5 hilos × 5000 incrementos</h3><pre data-archivo="CincoHilos.java">// Ejercicio: 5 hilos incrementan 5000 veces una variable compartida
+public class CincoHilos implements Runnable {
+
+    private static int contador = 0;                    // compartida (static)
+    private static final Object CERROJO = new Object(); // objeto monitor (final!)
+
+    private boolean sincronizado;
+
+    public CincoHilos(boolean sincronizado) {
+        this.sincronizado = sincronizado;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 5000; i++) {
+            if (sincronizado) {
+                synchronized (CERROJO) {   // bloque sincronizado: solo 1 hilo a la vez
+                    contador++;
+                }
+            } else {
+                contador++;                // condición de carrera
+            }
+        }
+    }
+
+    private static int probar(boolean sync) throws InterruptedException {
+        contador = 0;
+        Thread[] hilos = new Thread[5];
+        for (int i = 0; i &lt; 5; i++) {
+            hilos[i] = new Thread(new CincoHilos(sync));
+            hilos[i].start();
+        }
+        for (Thread h : hilos) h.join();   // esperar a los 5
+        return contador;
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println(&quot;Sin sincronizar: &quot; + probar(false) + &quot; (esperado 25000)&quot;);
+        System.out.println(&quot;Sincronizado:    &quot; + probar(true) + &quot; (esperado 25000)&quot;);
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida">Sin sincronizar: 23353 (esperado 25000)
+Sincronizado:    25000 (esperado 25000)</pre>
+
+</section>
+<section class="tema" id="t-waitnotify" data-cat="teoria">
+<h2>wait(), notify() y notifyAll()</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>Sincronización por condición · necesario para Aeropuerto y Dinamo</p>
+
+<p><code>synchronized</code> da exclusión mutua. Para <b>esperar a que se cumpla una condición</b> dentro de un monitor se usan los métodos de <code>Object</code>:</p>
+<div class="tabla"><table>
+<tr><th>Método</th><th>Qué hace</th></tr>
+<tr><td><code>wait()</code></td><td>Suelta el monitor y duerme el hilo hasta que otro haga notify. Lanza <code>InterruptedException</code>.</td></tr>
+<tr><td><code>notify()</code></td><td>Despierta a <b>un</b> hilo cualquiera de los que esperan en ese monitor.</td></tr>
+<tr><td><code>notifyAll()</code></td><td>Despierta a <b>todos</b>; cada uno vuelve a comprobar su condición. El más seguro.</td></tr>
+</table></div>
+
+<div class="ojo"><b>Reglas de oro:</b> solo dentro de un método/bloque <code>synchronized</code> sobre ese objeto (si no, <code>IllegalMonitorStateException</code>), y la condición siempre en un <b><code>while</code></b>, nunca en un <code>if</code>.</div>
+<pre data-archivo="Plantilla de monitor">public class Recurso {
+    private boolean ocupado = false;
+
+    public synchronized void entrar() throws InterruptedException {
+        while (ocupado) {        // mientras NO pueda pasar...
+            wait();              // ...espero
+        }
+        ocupado = true;          // paso
+    }
+
+    public synchronized void salir() {
+        ocupado = false;
+        notifyAll();             // aviso a los que esperan
+    }
+}</pre>
+<h3>Productor–consumidor</h3><pre data-archivo="Buffer.java">import java.util.LinkedList;
+
+// Monitor con sincronización por CONDICIÓN: wait() / notifyAll()
+public class Buffer {
+
+    private final LinkedList&lt;Integer&gt; cola = new LinkedList&lt;&gt;();
+    private final int capacidad;
+
+    public Buffer(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public synchronized void poner(int dato) throws InterruptedException {
+        while (cola.size() == capacidad) {   // SIEMPRE while, nunca if
+            wait();                          // suelta el monitor y se duerme
+        }
+        cola.add(dato);
+        System.out.println(&quot;Producido &quot; + dato + &quot;  -&gt; buffer &quot; + cola);
+        notifyAll();                         // despierta a los que esperan
+    }
+
+    public synchronized int quitar() throws InterruptedException {
+        while (cola.isEmpty()) {
+            wait();
+        }
+        int dato = cola.removeFirst();
+        System.out.println(&quot;Consumido &quot; + dato + &quot; &lt;- buffer &quot; + cola);
+        notifyAll();
+        return dato;
+    }
+}</pre>
+<pre data-archivo="ProductorConsumidor.java">public class ProductorConsumidor {
+
+    public static void main(String[] args) {
+        Buffer buffer = new Buffer(3);
+
+        Thread productor = new Thread(() -&gt; {
+            try {
+                for (int i = 1; i &lt;= 10; i++) {
+                    buffer.poner(i);
+                    Thread.sleep(100);
+                }
+            } catch (InterruptedException e) { }
+        });
+
+        Thread consumidor = new Thread(() -&gt; {
+            try {
+                for (int i = 1; i &lt;= 10; i++) {
+                    buffer.quitar();
+                    Thread.sleep(300);       // más lento: el buffer se llena y el productor espera
+                }
+            } catch (InterruptedException e) { }
+        });
+
+        productor.start();
+        consumidor.start();
+    }
+}</pre>
+
+</section>
+<section class="tema" id="t-prioridad" data-cat="teoria">
+<h2>Prioridad de hilos</h2>
+<p class="tipo"><span class="etq teoria">Teoría</span>UT2.2</p>
+<div class="tabla"><table>
+<tr><th>Constante</th><th>Valor</th></tr>
+<tr><td><code>Thread.MIN_PRIORITY</code></td><td>1</td></tr>
+<tr><td><code>Thread.NORM_PRIORITY</code></td><td>5 (la del main)</td></tr>
+<tr><td><code>Thread.MAX_PRIORITY</code></td><td>10</td></tr>
+</table></div>
+
+<ul>
+<li>Los hilos creados <b>heredan</b> la prioridad de su padre.</li>
+<li><code>getPriority()</code> / <code>setPriority(n)</code> (n entre 1 y 10).</li>
+<li>Los 10 niveles de Java no coinciden con los del SO: usa solo las 3 constantes.</li>
+<li>La prioridad es una <b>sugerencia</b>: los de mayor prioridad <i>tienden</i> a acabar antes, pero no está garantizado.</li>
+</ul>
+<pre data-archivo="MemoriaComun.java">public class MemoriaComun {
+    private int pasos = 0;
+    // Método compartido y sincronizado por todos los hilos
+    public synchronized void pasar() {
+        pasos++;
+    }
+}</pre>
+<pre data-archivo="HiloPrioridad.java">public class HiloPrioridad extends Thread {
+
+    private MemoriaComun miMemoriaComun;
+
+    public HiloPrioridad(int prioridad, MemoriaComun memoria) {
+        this.miMemoriaComun = memoria;
+        setPriority(prioridad);        // 1..10 (MIN_PRIORITY..MAX_PRIORITY)
+    }
+
+    // Ejecuta una tarea &quot;pesada&quot;
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 5000; ++i) {
+            miMemoriaComun.pasar();
+            Thread.yield();            // cede la CPU: el planificador elige otro hilo
+        }
+        System.out.println(&quot;Hilo de prioridad &quot; + getPriority() + &quot; termina ahora&quot;);
+    }
+}</pre>
+<pre data-archivo="ProgramaPrioridad.java">public class ProgramaPrioridad {
+
+    public static void main(String[] args) {
+        int contador = 5;
+        MemoriaComun memoria = new MemoriaComun();
+        Thread[] hilosMIN = new Thread[contador];
+        Thread[] hilosNORM = new Thread[contador];
+        Thread[] hilosMAX = new Thread[contador];
+
+        for (int i = 0; i &lt; contador; i++) {
+            hilosMIN[i] = new HiloPrioridad(Thread.MIN_PRIORITY, memoria);
+            hilosNORM[i] = new HiloPrioridad(Thread.NORM_PRIORITY, memoria);
+            hilosMAX[i] = new HiloPrioridad(Thread.MAX_PRIORITY, memoria);
+        }
+        System.out.println(&quot;Hilos en proceso, espera...\nLos de mayor prioridad TIENDEN a terminar antes...\n&quot;);
+
+        for (int i = 0; i &lt; contador; i++) {
+            hilosMIN[i].start();
+            hilosNORM[i].start();
+            hilosMAX[i].start();
+        }
+        // La prioridad es una SUGERENCIA al SO: no garantiza el orden
+    }
+}</pre>
+
+</section>
+<p class="bloque-titulo">UT2 · Boletines resueltos</p>
+<section class="tema" id="b-tictac" data-cat="boletin">
+<h2>TIC TAC con Thread y con Runnable</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>UT2.1 · ejercicios de clase</p>
+
+<div class="enunciado"><b>Enunciado:</b> dos hilos que extienden Thread: uno imprime TIC en bucle infinito y otro TAC, con <code>sleep()</code>. Una clase Main los lanza. ¿Salen ordenados? Después, repetirlo con Runnable.</div>
+<pre data-archivo="HiloTic.java">public class HiloTic extends Thread {
+    @Override
+    public void run() {
+        while (true) {
+            System.out.println(&quot;TIC&quot;);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                return;            // si lo interrumpen, termina el hilo
+            }
+        }
+    }
+}</pre>
+<pre data-archivo="HiloTac.java">public class HiloTac extends Thread {
+    @Override
+    public void run() {
+        while (true) {
+            System.out.println(&quot;TAC&quot;);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
+    }
+}</pre>
+<pre data-archivo="MainTicTac.java">// ¿Sale TIC TAC TIC TAC ordenado? NO está garantizado:
+// el planificador decide qué hilo se ejecuta en cada momento.
+public class MainTicTac {
+    public static void main(String[] args) {
+        new HiloTic().start();
+        new HiloTac().start();
+    }
+}</pre>
+<pre data-archivo="TicTacRunnable.java">// Versión con Runnable: una sola clase que recibe la palabra
+public class TicTacRunnable implements Runnable {
+
+    private String palabra;
+
+    public TicTacRunnable(String palabra) {
+        this.palabra = palabra;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            System.out.println(palabra);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Thread(new TicTacRunnable(&quot;TIC&quot;)).start();
+        new Thread(new TicTacRunnable(&quot;TAC&quot;)).start();
+    }
+}</pre>
+
+<div class="clave"><b>Respuesta:</b> no está garantizado que salga TIC TAC TIC TAC. Con el mismo sleep suele alternar, pero a veces sale TIC TIC o TAC TAC: el orden lo decide el planificador.</div>
+
+</section>
+<section class="tema" id="mh1-ej1" data-cat="boletin">
+<h2>MultiHilo I · Ejercicio 1 · Par / Impar</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>extends Thread</p>
+
+<div class="enunciado"><b>Enunciado:</b> clase con un método que, según un dato, saca los impares o los pares entre 1 y 10. Genera 2 hilos: uno para pares y otro para impares. Prueba y documenta varias respuestas.</div>
+<pre data-archivo="ParImpar.java">// Ejercicio 1 - PAR / IMPAR  (extends Thread)
+public class ParImpar extends Thread {
+
+    private boolean pares;     // true = pares, false = impares
+
+    public ParImpar(boolean pares) {
+        this.pares = pares;
+    }
+
+    public void mostrar() {
+        int inicio = pares ? 2 : 1;
+        for (int i = inicio; i &lt;= 10; i += 2) {
+            System.out.println(i);
+        }
+    }
+
+    @Override
+    public void run() {
+        mostrar();
+    }
+
+    public static void main(String[] args) {
+        ParImpar hiloPares = new ParImpar(true);
+        ParImpar hiloImpares = new ParImpar(false);
+        hiloImpares.start();
+        hiloPares.start();
+        // Cada ejecución puede salir en un orden distinto: 1 2 4 3 6 5 8 7 10 9...
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salidas posibles">1 3 5 7 9 2 4 6 8 10
+1 2 4 3 6 5 8 7 10 9
+2 4 6 8 10 1 3 5 7 9</pre>
+
+</section>
+<section class="tema" id="mh1-ej2" data-cat="boletin">
+<h2>MultiHilo I · Ejercicio 2 · Iron Man</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>implements Runnable</p>
+
+<div class="enunciado"><b>Enunciado:</b> clase con 3 métodos (bici 180 km, marathon 42 km, nadar 4.000 m) y otro que los enlaza. Variables: velocidades y nombre. 1 hora = 1000 ms. Pedro (6 km/h, 20 km/h, 1.000 m/h), Juan (7, 18, 2.000), Vicente (6, 30, 1.000). Todos empiezan a la vez. ¿Quién gana?</div>
+<div class="tabla"><table>
+<tr><th>Participante</th><th>Bici</th><th>Marathon</th><th>Nadar</th><th>Total</th></tr>
+<tr><td>Pedro</td><td>180/20 = 9 h</td><td>42/6 = 7 h</td><td>4000/1000 = 4 h</td><td>20 h</td></tr>
+<tr><td>Juan</td><td>180/18 = 10 h</td><td>42/7 = 6 h</td><td>4000/2000 = 2 h</td><td>18 h</td></tr>
+<tr><td><b>Vicente</b></td><td>180/30 = 6 h</td><td>42/6 = 7 h</td><td>4000/1000 = 4 h</td><td><b>17 h → gana</b></td></tr>
+</table></div>
+<pre data-archivo="IronMan.java">// Ejercicio 2 - IRON MAN  (implements Runnable)
+// 1 hora = 1000 ms  -&gt;  tiempo(ms) = distancia / velocidad * 1000
+public class IronMan implements Runnable {
+
+    private String nombre;
+    private double velCorrer;   // km/h
+    private double velBici;     // km/h
+    private double velNadar;    // m/h
+
+    public IronMan(String nombre, double velCorrer, double velBici, double velNadar) {
+        this.nombre = nombre;
+        this.velCorrer = velCorrer;
+        this.velBici = velBici;
+        this.velNadar = velNadar;
+    }
+
+    private void prueba(String nombrePrueba, double distancia, double velocidad) throws InterruptedException {
+        System.out.println(nombre + &quot; comienza la prueba en &quot; + nombrePrueba);
+        Thread.sleep((long) (distancia / velocidad * 1000));
+        System.out.println(nombre + &quot; ha acabado la prueba en &quot; + nombrePrueba);
+    }
+
+    public void bici() throws InterruptedException     { prueba(&quot;bici&quot;, 180, velBici); }
+    public void marathon() throws InterruptedException { prueba(&quot;marathon&quot;, 42, velCorrer); }
+    public void nadar() throws InterruptedException    { prueba(&quot;natación&quot;, 4000, velNadar); }
+
+    // Enlaza las tres pruebas
+    @Override
+    public void run() {
+        long inicio = System.currentTimeMillis();
+        try {
+            bici();
+            marathon();
+            nadar();
+            double horas = (System.currentTimeMillis() - inicio) / 1000.0;
+            System.out.printf(&quot;&gt;&gt;&gt; %s TERMINA el IronMan en %.1f horas%n&quot;, nombre, horas);
+        } catch (InterruptedException e) {
+            System.out.println(nombre + &quot; abandona&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        // Todos empiezan a la vez
+        new Thread(new IronMan(&quot;Pedro&quot;, 6, 20, 1000)).start();   // 9 + 7 + 4 = 20 h
+        new Thread(new IronMan(&quot;Juan&quot;, 7, 18, 2000)).start();    // 10 + 6 + 2 = 18 h
+        new Thread(new IronMan(&quot;Vicente&quot;, 6, 30, 1000)).start(); // 6 + 7 + 4 = 17 h -&gt; GANA
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida">Vicente comienza la prueba en bici
+Pedro comienza la prueba en bici
+Juan comienza la prueba en bici
+Vicente ha acabado la prueba en bici
+Vicente comienza la prueba en marathon
+Pedro ha acabado la prueba en bici
+...
+&gt;&gt;&gt; Vicente TERMINA el IronMan en 17.0 horas
+&gt;&gt;&gt; Juan TERMINA el IronMan en 18.0 horas
+&gt;&gt;&gt; Pedro TERMINA el IronMan en 20.0 horas</pre>
+
+</section>
+<section class="tema" id="mh1-ej3" data-cat="boletin">
+<h2>MultiHilo I · Ejercicio 3 · Relevos</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Runnable + join</p>
+
+<div class="enunciado"><b>Enunciado:</b> método que simula a un corredor haciendo 100 m; cada 10 m tarda entre 950 y 1.050 ms. Indica cuándo empieza y acaba y su equipo. Un corredor no puede salir hasta que acabe el anterior. ¿Cómo? Con <code>join</code>.</div>
+<pre data-archivo="Corredor.java">// Ejercicio 3 - RELEVOS  (implements Runnable)
+public class Corredor implements Runnable {
+
+    private String nombre;
+    private String equipo;
+
+    public Corredor(String nombre, String equipo) {
+        this.nombre = nombre;
+        this.equipo = equipo;
+    }
+
+    // Corre 100 m: 10 tramos de 10 m, cada uno entre 950 y 1050 ms
+    public void correr() {
+        System.out.println(equipo + &quot;:&quot; + nombre + &quot; comienza su relevo&quot;);
+        long total = 0;
+        try {
+            for (int i = 0; i &lt; 10; i++) {
+                int ms = 950 + (int) (Math.random() * 101);   // 950..1050
+                Thread.sleep(ms);
+                total += ms;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.printf(&quot;%s:%s ha acabado su relevo - Ha tardado: %.2f segundos%n&quot;,
+                equipo, nombre, total / 1000.0);
+    }
+
+    @Override
+    public void run() {
+        correr();
+    }
+}</pre>
+<pre data-archivo="Relevos.java">public class Relevos {
+
+    public static void main(String[] args) throws InterruptedException {
+        String[] nombres = {&quot;Pepe&quot;, &quot;María&quot;, &quot;Juan&quot;, &quot;Marta&quot;};
+
+        for (String n : nombres) {
+            Thread t = new Thread(new Corredor(n, &quot;España&quot;));
+            t.start();
+            t.join();     // el siguiente no sale hasta que este acabe (pasa el testigo)
+        }
+        System.out.println(&quot;FINAL DE PROGRAMA&quot;);
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida">España:Pepe comienza su relevo
+España:Pepe ha acabado su relevo - Ha tardado: 9.81 segundos
+España:María comienza su relevo
+España:María ha acabado su relevo - Ha tardado: 10.36 segundos
+España:Juan comienza su relevo
+España:Juan ha acabado su relevo - Ha tardado: 10.26 segundos
+España:Marta comienza su relevo
+España:Marta ha acabado su relevo - Ha tardado: 9.92 segundos
+FINAL DE PROGRAMA</pre>
+
+</section>
+<section class="tema" id="mh1-ej4" data-cat="boletin">
+<h2>MultiHilo I · Ejercicio 4 · Carrera de relevos</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Equipo extends Thread + Corredor Runnable</p>
+
+<div class="enunciado"><b>Enunciado:</b> usando la clase anterior, los equipos de España y EEUU hacen una carrera de relevos a la vez.</div>
+<p>La clave: el <code>join()</code> se hace <b>dentro del hilo de cada equipo</b>, así cada equipo espera solo a sus corredores y los dos equipos corren en paralelo. <code>Corredor.java</code> es el mismo del ejercicio 3.</p>
+<pre data-archivo="Equipo.java">// Ejercicio 4 - CARRERA DE RELEVOS
+// Cada equipo es un hilo (extends Thread) que lanza a sus corredores uno tras otro con join()
+public class Equipo extends Thread {
+
+    private String pais;
+    private String[] corredores;
+
+    public Equipo(String pais, String[] corredores) {
+        this.pais = pais;
+        this.corredores = corredores;
+    }
+
+    @Override
+    public void run() {
+        try {
+            for (String c : corredores) {
+                Thread t = new Thread(new Corredor(c, pais));
+                t.start();
+                t.join();     // join DENTRO del hilo del equipo: solo espera este equipo
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(&quot;FINAL DE PROGRAMA - &quot; + pais);
+    }
+
+    public static void main(String[] args) {
+        // Los dos equipos corren a la vez
+        new Equipo(&quot;España&quot;, new String[] {&quot;Pepe&quot;, &quot;María&quot;, &quot;Juan&quot;, &quot;Marta&quot;}).start();
+        new Equipo(&quot;EEUU&quot;, new String[] {&quot;John&quot;, &quot;Kim&quot;, &quot;Mike&quot;, &quot;Sarah&quot;}).start();
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida">España:Pepe comienza su relevo
+EEUU:John comienza su relevo
+España:Pepe ha acabado su relevo - Ha tardado: 9.71 segundos
+España:María comienza su relevo
+EEUU:John ha acabado su relevo - Ha tardado: 10.30 segundos
+EEUU:Kim comienza su relevo
+...
+FINAL DE PROGRAMA - España
+EEUU:Sarah ha acabado su relevo - Ha tardado: 10.45 segundos
+FINAL DE PROGRAMA - EEUU</pre>
+
+</section>
+<section class="tema" id="mh1-ej5" data-cat="boletin">
+<h2>MultiHilo I · Ejercicio 5 · El artificiero y la bomba</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>isAlive + interrupt</p>
+
+<div class="enunciado"><b>Enunciado:</b> una clase con 2 métodos: cuenta atrás de 9 a 0 (al llegar a 0 explota) y artificiero que tarda entre 9.500 y 10.500 ms en desactivarla. Se arranca uno u otro según un parámetro. Dos hilos; cuando uno acaba, se interrumpe el otro.</div>
+<pre data-archivo="ArtificieroBomba.java">// Ejercicio 5 - El artificiero y la bomba  (extends Thread)
+public class ArtificieroBomba extends Thread {
+
+    private boolean esBomba;   // true = contador, false = artificiero
+
+    public ArtificieroBomba(boolean esBomba) {
+        this.esBomba = esBomba;
+    }
+
+    // Cuenta atrás 9..0 (1 s por número)
+    public void contador() {
+        try {
+            for (int i = 9; i &gt;= 0; i--) {
+                System.out.println(i);
+                Thread.sleep(1000);
+            }
+            System.out.println(&quot;PUUUUUUMMMMMMMMMM&quot;);
+        } catch (InterruptedException e) {
+            // Nos interrumpen = el artificiero la ha desactivado
+            return;                 // return sale del hilo; System.exit(0) saldría del programa
+        }
+    }
+
+    // Tarda entre 9500 y 10500 ms
+    public void artificiero() {
+        try {
+            int ms = 9500 + (int) (Math.random() * 1001);
+            System.out.println(&quot;El artificiero comienza a desactivar la bomba&quot;);
+            Thread.sleep(ms);
+            System.out.println(&quot;El artificiero ha desactivado la bomba&quot;);
+        } catch (InterruptedException e) {
+            return;                 // interrumpido = ha explotado
+        }
+    }
+
+    @Override
+    public void run() {
+        if (esBomba) contador();
+        else artificiero();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        ArtificieroBomba artificiero = new ArtificieroBomba(false);
+        ArtificieroBomba bomba = new ArtificieroBomba(true);
+
+        bomba.start();
+        artificiero.start();
+
+        // Esperamos mientras LOS DOS sigan vivos
+        do {
+            Thread.sleep(50);
+        } while (bomba.isAlive() &amp;&amp; artificiero.isAlive());
+
+        if (bomba.isAlive()) {          // terminó antes el artificiero
+            bomba.interrupt();
+            System.out.println(&quot;La bomba ha sido desactivada&quot;);
+        } else {                        // terminó antes la bomba
+            artificiero.interrupt();
+            System.out.println(&quot;El artificiero ha muerto&quot;);
+        }
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida si explota">9
+El artificiero comienza a desactivar la bomba
+8
+...
+1
+0
+PUUUUUUMMMMMMMMMM
+El artificiero ha muerto</pre>
+<pre data-lang="txt" data-archivo="Salida si la desactiva">El artificiero comienza a desactivar la bomba
+9
+...
+0
+El artificiero ha desactivado la bomba
+La bomba ha sido desactivada</pre>
+
+</section>
+<section class="tema" id="b-relevos-sync" data-cat="boletin">
+<h2>Relevos con synchronized (sin join)</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>UT2.2 · UT2_2_2_Relevos_Sync</p>
+
+<p>Se lanzan los 8 corredores a la vez con un <code>ExecutorService</code>. Cada equipo comparte <b>un objeto</b> <code>CorrerRelevoEquipo</code> con el método <code>carrera</code> sincronizado: dentro de un equipo solo corre uno; los dos equipos van en paralelo porque son objetos (monitores) distintos.</p>
+<pre data-archivo="CorrerRelevoEquipo.java">// UT2_2_2_Relevos_Sync: objeto compartido por los 4 corredores de UN equipo
+public class CorrerRelevoEquipo {
+
+    private String equipo;
+
+    public CorrerRelevoEquipo(String equipo) {
+        this.equipo = equipo;
+    }
+
+    // synchronized: mientras un corredor del equipo corre, los demás de ESE equipo esperan.
+    // El otro equipo tiene su propio objeto -&gt; su propio monitor -&gt; corre en paralelo.
+    public synchronized void carrera(String corredor) {
+        try {
+            int numero = 0;
+            System.out.printf(&quot;%s:%s comienza su relevo%n&quot;, equipo, corredor);
+            for (int i = 0; i &lt; 10; i++) {
+                int ms = (int) (Math.random() * (1050 - 950 + 1) + 950);
+                numero += ms;
+                Thread.sleep(ms);
+            }
+            System.out.printf(&quot;%s:%s ha acabado su relevo - Ha tardado: %.2f segundos%n&quot;,
+                    equipo, corredor, numero / 1000.0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+<pre data-archivo="CorredorSync.java">public class CorredorSync extends Thread {
+
+    private String corredor;
+    private CorrerRelevoEquipo miEquipoRelevo;   // el MISMO objeto para todo el equipo
+
+    public CorredorSync(String corredor, CorrerRelevoEquipo miEquipoRelevo) {
+        super();
+        this.corredor = corredor;
+        this.miEquipoRelevo = miEquipoRelevo;
+    }
+
+    @Override
+    public void run() {
+        miEquipoRelevo.carrera(corredor);
+    }
+}</pre>
+<pre data-archivo="PrincipalRelevos.java">import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class PrincipalRelevos {
+
+    public static void main(String[] args) {
+        CorrerRelevoEquipo relevoEspana = new CorrerRelevoEquipo(&quot;España&quot;);
+        CorrerRelevoEquipo relevoEEUU = new CorrerRelevoEquipo(&quot;EEUU&quot;);
+
+        String[] equipo1 = {&quot;Pepe&quot;, &quot;María&quot;, &quot;Juan&quot;, &quot;Marta&quot;};
+        String[] equipo2 = {&quot;John&quot;, &quot;Kate&quot;, &quot;Larry&quot;, &quot;Sarah&quot;};
+
+        ExecutorService executor = Executors.newFixedThreadPool(8);
+        // Se lanzan los 8 a la vez: el synchronized hace que se &quot;relevan&quot; sin join.
+        // OJO: el orden de los corredores dentro del equipo NO está garantizado.
+        for (int i = 0; i &lt; equipo1.length; i++) {
+            executor.submit(new CorredorSync(equipo1[i], relevoEspana));
+            executor.submit(new CorredorSync(equipo2[i], relevoEEUU));
+        }
+        executor.shutdown();
+    }
+}</pre>
+
+<div class="ojo"><b>Diferencia con join:</b> con synchronized el orden de los corredores dentro del equipo <b>no</b> está garantizado (puede salir Marta antes que Pepe). Con join sí.</div>
+
+</section>
+<section class="tema" id="mh2-adivinar" data-cat="boletin">
+<h2>MultiHilo II · Adivinar el número</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Monitor Árbitro + Jugador extends Thread</p>
+
+<div class="enunciado"><b>Enunciado:</b> varios hilos jugadores intentan adivinar un número entre 1 y 10 (<code>1 + (int)(10 * Math.random())</code>). Un <b>Árbitro</b> guarda el número total de jugadores, el turno, el número a adivinar y si acabó; tiene un método <code>synchronized</code> que comprueba la jugada y calcula el siguiente turno. <b>Jugador</b> extiende Thread; si es su turno genera un número y llama al árbitro, hasta que el juego acabe. <b>Main</b> crea el árbitro y lanza los jugadores compartiendo el mismo árbitro.</div>
+<pre data-archivo="Arbitro.java">// Árbitro: lo COMPARTEN todos los jugadores (monitor)
+public class Arbitro {
+
+    private int numJugadores;
+    private int turno = 1;            // empieza el jugador 1
+    private int numeroAdivinar;
+    private boolean acabado = false;
+
+    public Arbitro(int numJugadores) {
+        this.numJugadores = numJugadores;
+        this.numeroAdivinar = 1 + (int) (10 * Math.random());   // 1..10
+        System.out.println(&quot;NÚMERO A ADIVINAR: &quot; + numeroAdivinar);
+    }
+
+    public synchronized int getTurno() {
+        return turno;
+    }
+
+    public synchronized boolean isAcabado() {
+        return acabado;
+    }
+
+    // synchronized: mientras un jugador hace su jugada nadie más puede interferir
+    public synchronized void comprobarJugada(int jugador, int numero) {
+        if (acabado || jugador != turno) {
+            return;                   // no es su turno (o ya terminó): se ignora
+        }
+        System.out.println(&quot;Jugador&quot; + jugador + &quot; dice: &quot; + numero);
+
+        if (numero == numeroAdivinar) {
+            acabado = true;
+            System.out.println(&quot;Jugador &quot; + jugador + &quot; gana, adivinó el número!!!&quot;);
+        } else {
+            turno = turno % numJugadores + 1;     // 1 -&gt; 2 -&gt; 3 -&gt; 1 ...
+            System.out.println(&quot;\tLe toca a Jug&quot; + turno);
+        }
+    }
+}</pre>
+<pre data-archivo="Jugador.java">public class Jugador extends Thread {
+
+    private int id;
+    private Arbitro arbitro;      // el mismo árbitro para todos
+
+    public Jugador(int id, Arbitro arbitro) {
+        this.id = id;
+        this.arbitro = arbitro;
+    }
+
+    @Override
+    public void run() {
+        while (!arbitro.isAcabado()) {
+            if (arbitro.getTurno() == id) {
+                int numero = 1 + (int) (10 * Math.random());
+                arbitro.comprobarJugada(id, numero);
+            }
+            try {
+                Thread.sleep(10);   // evita consumir CPU sin parar mientras no es su turno
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
+    }
+}</pre>
+<pre data-archivo="MainAdivinar.java">public class MainAdivinar {
+
+    public static void main(String[] args) {
+        int numJugadores = 3;
+        Arbitro arbitro = new Arbitro(numJugadores);
+
+        for (int i = 1; i &lt;= numJugadores; i++) {
+            new Jugador(i, arbitro).start();
+        }
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida">NÚMERO A ADIVINAR: 3
+Jugador1 dice: 6
+	Le toca a Jug2
+Jugador2 dice: 10
+	Le toca a Jug3
+Jugador3 dice: 9
+	Le toca a Jug1
+Jugador1 dice: 8
+	Le toca a Jug2
+Jugador2 dice: 3
+Jugador 2 gana, adivinó el número!!!</pre>
+
+<div class="clave"><b>Por qué se comprueba el turno dentro de comprobarJugada:</b> entre <code>getTurno()</code> y <code>comprobarJugada()</code> otro hilo podría cambiar el turno. Volver a comprobarlo dentro del método sincronizado evita jugadas fuera de turno.</div>
+
+</section>
+<section class="tema" id="mh2-aeropuerto" data-cat="boletin">
+<h2>MultiHilo II · El aeropuerto</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Monitor con wait/notifyAll y prioridad</p>
+
+<div class="enunciado"><b>Enunciado:</b> 20 aeroplanos (aviones o avionetas, no se sabe cuántos de cada) y una sola pista. Llega uno cada 2.000 ms. Si esperan aviones y avionetas, <b>prioridad a los aviones</b>. Entre dos despegues: 3.000 ms tras un avión y 2.000 ms tras una avioneta. Documenta los 20 despegues.</div>
+<ol class="pasos">
+<li><div>Cada aeroplano es un hilo que llega y llama a <code>pista.entrar(this)</code>.</div></li>
+<li><div>Espera con <code>wait()</code> mientras la pista esté ocupada <b>o</b> sea avioneta y haya aviones esperando.</div></li>
+<li><div>Ocupa la pista el tiempo de turbulencia (3 s / 2 s), despega y llama a <code>salir()</code>, que hace <code>notifyAll()</code>.</div></li>
+</ol>
+<pre data-archivo="Pista.java">// MONITOR de la pista: solo un aeroplano a la vez y prioridad para los aviones
+public class Pista {
+
+    private boolean ocupada = false;
+    private int avionesEsperando = 0;
+
+    public synchronized void entrar(Aeroplano a) throws InterruptedException {
+        if (a.esAvion()) avionesEsperando++;
+
+        // Espera si la pista está ocupada,
+        // o si es avioneta y hay algún avión esperando (prioridad)
+        while (ocupada || (!a.esAvion() &amp;&amp; avionesEsperando &gt; 0)) {
+            wait();
+        }
+
+        if (a.esAvion()) avionesEsperando--;
+        ocupada = true;
+        System.out.println(&quot;Aeroplano de tipo: &quot; + a.getTipo() + &quot; con número &quot;
+                + a.getName() + &quot; entra en la pista de despegue...&quot;);
+    }
+
+    public synchronized void salir() {
+        ocupada = false;
+        notifyAll();      // despierta a todos; cada uno vuelve a comprobar su condición
+    }
+}</pre>
+<pre data-archivo="Aeroplano.java">public class Aeroplano extends Thread {
+
+    private boolean avion;      // true = AVION, false = AVIONETA
+    private Pista pista;
+
+    public Aeroplano(String nombre, boolean avion, Pista pista) {
+        super(nombre);
+        this.avion = avion;
+        this.pista = pista;
+    }
+
+    public boolean esAvion() { return avion; }
+    public String getTipo()  { return avion ? &quot;AVION&quot; : &quot;AVIONETA&quot;; }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println(&quot;Llega a pista el/la &quot; + getTipo() + &quot; con número &quot; + getName());
+            pista.entrar(this);
+            // Turbulencias: la pista queda bloqueada 3 s (avión) o 2 s (avioneta)
+            Thread.sleep(avion ? 3000 : 2000);
+            System.out.println(&quot;Aeroplano de tipo: &quot; + getTipo() + &quot; con número &quot; + getName() + &quot; ha despegado.&quot;);
+            pista.salir();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+<pre data-archivo="Reloj.java">// Muestra los segundos (minutos simulados) para documentar la simulación
+public class Reloj extends Thread {
+
+    @Override
+    public void run() {
+        int segundos = 0;
+        try {
+            while (true) {
+                System.out.println(segundos++);
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            // fin del reloj
+        }
+    }
+}</pre>
+<pre data-archivo="MainAeropuerto.java">public class MainAeropuerto {
+
+    public static void main(String[] args) throws InterruptedException {
+        Pista pista = new Pista();
+        Aeroplano[] aeroplanos = new Aeroplano[20];
+        int aviones = 0;
+
+        Reloj reloj = new Reloj();
+        reloj.setDaemon(true);        // daemon: no impide que el programa termine
+        reloj.start();
+
+        for (int i = 0; i &lt; 20; i++) {
+            boolean esAvion = Math.random() &lt; 0.5;   // no se sabe cuántos de cada
+            if (esAvion) aviones++;
+            aeroplanos[i] = new Aeroplano(&quot;Thread-&quot; + (i + 1), esAvion, pista);
+            aeroplanos[i].start();
+            Thread.sleep(2000);       // llega uno cada 2 minutos (2000 ms)
+        }
+
+        for (Aeroplano a : aeroplanos) a.join();      // esperar a que despeguen todos
+        reloj.interrupt();
+        System.out.println(&quot;Han despegado los 20 aeroplanos: &quot; + aviones
+                + &quot; aviones y &quot; + (20 - aviones) + &quot; avionetas&quot;);
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida (extracto)">0
+Llega a pista el/la AVION con número Thread-1
+Aeroplano de tipo: AVION con número Thread-1 entra en la pista de despegue...
+2
+Llega a pista el/la AVIONETA con número Thread-2
+3
+Aeroplano de tipo: AVION con número Thread-1 ha despegado.
+Aeroplano de tipo: AVIONETA con número Thread-2 entra en la pista de despegue...
+...
+Llega a pista el/la AVIONETA con número Thread-4
+Llega a pista el/la AVION con número Thread-5
+Aeroplano de tipo: AVION con número Thread-3 ha despegado.
+Aeroplano de tipo: AVION con número Thread-5 entra en la pista de despegue...   &lt;- adelanta a la avioneta 4
+...
+Han despegado los 20 aeroplanos: 10 aviones y 10 avionetas</pre>
+
+<div class="ojo"><b>Entre aviones no hay orden de llegada:</b> <code>notifyAll()</code> despierta a todos y entra el que el planificador elija. Si te piden FIFO, guarda una cola (<code>LinkedList</code>) y deja pasar solo al primero.</div>
+
+</section>
+<section class="tema" id="dinamo" data-cat="boletin">
+<h2>Opcional · Operación Dinamo (histórica)</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Exclusión por tipo en playa y alta mar</p>
+
+<div class="enunciado"><b>Enunciado (resumen):</b> 400.000 soldados en la playa de Dunkerque. Se rescatan con lanchas (500–1.000 soldados/viaje) y botes salvavidas (1.500–2.000). En la playa solo puede haber lanchas <b>o</b> botes, nunca los dos; lo mismo al desembarcar en los barcos de alta mar. Embarcar dura media hora y desembarcar otra media. La operación acaba a los 6 días o cuando no queden soldados: los de la playa se rinden y los que van en lancha/bote llegan a Gran Bretaña. Información constante al alto mando. 1 h = 1000 ms.</div>
+<p><b>Diseño:</b> <code>Operacion</code> guarda los contadores (monitor). <code>Zona</code> es un monitor reutilizable para playa y alta mar que deja entrar a varios del mismo tipo pero nunca mezcla tipos (y cede el turno si el otro tipo espera, para evitar inanición). <code>Reloj</code> es el hilo de máxima prioridad que cuenta las horas, informa cada 12 h y cierra la operación.</p>
+<pre data-archivo="Operacion.java">// Datos COMPARTIDOS de toda la operación (monitor)
+public class Operacion {
+
+    // 1 h = 1000 ms. Para probar rápido: java -Dhora=20 Dinamo
+    public static final int HORA = Integer.getInteger(&quot;hora&quot;, 1000);
+    public static final int DIAS = 6;
+
+    private int enPlaya;
+    private int rescatados = 0;          // llegados a los barcos de alta mar
+    private int llegadosPorSuCuenta = 0; // iban en lancha/bote al acabar los 6 días
+    private int enTransito = 0;          // a bordo de lanchas o botes ahora mismo
+    private volatile boolean fin = false;
+
+    public Operacion(int soldados) {
+        this.enPlaya = soldados;
+    }
+
+    // Saca de la playa como mucho &#x27;max&#x27; soldados
+    public synchronized int embarcar(int max) {
+        int n = Math.min(max, enPlaya);
+        enPlaya -= n;
+        enTransito += n;
+        return n;
+    }
+
+    public synchronized void desembarcar(int n) {
+        enTransito -= n;
+        rescatados += n;
+    }
+
+    public synchronized void vuelvenPorSuCuenta(int n) {
+        enTransito -= n;
+        llegadosPorSuCuenta += n;
+    }
+
+    public synchronized int getEnPlaya()     { return enPlaya; }
+    public synchronized int getRescatados()  { return rescatados; }
+    public synchronized int getEnTransito()  { return enTransito; }
+    public synchronized int getPorSuCuenta() { return llegadosPorSuCuenta; }
+
+    public boolean isFin()   { return fin; }
+    public void terminar()   { fin = true; }
+}</pre>
+<pre data-archivo="Zona.java">// Monitor para la PLAYA y para el DESEMBARCO en alta mar:
+// dentro solo puede haber lanchas o solo botes, nunca los dos tipos a la vez
+public class Zona {
+
+    private String nombre;
+    private String tipoDentro = null;
+    private int dentro = 0;
+    private int esperandoLanchas = 0, esperandoBotes = 0;
+    private boolean cerrada = false;
+
+    public Zona(String nombre) {
+        this.nombre = nombre;
+    }
+
+    private int esperandoOtro(String tipo) {
+        return tipo.equals(&quot;LANCHA&quot;) ? esperandoBotes : esperandoLanchas;
+    }
+
+    // Devuelve false si la zona se ha cerrado (fin de la operación)
+    public synchronized boolean entrar(String tipo) throws InterruptedException {
+        if (tipo.equals(&quot;LANCHA&quot;)) esperandoLanchas++; else esperandoBotes++;
+
+        // Puede entrar si está vacía, o si dentro hay de su tipo y el otro tipo no espera
+        // (lo segundo evita que un tipo acapare la zona: INANICIÓN)
+        while (!cerrada &amp;&amp; !(dentro == 0
+                || (tipo.equals(tipoDentro) &amp;&amp; esperandoOtro(tipo) == 0))) {
+            wait();
+        }
+
+        if (tipo.equals(&quot;LANCHA&quot;)) esperandoLanchas--; else esperandoBotes--;
+        if (cerrada) return false;
+        tipoDentro = tipo;
+        dentro++;
+        return true;
+    }
+
+    public synchronized void salir() {
+        dentro--;
+        if (dentro == 0) tipoDentro = null;
+        notifyAll();
+    }
+
+    public synchronized void cerrar() {
+        cerrada = true;
+        notifyAll();      // despierta a los que esperaban para que terminen
+    }
+}</pre>
+<pre data-archivo="Embarcacion.java">// Cada hilo es la flota de lanchas o la de botes salvavidas
+public class Embarcacion extends Thread {
+
+    private String tipo;
+    private int min, max;
+    private Operacion op;
+    private Zona playa, altaMar;
+    private int viajes = 0, total = 0;
+
+    public Embarcacion(String nombre, String tipo, int min, int max,
+                       Operacion op, Zona playa, Zona altaMar) {
+        super(nombre);
+        this.tipo = tipo;
+        this.min = min;
+        this.max = max;
+        this.op = op;
+        this.playa = playa;
+        this.altaMar = altaMar;
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (!op.isFin() &amp;&amp; op.getEnPlaya() &gt; 0) {
+                // ---- 1. PLAYA ----
+                if (!playa.entrar(tipo)) break;          // operación terminada
+                int capacidad = min + (int) (Math.random() * (max - min + 1));
+                int soldados = op.embarcar(capacidad);
+                if (soldados == 0) {                     // ya no queda nadie
+                    playa.salir();
+                    break;
+                }
+                System.out.printf(&quot;  %s embarca %d soldados (quedan %d en la playa)%n&quot;,
+                        getName(), soldados, op.getEnPlaya());
+                Thread.sleep(Operacion.HORA / 2);        // embarcar: media hora
+                playa.salir();
+
+                // ---- 2. ALTA MAR ----
+                if (op.isFin()) {                        // los barcos se han ido
+                    op.vuelvenPorSuCuenta(soldados);
+                    System.out.printf(&quot;  %s pone rumbo a Gran Bretaña con %d soldados%n&quot;, getName(), soldados);
+                    break;
+                }
+                altaMar.entrar(tipo);
+                Thread.sleep(Operacion.HORA / 2);        // desembarcar: media hora
+                op.desembarcar(soldados);
+                altaMar.salir();
+                viajes++;
+                total += soldados;
+                System.out.printf(&quot;  %s deja %d soldados en los barcos%n&quot;, getName(), soldados);
+            }
+        } catch (InterruptedException e) {
+            // no se usa: el fin se controla con op.isFin()
+        }
+    }
+
+    public int getViajes() { return viajes; }
+    public int getTotal()  { return total; }
+}</pre>
+<pre data-archivo="Reloj.java">// Contador de tiempo: el hilo MÁS prioritario. Informa al alto mando cada 12 h
+public class Reloj extends Thread {
+
+    private Operacion op;
+    private Zona playa;
+    private int horas = 0;
+
+    public Reloj(Operacion op, Zona playa) {
+        this.op = op;
+        this.playa = playa;
+        setPriority(Thread.MAX_PRIORITY);
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (horas &lt; Operacion.DIAS * 24) {
+                Thread.sleep(Operacion.HORA);
+                horas++;
+                if (horas % 12 == 0) {
+                    System.out.printf(&quot;[ALTO MANDO] Día %d %02d:00 · en playa: %d · rescatados: %d · en lanchas/botes: %d%n&quot;,
+                            horas / 24 + 1, horas % 24, op.getEnPlaya(), op.getRescatados(), op.getEnTransito());
+                }
+                if (op.getEnPlaya() == 0 &amp;&amp; op.getEnTransito() == 0) break;   // todos a salvo
+            }
+        } catch (InterruptedException e) { }
+        op.terminar();
+        playa.cerrar();
+    }
+
+    public int getHoras() { return horas; }
+}</pre>
+<pre data-archivo="Dinamo.java">public class Dinamo {
+
+    static final int SOLDADOS = 400_000;
+    static final int NUM_LANCHAS = 1;   // flotas de lanchas (todas embarcan a la vez)
+    static final int NUM_BOTES = 1;     // flotas de botes salvavidas
+
+    public static void main(String[] args) throws InterruptedException {
+        Operacion op = new Operacion(SOLDADOS);
+        Zona playa = new Zona(&quot;Playa&quot;);
+        Zona altaMar = new Zona(&quot;Alta mar&quot;);
+
+        Reloj reloj = new Reloj(op, playa);
+        Embarcacion[] flota = new Embarcacion[NUM_LANCHAS + NUM_BOTES];
+        for (int i = 0; i &lt; NUM_LANCHAS; i++)
+            flota[i] = new Embarcacion(&quot;Lanchas-&quot; + (i + 1), &quot;LANCHA&quot;, 500, 1000, op, playa, altaMar);
+        for (int i = 0; i &lt; NUM_BOTES; i++)
+            flota[NUM_LANCHAS + i] = new Embarcacion(&quot;Botes-&quot; + (i + 1), &quot;BOTE&quot;, 1500, 2000, op, playa, altaMar);
+
+        System.out.println(&quot;26 de mayo de 1940: comienza la OPERACIÓN DINAMO&quot;);
+        reloj.start();
+        for (Embarcacion e : flota) e.start();
+
+        for (Embarcacion e : flota) e.join();
+        reloj.join();
+
+        System.out.println(&quot;\n========== RESUMEN ==========&quot;);
+        System.out.printf(&quot;Duración: %d horas (%.1f días)%n&quot;, reloj.getHoras(), reloj.getHoras() / 24.0);
+        for (Embarcacion e : flota)
+            System.out.printf(&quot;%-10s %4d viajes · %7d soldados%n&quot;, e.getName(), e.getViajes(), e.getTotal());
+        System.out.println(&quot;Rescatados en los barcos:    &quot; + op.getRescatados());
+        System.out.println(&quot;Llegan a GB en lancha/bote:  &quot; + op.getPorSuCuenta());
+        System.out.println(&quot;Se rinden en la playa:       &quot; + op.getEnPlaya());
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida (resumen de una ejecución)">26 de mayo de 1940: comienza la OPERACIÓN DINAMO
+[ALTO MANDO] Día 1 12:00 · en playa: 374601 · rescatados: 23101 · en lanchas/botes: 2298
+[ALTO MANDO] Día 2 00:00 · en playa: 346516 · rescatados: 50750 · en lanchas/botes: 2734
+...
+[ALTO MANDO] Día 7 00:00 · en playa: 57722 · rescatados: 339733 · en lanchas/botes: 2545
+
+========== RESUMEN ==========
+Duración: 144 horas (6.0 días)
+Lanchas-1   137 viajes ·  103768 soldados
+Botes-1     136 viajes ·  236625 soldados
+Rescatados en los barcos:    340393
+Llegan a GB en lancha/bote:  1885
+Se rinden en la playa:       57722</pre>
+
+<div class="ojo"><b>Para probar rápido:</b> ejecuta con <code>-Dhora=20</code> (Run Configurations → Arguments → VM arguments) y la simulación de 6 días dura 3 s en vez de 2,4 minutos.</div>
+
+</section>
+<section class="tema" id="dinamo2" data-cat="boletin">
+<h2>Opcional · Dinamo: lo que pudo ser</h2>
+<p class="tipo"><span class="etq boletin">Boletín resuelto</span>Capacidad 7 + prioridad a barcas</p>
+
+<div class="enunciado"><b>Hipótesis del alumno de FP:</b> 5 grupos de barcas (300–400 soldados) y 5 de lanchas (100–200). Máximo 7 grupos a la vez en la playa, con prioridad a las barcas. Embarcar baja a 24 min (400 ms). Desembarcar sigue en 30 min, pero sin esperas entre grupos. Resumen con el total rescatado por cada grupo.</div>
+<pre data-archivo="Playa.java">// Monitor de la playa: máximo 7 grupos a la vez y prioridad para las BARCAS
+public class Playa {
+
+    private static final int MAX_GRUPOS = 7;
+    private int dentro = 0;
+    private int barcasEsperando = 0;
+    private boolean cerrada = false;
+
+    public synchronized boolean entrar(boolean esBarca) throws InterruptedException {
+        if (esBarca) barcasEsperando++;
+
+        while (!cerrada &amp;&amp; (dentro &gt;= MAX_GRUPOS || (!esBarca &amp;&amp; barcasEsperando &gt; 0))) {
+            wait();
+        }
+
+        if (esBarca) barcasEsperando--;
+        if (cerrada) return false;
+        dentro++;
+        return true;
+    }
+
+    public synchronized void salir() {
+        dentro--;
+        notifyAll();
+    }
+
+    public synchronized void cerrar() {
+        cerrada = true;
+        notifyAll();
+    }
+}</pre>
+<pre data-archivo="Grupo.java">// Un grupo de barcas (botes salvavidas) o de lanchas
+public class Grupo extends Thread {
+
+    private boolean barca;
+    private Operacion op;
+    private Playa playa;
+    private int total = 0, viajes = 0;
+
+    public Grupo(String nombre, boolean barca, Operacion op, Playa playa) {
+        super(nombre);
+        this.barca = barca;
+        this.op = op;
+        this.playa = playa;
+    }
+
+    @Override
+    public void run() {
+        int min = barca ? 300 : 100;
+        int max = barca ? 400 : 200;
+        try {
+            while (!op.isFin() &amp;&amp; op.getEnPlaya() &gt; 0) {
+                if (!playa.entrar(barca)) break;
+                int soldados = op.embarcar(min + (int) (Math.random() * (max - min + 1)));
+                if (soldados == 0) { playa.salir(); break; }
+                Thread.sleep(Operacion.HORA * 24 / 60);   // embarque: 24 min = 400 ms
+                playa.salir();
+
+                if (op.isFin()) {
+                    op.vuelvenPorSuCuenta(soldados);
+                    total += soldados;
+                    break;
+                }
+                // Desembarque: sin esperas, cada grupo tiene su barco
+                Thread.sleep(Operacion.HORA / 2);
+                op.desembarcar(soldados);
+                total += soldados;
+                viajes++;
+            }
+        } catch (InterruptedException e) { }
+    }
+
+    public int getTotal()  { return total; }
+    public int getViajes() { return viajes; }
+}</pre>
+<pre data-archivo="Reloj.java">public class Reloj extends Thread {
+
+    private Operacion op;
+    private Playa playa;
+    private int horas = 0;
+
+    public Reloj(Operacion op, Playa playa) {
+        this.op = op;
+        this.playa = playa;
+        setPriority(Thread.MAX_PRIORITY);       // el más prioritario
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (horas &lt; Operacion.DIAS * 24) {
+                Thread.sleep(Operacion.HORA);
+                horas++;
+                if (horas % 12 == 0) {
+                    System.out.printf(&quot;[ALTO MANDO] Día %d %02d:00 · en playa: %d · rescatados: %d%n&quot;,
+                            horas / 24 + 1, horas % 24, op.getEnPlaya(), op.getRescatados());
+                }
+                if (op.getEnPlaya() == 0 &amp;&amp; op.getEnTransito() == 0) break;
+            }
+        } catch (InterruptedException e) { }
+        op.terminar();
+        playa.cerrar();
+    }
+
+    public int getHoras() { return horas; }
+}</pre>
+<pre data-archivo="Operacion.java">public class Operacion {
+
+    public static final int HORA = Integer.getInteger(&quot;hora&quot;, 1000);
+    public static final int DIAS = 6;
+
+    private int enPlaya;
+    private int rescatados = 0;
+    private int llegadosPorSuCuenta = 0;
+    private int enTransito = 0;
+    private volatile boolean fin = false;
+
+    public Operacion(int soldados) { this.enPlaya = soldados; }
+
+    public synchronized int embarcar(int max) {
+        int n = Math.min(max, enPlaya);
+        enPlaya -= n;
+        enTransito += n;
+        return n;
+    }
+
+    public synchronized void desembarcar(int n)       { enTransito -= n; rescatados += n; }
+    public synchronized void vuelvenPorSuCuenta(int n) { enTransito -= n; llegadosPorSuCuenta += n; }
+
+    public synchronized int getEnPlaya()     { return enPlaya; }
+    public synchronized int getRescatados()  { return rescatados; }
+    public synchronized int getEnTransito()  { return enTransito; }
+    public synchronized int getPorSuCuenta() { return llegadosPorSuCuenta; }
+
+    public boolean isFin() { return fin; }
+    public void terminar() { fin = true; }
+}</pre>
+<pre data-archivo="DinamoMejorado.java">public class DinamoMejorado {
+
+    public static void main(String[] args) throws InterruptedException {
+        Operacion op = new Operacion(400_000);
+        Playa playa = new Playa();
+        Reloj reloj = new Reloj(op, playa);
+
+        Grupo[] grupos = new Grupo[10];
+        for (int i = 0; i &lt; 5; i++) {
+            grupos[i] = new Grupo(&quot;Barcas-&quot; + (i + 1), true, op, playa);
+            grupos[i + 5] = new Grupo(&quot;Lanchas-&quot; + (i + 1), false, op, playa);
+        }
+
+        reloj.start();
+        for (Grupo g : grupos) g.start();
+        for (Grupo g : grupos) g.join();
+        reloj.join();
+
+        System.out.println(&quot;\n===== RESUMEN: lo que pudo ser =====&quot;);
+        System.out.printf(&quot;Duración: %d horas (%.1f días)%n&quot;, reloj.getHoras(), reloj.getHoras() / 24.0);
+        for (Grupo g : grupos)
+            System.out.printf(&quot;%-10s %4d viajes · %6d soldados%n&quot;, g.getName(), g.getViajes(), g.getTotal());
+        System.out.println(&quot;Rescatados en los barcos:   &quot; + op.getRescatados());
+        System.out.println(&quot;Llegan a GB por su cuenta:  &quot; + op.getPorSuCuenta());
+        System.out.println(&quot;Se rinden en la playa:      &quot; + op.getEnPlaya());
+    }
+}</pre>
+<pre data-lang="txt" data-archivo="Salida (resumen de una ejecución)">===== RESUMEN: lo que pudo ser =====
+Duración: 144 horas (6.0 días)
+Barcas-1    159 viajes ·  56220 soldados
+Barcas-2    159 viajes ·  56336 soldados
+...
+Lanchas-5   159 viajes ·  24006 soldados
+Rescatados en los barcos:   398542
+Llegan a GB por su cuenta:  1300
+Se rinden en la playa:      158</pre>
+
+<div class="clave"><b>¿Lleva razón?</b> En la simulación sí: ~340.000 rescatados con el plan histórico frente a ~398.000 con el suyo. Prácticamente no se rinde nadie.</div>
+
+</section>
+<p class="bloque-titulo">Chuletas y repaso</p>
+<section class="tema" id="chuleta-procesos" data-cat="chuleta">
+<h2>Chuleta de procesos</h2>
+<p class="tipo"><span class="etq chuleta">Chuleta</span>Para copiar en el examen</p>
+<pre data-archivo="Lanzar y esperar">String cp = System.getProperty(&quot;java.class.path&quot;);
+ProcessBuilder pb = new ProcessBuilder(&quot;java&quot;, &quot;-cp&quot;, cp, &quot;Clase&quot;, &quot;arg1&quot;);
+Process p = pb.start();
+int codigo = p.waitFor();</pre>
+<pre data-archivo="Padre → hijo (entrada)">BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+bw.write(&quot;dato&quot;);
+bw.newLine();
+bw.close();          // ¡imprescindible!</pre>
+<pre data-archivo="Hijo → padre (salida)">BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+String linea;
+while ((linea = br.readLine()) != null) {
+    System.out.println(linea);
+}
+br.close();</pre>
+<pre data-archivo="Leer System.in en el hijo">BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+String linea;
+while ((linea = br.readLine()) != null) {
+    // procesar línea
+}
+// o con Scanner
+Scanner sc = new Scanner(System.in);
+while (sc.hasNextLine()) {
+    String l = sc.nextLine();
+}</pre>
+<pre data-archivo="Errores del hijo">BufferedReader err = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+// o juntarlos con la salida normal
+pb.redirectErrorStream(true);</pre>
+<pre data-archivo="Ficheros">pb.redirectInput(new File(&quot;entrada.txt&quot;));
+pb.redirectOutput(new File(&quot;salida.txt&quot;));
+pb.redirectError(new File(&quot;error.txt&quot;));
+pb.redirectOutput(ProcessBuilder.Redirect.appendTo(new File(&quot;log.txt&quot;)));
+pb.inheritIO();
+pb.directory(new File(&quot;../OtroProyecto/bin&quot;));</pre>
+<pre data-archivo="Leer / escribir un fichero de texto">try (BufferedReader br = new BufferedReader(new FileReader(&quot;datos.txt&quot;))) {
+    String linea;
+    while ((linea = br.readLine()) != null) { }
+}
+try (FileWriter fw = new FileWriter(&quot;salida.txt&quot;, true)) {   // true = añadir
+    fw.write(&quot;texto&quot; + System.lineSeparator());
+}
+List&lt;String&gt; lineas = Files.readAllLines(Path.of(&quot;datos.txt&quot;));</pre>
+<pre data-archivo="FileLock entre procesos">try (RandomAccessFile raf = new RandomAccessFile(&quot;datos.lock&quot;, &quot;rw&quot;);
+     FileChannel canal = raf.getChannel();
+     FileLock lock = canal.lock()) {
+    // región crítica
+}</pre>
+<pre data-archivo="Switch de códigos (Windows + Linux)">switch (codigo) {
+    case 0:            /* OK */    break;
+    case -1: case 255: /* err 1 */ break;
+    case -2: case 254: /* err 2 */ break;
+    default: System.out.println(&quot;Inesperado: &quot; + codigo);
+}</pre>
+
+</section>
+<section class="tema" id="chuleta-hilos" data-cat="chuleta">
+<h2>Chuleta de hilos</h2>
+<p class="tipo"><span class="etq chuleta">Chuleta</span>Para copiar en el examen</p>
+<pre data-archivo="Crear y esperar">Thread t = new Thread(new Tarea(), &quot;Nombre&quot;);
+t.start();
+t.join();
+
+Thread.sleep(1000);
+Thread.currentThread().getName();
+int ms = 950 + (int) (Math.random() * 101);      // aleatorio 950..1050
+int n = min + (int) (Math.random() * (max - min + 1));</pre>
+<pre data-archivo="Varios hilos y esperar a todos">Thread[] hilos = new Thread[5];
+for (int i = 0; i &lt; hilos.length; i++) {
+    hilos[i] = new Thread(new Tarea(i));
+    hilos[i].start();
+}
+for (Thread h : hilos) h.join();</pre>
+<pre data-archivo="ExecutorService">ExecutorService ex = Executors.newFixedThreadPool(4);
+ex.submit(new Tarea());
+ex.execute(() -&gt; System.out.println(&quot;lambda&quot;));
+ex.shutdown();
+ex.awaitTermination(1, TimeUnit.MINUTES);</pre>
+<pre data-archivo="Parar un hilo desde fuera">// en el hilo
+try {
+    Thread.sleep(1000);
+} catch (InterruptedException e) {
+    return;                 // salir del hilo
+}
+// en el main
+while (a.isAlive() &amp;&amp; b.isAlive()) Thread.sleep(50);
+if (a.isAlive()) a.interrupt(); else b.interrupt();</pre>
+<pre data-archivo="Monitor con condición">public synchronized void entrar() throws InterruptedException {
+    while (!puedoPasar()) wait();
+    // actualizar estado
+}
+public synchronized void salir() {
+    // actualizar estado
+    notifyAll();
+}</pre>
+<pre data-archivo="Prioridad para el hilo reloj">Reloj reloj = new Reloj();
+reloj.setPriority(Thread.MAX_PRIORITY);
+reloj.setDaemon(true);      // no impide que acabe el programa
+reloj.start();</pre>
+
+</section>
+<section class="tema" id="errores" data-cat="chuleta">
+<h2>Errores típicos y cómo arreglarlos</h2>
+<p class="tipo"><span class="etq chuleta">Chuleta</span>Lo que más falla en el examen</p>
+<div class="tabla"><table>
+<tr><th>Síntoma</th><th>Causa</th><th>Arreglo</th></tr>
+<tr><td>El hijo devuelve 1 / "No se ha encontrado la clase principal"</td><td>Classpath vacío, clase en paquete, sin compilar o <code>module-info.java</code></td><td>Borrar module-info; poner <code>paquete.Clase</code>; compilar el hijo</td></tr>
+<tr><td>El padre se queda colgado</td><td>No se cerró la entrada del hijo, o <code>waitFor()</code> antes de leer mucha salida</td><td><code>bw.close()</code>; leer la salida y luego <code>waitFor()</code></td></tr>
+<tr><td>Llega 255 en vez de -1</td><td>Linux/macOS: código sin signo</td><td><code>case -1: case 255:</code></td></tr>
+<tr><td>No se crea / no encuentra el .txt</td><td>Directorio de trabajo distinto</td><td>El fichero va en la carpeta del proyecto, o usa ruta absoluta</td></tr>
+<tr><td>Tildes rotas (&#xFFFD;)</td><td>Codificación distinta padre/hijo</td><td><code>new InputStreamReader(is, "UTF-8")</code></td></tr>
+<tr><td>Contador con valores raros</td><td>Condición de carrera</td><td><code>synchronized</code> sobre el MISMO objeto</td></tr>
+<tr><td>synchronized no hace nada</td><td>Cada hilo usa su propio objeto</td><td>Pasar la misma instancia a todos los hilos</td></tr>
+<tr><td><code>IllegalMonitorStateException</code></td><td><code>wait()</code>/<code>notify()</code> fuera de synchronized</td><td>Meterlo en un método/bloque synchronized</td></tr>
+<tr><td><code>IllegalThreadStateException</code></td><td><code>start()</code> dos veces</td><td>Crear un hilo nuevo</td></tr>
+<tr><td>Todo va secuencial</td><td>Llamaste a <code>run()</code> en vez de <code>start()</code>, o <code>join()</code> justo después de cada <code>start()</code></td><td><code>start()</code> todos y luego <code>join()</code></td></tr>
+<tr><td>El programa no termina</td><td>Hilos con bucle infinito</td><td><code>interrupt()</code>, bandera volatile o <code>setDaemon(true)</code></td></tr>
+<tr><td><code>OverlappingFileLockException</code></td><td>Dos FileLock del mismo fichero en la misma JVM</td><td>FileLock es entre procesos; entre hilos usa synchronized</td></tr>
+</table></div>
+
+</section>
+<section class="tema" id="test" data-cat="test">
+<h2>Repaso tipo test</h2>
+<p class="tipo"><span class="etq test">Test</span>Pulsa cada pregunta para ver la respuesta</p>
+<details class="pregunta"><summary>¿Diferencia entre programa y proceso?</summary><div>El programa es estático (instrucciones en disco); el proceso es un programa en ejecución con su memoria, PID y estado.</div></details>
+<details class="pregunta"><summary>¿Qué comparten los hilos de un proceso y qué tiene cada uno?</summary><div>Comparten código, datos (static/globales) y ficheros. Cada uno tiene id, contador de programa, registros y pila.</div></details>
+<details class="pregunta"><summary>¿Qué es un cambio de contexto y por qué es caro?</summary><div>Guardar el estado de un proceso (en el PCB) y cargar el de otro. Durante ese tiempo la CPU no hace trabajo útil.</div></details>
+<details class="pregunta"><summary>¿Dónde se guarda el contexto de un proceso?</summary><div>En el PCB (Bloque de Control de Proceso).</div></details>
+<details class="pregunta"><summary>Multitarea cooperativa vs preferente</summary><div>Cooperativa: el proceso cede la CPU voluntariamente (Windows 3.11). Preferente: el SO reparte la CPU y expulsa procesos (UNIX, Windows NT).</div></details>
+<details class="pregunta"><summary>¿Concurrente es lo mismo que paralelo?</summary><div>No. Concurrente: varias tareas avanzan intercaladas (puede ser con 1 CPU). Paralelo: se ejecutan a la vez en varias CPU.</div></details>
+<details class="pregunta"><summary>Tres características de un sistema distribuido</summary><div>Concurrencia, inexistencia de reloj global y fallos independientes.</div></details>
+<details class="pregunta"><summary>¿Qué devuelve getInputStream() de Process?</summary><div>La salida estándar del hijo (lo que imprime), para que el padre la lea.</div></details>
+<details class="pregunta"><summary>¿Qué valor indica que el hijo acabó bien?</summary><div>0, por convenio.</div></details>
+<details class="pregunta"><summary>¿Qué pasa si redirijo la entrada con redirectInput?</summary><div>getOutputStream() devuelve un NullOutputStream: ya no se puede escribir al hijo.</div></details>
+<details class="pregunta"><summary>¿Qué método bloquea al padre hasta que acabe el hijo?</summary><div>waitFor().</div></details>
+<details class="pregunta"><summary>¿Cuál es la forma recomendada de sincronizar procesos con ficheros en Java?</summary><div>FileChannel.lock() (FileLock de Java NIO), con un fichero solo para el bloqueo.</div></details>
+<details class="pregunta"><summary>¿Por qué while(lock.exists()) + createNewFile() no es correcto?</summary><div>Dos procesos pueden pasar exists() a la vez y entrar los dos.</div></details>
+<details class="pregunta"><summary>Semáforo binario vs general</summary><div>Binario: 0 o 1. General: cualquier entero no negativo. 0 = cerrado, &gt;0 = abierto.</div></details>
+<details class="pregunta"><summary>Paso de mensajes síncrono vs asíncrono</summary><div>Síncrono: el emisor espera a que se reciba (rendezvous, RPC). Asíncrono: no espera; usa buzones.</div></details>
+<details class="pregunta"><summary>Interbloqueo vs inanición</summary><div>Interbloqueo: varios esperan para siempre recursos que tienen otros del grupo. Inanición: uno nunca consigue el recurso porque otros entran antes.</div></details>
+<details class="pregunta"><summary>¿Diferencia entre start() y run()?</summary><div>start() crea un hilo nuevo que ejecuta run(). Llamar a run() lo ejecuta en el hilo actual, sin concurrencia.</div></details>
+<details class="pregunta"><summary>¿Cuándo usar Runnable en vez de extends Thread?</summary><div>Cuando la clase ya hereda de otra (Java solo tiene herencia simple).</div></details>
+<details class="pregunta"><summary>¿Qué hace join()?</summary><div>El hilo que llama espera a que termine el hilo sobre el que se invoca.</div></details>
+<details class="pregunta"><summary>¿Cómo se para un hilo de forma segura?</summary><div>Con interrupt() (salta InterruptedException en sleep/wait) o una bandera volatile. stop() está deprecado.</div></details>
+<details class="pregunta"><summary>¿Qué operaciones son atómicas en Java?</summary><div>Leer/escribir primitivos salvo long y double, y cualquier variable volatile.</div></details>
+<details class="pregunta"><summary>¿Sobre qué objeto sincroniza un método synchronized?</summary><div>Sobre this (la instancia). Es equivalente a synchronized(this){...}.</div></details>
+<details class="pregunta"><summary>¿Sobre qué objetos NO se recomienda sincronizar?</summary><div>String y wrappers (Integer, Boolean...). Usa this o un final Object.</div></details>
+<details class="pregunta"><summary>Requisitos de una solución a la sección crítica</summary><div>Exclusión mutua, progreso y espera limitada.</div></details>
+<details class="pregunta"><summary>Prioridad por defecto del main y rango</summary><div>5 (NORM_PRIORITY). Rango 1 (MIN) a 10 (MAX). Es solo una sugerencia.</div></details>
+<details class="pregunta"><summary>shutdown() vs shutdownNow()</summary><div>shutdown: no acepta tareas nuevas y deja terminar las actuales. shutdownNow: intenta parar todas interrumpiendo los hilos.</div></details>
+<details class="pregunta"><summary>execute() vs submit()</summary><div>execute (Executor) no devuelve nada. submit (ExecutorService) devuelve un Future; con Callable, el resultado.</div></details>
+<details class="pregunta"><summary>¿Por qué wait() siempre dentro de un while?</summary><div>Porque al despertar la condición puede no cumplirse (otro hilo entró antes, o despertar espurio).</div></details>
+<details class="pregunta"><summary>Modelo de hilos M×N</summary><div>Muchos hilos de usuario sobre igual o menos hilos de kernel: hilos ilimitados, paralelismo y, si uno se bloquea, el kernel planifica otro.</div></details>
+
+</section>
+
+    <p id="sin-resultados" class="sin-resultados oculto">No hay nada con ese texto. Prueba con un método (waitFor, notifyAll, redirectInput) o el nombre de un ejercicio (aeropuerto, notas, bomba).</p>
+  </main>
+</div>
+</body>
+</html>
