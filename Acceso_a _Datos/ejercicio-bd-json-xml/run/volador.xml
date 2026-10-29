@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pokedex tipo="Volador" total="19">
+    <pokemon numero="6">
+        <nombre>Charizard</nombre>
+        <peso>90.5</peso>
+        <altura>1.7</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="84" defensa="78" especial="97" ps="78" velocidad="100"/>
+        <evolucionaA>
+            <pokemon>Charmeleon</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="12">
+        <nombre>Butterfree</nombre>
+        <peso>32.0</peso>
+        <altura>1.1</altura>
+        <tipos>
+            <tipo>Bicho</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="45" defensa="50" especial="80" ps="60" velocidad="70"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="16">
+        <nombre>Pidgey</nombre>
+        <peso>1.8</peso>
+        <altura>0.3</altura>
+        <tipos>
+            <tipo>Normal</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="45" defensa="40" especial="35" ps="40" velocidad="56"/>
+        <evolucionaA>
+            <pokemon>Pidgeotto</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="17">
+        <nombre>Pidgeotto</nombre>
+        <peso>30.0</peso>
+        <altura>1.1</altura>
+        <tipos>
+            <tipo>Normal</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="60" defensa="55" especial="50" ps="63" velocidad="71"/>
+        <evolucionaA>
+            <pokemon>Pidgeot</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="18">
+        <nombre>Pidgeot</nombre>
+        <peso>39.5</peso>
+        <altura>1.5</altura>
+        <tipos>
+            <tipo>Normal</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="80" defensa="75" especial="70" ps="83" velocidad="91"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="21">
+        <nombre>Spearow</nombre>
+        <peso>2.0</peso>
+        <altura>0.3</altura>
+        <tipos>
+            <tipo>Normal</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="60" defensa="30" especial="31" ps="40" velocidad="70"/>
+        <evolucionaA>
+            <pokemon>Fearow</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="22">
+        <nombre>Fearow</nombre>
+        <peso>38.0</peso>
+        <altura>1.2</altura>
+        <tipos>
+            <tipo>Normal</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="90" defensa="65" especial="61" ps="65" velocidad="100"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="41">
+        <nombre>Zubat</nombre>
+        <peso>7.5</peso>
+        <altura>0.8</altura>
+        <tipos>
+            <tipo>Veneno</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="45" defensa="35" especial="35" ps="40" velocidad="55"/>
+        <evolucionaA>
+            <pokemon>Golbat</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="42">
+        <nombre>Golbat</nombre>
+        <peso>55.0</peso>
+        <altura>1.6</altura>
+        <tipos>
+            <tipo>Veneno</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="80" defensa="70" especial="70" ps="75" velocidad="90"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="83">
+        <nombre>Farfetch'd</nombre>
+        <peso>15.0</peso>
+        <altura>0.8</altura>
+        <tipos>
+            <tipo>Normal</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="65" defensa="55" especial="60" ps="52" velocidad="60"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="84">
+        <nombre>Doduo</nombre>
+        <peso>39.2</peso>
+        <altura>1.4</altura>
+        <tipos>
+            <tipo>Normal</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <evolucionaA>
+            <pokemon>Dodrio</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="85">
+        <nombre>Dodrio</nombre>
+        <peso>85.2</peso>
+        <altura>1.8</altura>
+        <tipos>
+            <tipo>Normal</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="110" defensa="70" especial="60" ps="60" velocidad="100"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="123">
+        <nombre>Scyther</nombre>
+        <peso>56.0</peso>
+        <altura>1.5</altura>
+        <tipos>
+            <tipo>Bicho</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="110" defensa="80" especial="68" ps="70" velocidad="105"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="130">
+        <nombre>Gyarados</nombre>
+        <peso>235.0</peso>
+        <altura>6.5</altura>
+        <tipos>
+            <tipo>Agua</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="125" defensa="79" especial="80" ps="95" velocidad="81"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="142">
+        <nombre>Aerodactyl</nombre>
+        <peso>59.0</peso>
+        <altura>1.8</altura>
+        <tipos>
+            <tipo>Roca</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="105" defensa="65" especial="67" ps="80" velocidad="130"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="144">
+        <nombre>Articuno</nombre>
+        <peso>55.4</peso>
+        <altura>1.7</altura>
+        <tipos>
+            <tipo>Hielo</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="85" defensa="100" especial="110" ps="90" velocidad="85"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="145">
+        <nombre>Zapdos</nombre>
+        <peso>52.6</peso>
+        <altura>1.6</altura>
+        <tipos>
+            <tipo>Eléctrico</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="90" defensa="85" especial="83" ps="90" velocidad="100"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="146">
+        <nombre>Moltres</nombre>
+        <peso>60.0</peso>
+        <altura>2.0</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="100" defensa="90" especial="105" ps="90" velocidad="90"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="149">
+        <nombre>Dragonite</nombre>
+        <peso>210.0</peso>
+        <altura>2.2</altura>
+        <tipos>
+            <tipo>Dragón</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="134" defensa="95" especial="100" ps="91" velocidad="80"/>
+        <evolucionaA/>
+    </pokemon>
+</pokedex>

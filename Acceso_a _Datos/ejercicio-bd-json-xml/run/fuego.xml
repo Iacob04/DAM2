@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pokedex tipo="Fuego" total="12">
+    <pokemon numero="4">
+        <nombre>Charmander</nombre>
+        <peso>8.5</peso>
+        <altura>0.6</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="52" defensa="43" especial="55" ps="39" velocidad="65"/>
+        <evolucionaA>
+            <pokemon>Charmeleon</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="5">
+        <nombre>Charmeleon</nombre>
+        <peso>19.0</peso>
+        <altura>1.1</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="64" defensa="58" especial="73" ps="58" velocidad="80"/>
+        <evolucionaA>
+            <pokemon>Charizard</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="6">
+        <nombre>Charizard</nombre>
+        <peso>90.5</peso>
+        <altura>1.7</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="84" defensa="78" especial="97" ps="78" velocidad="100"/>
+        <evolucionaA>
+            <pokemon>Charmeleon</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="37">
+        <nombre>Vulpix</nombre>
+        <peso>9.9</peso>
+        <altura>0.6</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="41" defensa="40" especial="57" ps="38" velocidad="65"/>
+        <evolucionaA>
+            <pokemon>Ninetales</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="38">
+        <nombre>Ninetales</nombre>
+        <peso>19.9</peso>
+        <altura>1.1</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="76" defensa="75" especial="91" ps="73" velocidad="100"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="58">
+        <nombre>Growlithe</nombre>
+        <peso>19.0</peso>
+        <altura>0.7</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="70" defensa="45" especial="60" ps="55" velocidad="60"/>
+        <evolucionaA>
+            <pokemon>Arcanine</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="59">
+        <nombre>Arcanine</nombre>
+        <peso>155.0</peso>
+        <altura>1.9</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="110" defensa="80" especial="90" ps="90" velocidad="95"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="77">
+        <nombre>Ponyta</nombre>
+        <peso>30.0</peso>
+        <altura>1.0</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="85" defensa="55" especial="65" ps="50" velocidad="90"/>
+        <evolucionaA>
+            <pokemon>Rapidash</pokemon>
+        </evolucionaA>
+    </pokemon>
+    <pokemon numero="78">
+        <nombre>Rapidash</nombre>
+        <peso>95.0</peso>
+        <altura>1.7</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="100" defensa="70" especial="80" ps="65" velocidad="105"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="126">
+        <nombre>Magmar</nombre>
+        <peso>44.5</peso>
+        <altura>1.3</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="95" defensa="57" especial="90" ps="65" velocidad="105"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="136">
+        <nombre>Flareon</nombre>
+        <peso>25.0</peso>
+        <altura>0.9</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+        </tipos>
+        <estadisticas ataque="130" defensa="60" especial="103" ps="65" velocidad="65"/>
+        <evolucionaA/>
+    </pokemon>
+    <pokemon numero="146">
+        <nombre>Moltres</nombre>
+        <peso>60.0</peso>
+        <altura>2.0</altura>
+        <tipos>
+            <tipo>Fuego</tipo>
+            <tipo>Volador</tipo>
+        </tipos>
+        <estadisticas ataque="100" defensa="90" especial="105" ps="90" velocidad="90"/>
+        <evolucionaA/>
+    </pokemon>
+</pokedex>

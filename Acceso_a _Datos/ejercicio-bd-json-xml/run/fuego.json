@@ -1,0 +1,224 @@
+{
+  "tipo": "Fuego",
+  "total": 12,
+  "pokemon": [
+    {
+      "numero": 4,
+      "nombre": "Charmander",
+      "peso": 8.5,
+      "altura": 0.6,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 39,
+        "ataque": 52,
+        "defensa": 43,
+        "especial": 55,
+        "velocidad": 65
+      },
+      "evolucionaA": [
+        "Charmeleon"
+      ]
+    },
+    {
+      "numero": 5,
+      "nombre": "Charmeleon",
+      "peso": 19.0,
+      "altura": 1.1,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 58,
+        "ataque": 64,
+        "defensa": 58,
+        "especial": 73,
+        "velocidad": 80
+      },
+      "evolucionaA": [
+        "Charizard"
+      ]
+    },
+    {
+      "numero": 6,
+      "nombre": "Charizard",
+      "peso": 90.5,
+      "altura": 1.7,
+      "tipos": [
+        "Fuego",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 78,
+        "ataque": 84,
+        "defensa": 78,
+        "especial": 97,
+        "velocidad": 100
+      },
+      "evolucionaA": [
+        "Charmeleon"
+      ]
+    },
+    {
+      "numero": 37,
+      "nombre": "Vulpix",
+      "peso": 9.9,
+      "altura": 0.6,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 38,
+        "ataque": 41,
+        "defensa": 40,
+        "especial": 57,
+        "velocidad": 65
+      },
+      "evolucionaA": [
+        "Ninetales"
+      ]
+    },
+    {
+      "numero": 38,
+      "nombre": "Ninetales",
+      "peso": 19.9,
+      "altura": 1.1,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 73,
+        "ataque": 76,
+        "defensa": 75,
+        "especial": 91,
+        "velocidad": 100
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 58,
+      "nombre": "Growlithe",
+      "peso": 19.0,
+      "altura": 0.7,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 55,
+        "ataque": 70,
+        "defensa": 45,
+        "especial": 60,
+        "velocidad": 60
+      },
+      "evolucionaA": [
+        "Arcanine"
+      ]
+    },
+    {
+      "numero": 59,
+      "nombre": "Arcanine",
+      "peso": 155.0,
+      "altura": 1.9,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 90,
+        "ataque": 110,
+        "defensa": 80,
+        "especial": 90,
+        "velocidad": 95
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 77,
+      "nombre": "Ponyta",
+      "peso": 30.0,
+      "altura": 1.0,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 50,
+        "ataque": 85,
+        "defensa": 55,
+        "especial": 65,
+        "velocidad": 90
+      },
+      "evolucionaA": [
+        "Rapidash"
+      ]
+    },
+    {
+      "numero": 78,
+      "nombre": "Rapidash",
+      "peso": 95.0,
+      "altura": 1.7,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 65,
+        "ataque": 100,
+        "defensa": 70,
+        "especial": 80,
+        "velocidad": 105
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 126,
+      "nombre": "Magmar",
+      "peso": 44.5,
+      "altura": 1.3,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 65,
+        "ataque": 95,
+        "defensa": 57,
+        "especial": 90,
+        "velocidad": 105
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 136,
+      "nombre": "Flareon",
+      "peso": 25.0,
+      "altura": 0.9,
+      "tipos": [
+        "Fuego"
+      ],
+      "estadisticas": {
+        "ps": 65,
+        "ataque": 130,
+        "defensa": 60,
+        "especial": 103,
+        "velocidad": 65
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 146,
+      "nombre": "Moltres",
+      "peso": 60.0,
+      "altura": 2.0,
+      "tipos": [
+        "Fuego",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 90,
+        "ataque": 100,
+        "defensa": 90,
+        "especial": 105,
+        "velocidad": 90
+      },
+      "evolucionaA": []
+    }
+  ]
+}

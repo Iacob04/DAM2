@@ -1,0 +1,33 @@
+Exportados 12 pokemon de tipo Fuego a fuego.json
+Exportados 12 pokemon de tipo Fuego a fuego.xml
+Exportados 19 pokemon de tipo Volador a volador.json
+Exportados 19 pokemon de tipo Volador a volador.xml
+El tipo Luz no existe
+
+== fuego.json: 12 pokemon de tipo Fuego ==
+Más fuerte: Moltres (475 puntos)
+No evolucionan: 6
+
+== volador.xml: 19 pokemon de tipo Volador ==
+#6   Charizard   Fuego/Volador      ataque 84
+#12  Butterfree  Bicho/Volador      ataque 45
+#16  Pidgey      Normal/Volador     ataque 45
+#17  Pidgeotto   Normal/Volador     ataque 60
+#18  Pidgeot     Normal/Volador     ataque 80
+#21  Spearow     Normal/Volador     ataque 60
+#22  Fearow      Normal/Volador     ataque 90
+#41  Zubat       Veneno/Volador     ataque 45
+#42  Golbat      Veneno/Volador     ataque 80
+#83  Farfetch'd  Normal/Volador     ataque 65
+#84  Doduo       Normal/Volador     sin estadísticas
+#85  Dodrio      Normal/Volador     ataque 110
+#123 Scyther     Bicho/Volador      ataque 110
+#130 Gyarados    Agua/Volador       ataque 125
+#142 Aerodactyl  Roca/Volador       ataque 105
+#144 Articuno    Hielo/Volador      ataque 85
+#145 Zapdos      Eléctrico/Volador  ataque 90
+#146 Moltres     Fuego/Volador      ataque 100
+#149 Dragonite   Dragón/Volador     ataque 134
+Ataque medio: 84.06 (de 18 con estadísticas)
+
+No existe el fichero noexiste.xml

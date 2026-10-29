@@ -28,8 +28,8 @@ public class Pokemon {
     public double getAltura() { return altura; }
     public List<String> getTipo() { return tipo; }
 
-    @Override
+   /* @Override
     public String toString() {
         return numero + " - " + nombre + " (" + String.join(", ", tipo) + ")";
-    }
+    }*/
 }

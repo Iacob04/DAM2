@@ -1,0 +1,4 @@
+25 Pikachu |[ELECTRICO]|  Nivel 35
+6 Charizard |[FUEGO, VOLADOR]|  Nivel 50
+7 Squirtle |[AGUA]|  Nivel 12
+1 Bulbasaur |[PLANTA, VENENO]|  Nivel 18

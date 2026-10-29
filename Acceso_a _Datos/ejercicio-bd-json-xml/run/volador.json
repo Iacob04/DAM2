@@ -1,0 +1,354 @@
+{
+  "tipo": "Volador",
+  "total": 19,
+  "pokemon": [
+    {
+      "numero": 6,
+      "nombre": "Charizard",
+      "peso": 90.5,
+      "altura": 1.7,
+      "tipos": [
+        "Fuego",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 78,
+        "ataque": 84,
+        "defensa": 78,
+        "especial": 97,
+        "velocidad": 100
+      },
+      "evolucionaA": [
+        "Charmeleon"
+      ]
+    },
+    {
+      "numero": 12,
+      "nombre": "Butterfree",
+      "peso": 32.0,
+      "altura": 1.1,
+      "tipos": [
+        "Bicho",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 60,
+        "ataque": 45,
+        "defensa": 50,
+        "especial": 80,
+        "velocidad": 70
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 16,
+      "nombre": "Pidgey",
+      "peso": 1.8,
+      "altura": 0.3,
+      "tipos": [
+        "Normal",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 40,
+        "ataque": 45,
+        "defensa": 40,
+        "especial": 35,
+        "velocidad": 56
+      },
+      "evolucionaA": [
+        "Pidgeotto"
+      ]
+    },
+    {
+      "numero": 17,
+      "nombre": "Pidgeotto",
+      "peso": 30.0,
+      "altura": 1.1,
+      "tipos": [
+        "Normal",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 63,
+        "ataque": 60,
+        "defensa": 55,
+        "especial": 50,
+        "velocidad": 71
+      },
+      "evolucionaA": [
+        "Pidgeot"
+      ]
+    },
+    {
+      "numero": 18,
+      "nombre": "Pidgeot",
+      "peso": 39.5,
+      "altura": 1.5,
+      "tipos": [
+        "Normal",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 83,
+        "ataque": 80,
+        "defensa": 75,
+        "especial": 70,
+        "velocidad": 91
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 21,
+      "nombre": "Spearow",
+      "peso": 2.0,
+      "altura": 0.3,
+      "tipos": [
+        "Normal",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 40,
+        "ataque": 60,
+        "defensa": 30,
+        "especial": 31,
+        "velocidad": 70
+      },
+      "evolucionaA": [
+        "Fearow"
+      ]
+    },
+    {
+      "numero": 22,
+      "nombre": "Fearow",
+      "peso": 38.0,
+      "altura": 1.2,
+      "tipos": [
+        "Normal",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 65,
+        "ataque": 90,
+        "defensa": 65,
+        "especial": 61,
+        "velocidad": 100
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 41,
+      "nombre": "Zubat",
+      "peso": 7.5,
+      "altura": 0.8,
+      "tipos": [
+        "Veneno",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 40,
+        "ataque": 45,
+        "defensa": 35,
+        "especial": 35,
+        "velocidad": 55
+      },
+      "evolucionaA": [
+        "Golbat"
+      ]
+    },
+    {
+      "numero": 42,
+      "nombre": "Golbat",
+      "peso": 55.0,
+      "altura": 1.6,
+      "tipos": [
+        "Veneno",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 75,
+        "ataque": 80,
+        "defensa": 70,
+        "especial": 70,
+        "velocidad": 90
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 83,
+      "nombre": "Farfetch\u0027d",
+      "peso": 15.0,
+      "altura": 0.8,
+      "tipos": [
+        "Normal",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 52,
+        "ataque": 65,
+        "defensa": 55,
+        "especial": 60,
+        "velocidad": 60
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 84,
+      "nombre": "Doduo",
+      "peso": 39.2,
+      "altura": 1.4,
+      "tipos": [
+        "Normal",
+        "Volador"
+      ],
+      "estadisticas": null,
+      "evolucionaA": [
+        "Dodrio"
+      ]
+    },
+    {
+      "numero": 85,
+      "nombre": "Dodrio",
+      "peso": 85.2,
+      "altura": 1.8,
+      "tipos": [
+        "Normal",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 60,
+        "ataque": 110,
+        "defensa": 70,
+        "especial": 60,
+        "velocidad": 100
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 123,
+      "nombre": "Scyther",
+      "peso": 56.0,
+      "altura": 1.5,
+      "tipos": [
+        "Bicho",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 70,
+        "ataque": 110,
+        "defensa": 80,
+        "especial": 68,
+        "velocidad": 105
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 130,
+      "nombre": "Gyarados",
+      "peso": 235.0,
+      "altura": 6.5,
+      "tipos": [
+        "Agua",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 95,
+        "ataque": 125,
+        "defensa": 79,
+        "especial": 80,
+        "velocidad": 81
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 142,
+      "nombre": "Aerodactyl",
+      "peso": 59.0,
+      "altura": 1.8,
+      "tipos": [
+        "Roca",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 80,
+        "ataque": 105,
+        "defensa": 65,
+        "especial": 67,
+        "velocidad": 130
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 144,
+      "nombre": "Articuno",
+      "peso": 55.4,
+      "altura": 1.7,
+      "tipos": [
+        "Hielo",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 90,
+        "ataque": 85,
+        "defensa": 100,
+        "especial": 110,
+        "velocidad": 85
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 145,
+      "nombre": "Zapdos",
+      "peso": 52.6,
+      "altura": 1.6,
+      "tipos": [
+        "Eléctrico",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 90,
+        "ataque": 90,
+        "defensa": 85,
+        "especial": 83,
+        "velocidad": 100
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 146,
+      "nombre": "Moltres",
+      "peso": 60.0,
+      "altura": 2.0,
+      "tipos": [
+        "Fuego",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 90,
+        "ataque": 100,
+        "defensa": 90,
+        "especial": 105,
+        "velocidad": 90
+      },
+      "evolucionaA": []
+    },
+    {
+      "numero": 149,
+      "nombre": "Dragonite",
+      "peso": 210.0,
+      "altura": 2.2,
+      "tipos": [
+        "Dragón",
+        "Volador"
+      ],
+      "estadisticas": {
+        "ps": 91,
+        "ataque": 134,
+        "defensa": 95,
+        "especial": 100,
+        "velocidad": 80
+      },
+      "evolucionaA": []
+    }
+  ]
+}
