@@ -12,8 +12,8 @@ private static BasicDataSource dataSource;
 	static {
 		dataSource = new BasicDataSource();
 		String url = "jdbc:mysql://localhost/classicmodels";
-		String usuario = "alumno";
-		String password = "abc123";
+		String usuario = "alex";
+		String password = "1234";
 		dataSource.setUrl(url);
 		dataSource.setUsername(usuario);
 		dataSource.setPassword(password);
