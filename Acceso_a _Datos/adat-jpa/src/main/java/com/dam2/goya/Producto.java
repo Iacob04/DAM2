@@ -46,5 +46,12 @@ public class Producto {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	@Override
+	public String toString() {
+		String salida = "";
+		salida = "( "+ id +" ) Producto: "+ nombre + "\nPrecio: "+ precio + "€\n";
+		return salida;
+	}
 
 }
